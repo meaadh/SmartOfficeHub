@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
   $cpass = md5($_POST['cpassword']);
   $user_type = $_POST['user_type'];
 
-  $select = " SELECT * FROM users WHERE username = '$username' && password = '$pass' ";
+  $select = " SELECT * FROM user WHERE username = '$username' && password = '$pass' ";
 
   $result = mysqli_query($conn, $select);
 
@@ -28,15 +28,11 @@ if (isset($_POST['submit'])) {
     } elseif ($row['user_type'] == 'user') {
 
       $_SESSION['user_name'] = $row['name'];
-      header('location:userpage.php');
-    } elseif ($row['user_type'] == 'reviewer') {
+      header('location:admin.php');
+    } elseif ($row['user_type'] == 'student') {
 
       $_SESSION['user_name'] = $row['name'];
-      header('location:reviewerPage.php');
-    } elseif ($row['user_type'] == 'author') {
-
-      $_SESSION['user_name'] = $row['name'];
-      header('location:authorPage.php');
+      header('location:officehours.php');
     }
   } else {
     $error[] = 'incorrect email or password!';
@@ -87,15 +83,12 @@ if (isset($_POST['submit'])) {
     <div class="container">
 
       <div class="logo float-left">
-        <a href="index.php"><img src="assets/img/pcm logo.png" alt="" class="img-fluid"></a>
+        <a href="index.php"><img src="assets/img/logo_notext.png" alt="" class="img-fluid"></a>
       </div>
       <nav class="nav-menu float-right d-none d-lg-block">
         <ul>
           <li class="active"><a href="index.php">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#event">Events</a></li>
-          <li><a href="#team">Board Members</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="about.php">About Us</a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
@@ -103,7 +96,8 @@ if (isset($_POST['submit'])) {
   <main id="main">
     <div class="form-container">
       <form action="" method="post">
-        <h3>Welcome to PERSPECTIVES Portal</h3>
+        <h3>Welcome to</h3> 
+        <h3>Smart Office Hub Portal</h3>
         <?php
         if (isset($error)) {
           foreach ($error as $error) {
@@ -128,7 +122,7 @@ if (isset($_POST['submit'])) {
             <div class="info-box">
               <a href="" rel="noopener noreferrer" target="_blank"><i class="bx bx-map"></i></a>
               <h3>Our Address</h3>
-              <p>4901 Evergreen Rd Dearborn,MI 48128</p>
+              <p>2281 Bonisteel Ann Arbor,MI 48109</p>
             </div>
           </div>
           <div class="col-sm-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
@@ -151,14 +145,14 @@ if (isset($_POST['submit'])) {
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>PERSPECTIVES PROCEEDINGS MANAGEMENT</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>SMART OFFICE HUB</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mamba-one-page-bootstrap-template-free/ -->
-        Designed by Meaad Hassan | Template by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by Meaad Hassan & Liyufei Meng | Template by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
   </footer><!-- End Footer -->

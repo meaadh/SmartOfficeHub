@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
    $cpass = md5($_POST['cpassword']);
    $user_type = $_POST['user_type'];
 
-   $select = " SELECT * FROM users WHERE username = '$username' && password = '$pass' ";
+   $select = " SELECT * FROM user WHERE username = '$username' && password = '$pass' ";
 
    $result = mysqli_query($conn, $select);
 
@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
       if ($pass != $cpass) {
          $error[] = 'password not matched!';
       } else {
-         $insert = "INSERT INTO users(name,username, email, password, user_type) VALUES('$name','$username ','$email','$pass','$user_type')";
+         $insert = "INSERT INTO user(name,username, email, password, user_type) VALUES('$name','$username ','$email','$pass','$user_type')";
          mysqli_query($conn, $insert);
          header('location:loginform.php');
       }
@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
       <div class="container">
 
          <div class="logo float-left">
-            <a href="index.php"><img src="assets/img/pcm logo.png" alt="" class="img-fluid"></a>
+            <a href="index.php"><img src="assets/img/logo_notext.png" alt="" class="img-fluid"></a>
          </div>
          <div class="mobile">
          <div class="logo float-right">
@@ -102,11 +102,9 @@ if (isset($_POST['submit'])) {
             <input type="email" name="email" required placeholder="Enter your Email">
             <input type="password" name="password" required placeholder="Enter your Password">
             <input type="password" name="cpassword" required placeholder="Confirm your Password">
-            <input type="text" name="title" required placeholder="Enter your Title">
-            <input type="text" name="affliation" required placeholder="Enter your Affiliation">
             <select name="user_type">
-               <option value="author">Author</option>
-               <option value="reviewer">Reviewer</option>
+               <option value="student">student</option>
+               <option value="admin">admin</option>
             </select>
             <input type="submit" name="submit" value="register now" class="form-btn">
             <p>Already have an account? <a href="loginform.php">Login Now</a></p>
@@ -118,14 +116,14 @@ if (isset($_POST['submit'])) {
    <footer id="footer">
       <div class="container">
          <div class="copyright">
-            &copy; Copyright <strong><span>PERSPECTIVES PROCEEDINGS MANAGEMENT</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>SMART OFFICE HUB</span></strong>. All Rights Reserved
          </div>
          <div class="credits">
             <!-- All the links in the footer should remain intact. -->
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mamba-one-page-bootstrap-template-free/ -->
-            Designed by Meaad Hassan | Template by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by Meaad Hassan & Liyufei Meng | Template by <a href="https://bootstrapmade.com/">BootstrapMade</a>
          </div>
       </div>
    </footer><!-- End Footer -->

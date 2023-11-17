@@ -85,7 +85,6 @@ if (isset($_POST["submit"])) {
         <ul>
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="about.php">About Us</a></li>
-          <li><a href="#team">Board Members</a></li>
           <a href="loginform.php" rel="noopener noreferrer" target="_self" class="btn-get-started"><i class="icofont-login"></i>
             | Login</a>
         </ul>
@@ -94,94 +93,48 @@ if (isset($_POST["submit"])) {
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div class="hero-container">
-      <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
-
-        <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
-          <div class="carousel-container">
-            <div class="carousel-content container">
-              <h2 class="animate__animated animate__fadeInDown"><span>Smart Office Hub</span></h2>
-              <h6 class="animate__animated animate__fadeInUp">Empowering Learning, Connecting Minds: SmartOfficeHub, Where Office Hours Become Intelligent and Collaborative</h6>
-              <a href="loginform.php" rel="noopener noreferrer" target="_self" class="btn-get-started animate__animated animate__fadeInUp scrollto"><i class="icofont-login"></i> | Login</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section><!-- End Hero -->
 
   <main id="main">
-        <!-- ======= Our Team Section ======= -->
-        <section id="team" class="team">
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
       <div class="container">
-
-        <div class="section-title">
-          <h2>Board Members</h2>
-        </div>
-
         <div class="row">
 
-          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-            <div class="our-team">
-              <div class="picture">
-                <img class="img-fluid" src="assets/img/team/team-7.jpg">
-              </div>
-              <div class="team-content">
-                <h3 class="name">Meaad Hassan</h3>
-                <h4 class="title">CEO</h4>
-              </div>
-              <ul class="social">
-              </ul>
-            </div>
-          </div>
 
-          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-            <div class="our-team">
-              <div class="picture">
-                <img class="img-fluid" src="assets/img/team/team-5.jpg">
-              </div>
-              <div class="team-content">
-                <h3 class="name">Jon Chen</h3>
-                <h4 class="title">Administrator</h4>
-              </div>
-              <ul class="social">
-              </ul>
-            </div>
-          </div>
+          <div class="col-lg-12">
 
-          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-            <div class="our-team">
-              <div class="picture">
-                <img class="img-fluid" src="assets/img/team/team-4.jpg">
-              </div>
-              <div class="team-content">
-                <h3 class="name">Yogal Chen</h3>
-                <h4 class="title">CFO</h4>
-              </div>
-              <ul class="social">
-              </ul>
+            <div class="section-title">
+              <h2>About Us</h2>
+              <p>We are an organization that helps streamline the office hour experience for students using help of AI</p>
             </div>
-          </div>
 
-          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-            <div class="our-team">
-              <div class="picture">
-                <img class="img-fluid" src="assets/img/team/team-3.jpg">
-              </div>
-              <div class="team-content">
-                <h3 class="name">John Applet</h3>
-                <h4 class="title">COO</h4>
-              </div>
-              <ul class="social">
-              </ul>
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="bx bx-fingerprint"></i></div>
+              <h4 class="title">Our Misson</h4>
+              <p class="description">"To streamline the office hour experience for students, combines the benefits of both live discussions and online educational materials, providing a comprehensive solution for efficient knowledge retrieval."</p>
             </div>
+
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="bx bx-fingerprint"></i></div>
+              <p class="description">"Welcome to Smart Office Hub, your revolutionary go-to resource before attending office hours! At Smart Office Hub, our platform meticulously aggregates content from Piazza, lecture recordings, and office hours sessions to ensure you have 
+                access to the most pertinent information at your fingertips."</p>
+              <p class="description">"Wondering if your question has already been answered? Our system will comb through Piazza posts and lecture content, pinpointing and returning the exact posts or lecture segments that best address your query. You'll get direct links to 
+                relevant Piazza discussions and timestamps for lecture segments, saving you time and effort."</p>
+              <p class="description">"But that's not all. If your question has been addressed in a previous office hours session, Smart Office Hub will scan through all recorded sessions, segmented by individual contributors, to find a match. You'll receive a recording of 
+                the most relevant question asked, providing you with a personalized learning experience."</p>
+              <p class="description">"And in the rare event that your question is still unanswered, SmartEd Search takes an extra step. It searches through queries from other students and groups you with those who have similar questions, fostering a collaborative learning 
+                environment. Our goal is to ensure that you're not just finding answers but also connecting with peers on a similar learning journey."</p>
+              <p class="description">"At Smart Office Hub, we're committed to enhancing your educational experience by making information more accessible, relevant, and collaborative. Join us in revolutionizing the way students engage with academic resources and discover a 
+                smarter way to learn! 🎓🔍✨"</p>
+            </div>
+
           </div>
+        </div>
+      </div>
 
       </div>
-    </section><!-- End Our Team Section -->
+    </section><!-- End About Us Section -->
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
