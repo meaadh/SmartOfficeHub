@@ -99,9 +99,9 @@ echo $statusMsg;
                     <option value="CourseName4">EECS 388 Introduction to Computer Security</option>
                 </select>
                 <input type="text" name="question" required placeholder="Enter Question">
-                <input type="button" id="bt" name="submit" value="Upload Question" class="form-btn" onclick="saveFile()">
-            </form>
+                <input type="button" id="bt" class="form-btn" value="Upload Question" onclick="saveFormAsTextFile()" />
 
+            </form>
         </div>
 
     </main><!-- End #main -->
@@ -144,46 +144,65 @@ echo $statusMsg;
     <script src="assets/vendor/aos/aos.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script type="text/javascript">
+    // Current date - http://stackoverflow.com/a/4929629/412329
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
 
-</body>
-<script type="text/javascript">
- let saveFile = () => {
+    if(dd<10) {
+        dd='0'+dd
+        } 
 
-            // Get the data from each element on the form.
-            const question = document.getElementById("question");
+    if(mm<10) {
+        mm='0'+mm
+        } 
 
-            // This variable stores all the data.
-            let data =  question.value;
-            console.log(data); //printing form data into the console
-            // Convert the text to BLOB.
-            const textToBLOB = new Blob([data], { type: "text/plain" });
-            var filename = new Date();
-            var month =new Date(); //months from 1-12
-            month = month.getMonth();
+    today = yyyy+'-'+mm+'-'+dd;
+    function saveFormAsTextFile()
+    
+        // Based on https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
+        {
+            alert("Bazinga!!!  you called letMeCallYou")
 
-            var day = new Date();
-            var day = day.getUTCDate();
+            let saveFile = () => {
+        // Get the data from each element on the form.
+        const name = document.getElementById("CourseName");
+        const msg = document.getElementById("question");
 
-            var year = new Date();
-            var year = year.getUTCFullYear();
+        // This variable stores all the data.
+        let data = "\r CourseName: " + name.value + "question: " + msg.value;
+        console.log(data); //printing form data into the console
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: "text/plain" });
+        var filename = new Date();
+        var month =new Date(); //months from 1-12
+        month = month.getMonth();
 
-            newdate = year + "/" + month + "/" + day;
-            const sFileName = filename; // The file to save the data.
+        var day = new Date();
+        var day = day.getUTCDate();
 
-            let newLink = document.createElement("a");
-            newLink.download = new Date();
+        var year = new Date();
+        var year = year.getUTCFullYear();
 
-            if (window.webkitURL != null) {
-                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-            } else {
-                newLink.href = window.URL.createObjectURL(textToBLOB);
-                newLink.style.display = "none";
-                document.body.appendChild(newLink);
-            }
+        newdate = year + "/" + month + "/" + day;
+        const sFileName = filename; // The file to save the data.
 
-            newLink.click();
-        
+        let newLink = document.createElement("a");
+        newLink.download = new Date();
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        } else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click();
     };
-    </script>
+}
+  </script>
+</body>
 </html>
