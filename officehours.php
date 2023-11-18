@@ -7,9 +7,9 @@ if (!isset($_SESSION['user_name'])) {
     header('location:loginform.php');
 }
 
-// if (isset($_POST["submit"])) {
-//     $inserts = "INSERT INTO studentquestion (question,CourseName) VALUES ('$question','$coursename')"; 
-// }
+if (isset($_POST["submit"])) {
+   $inserts = "INSERT INTO studentquestion (question,Name,CourseName) VALUES ('$question','$name','$coursename')"; 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +98,7 @@ if (!isset($_SESSION['user_name'])) {
                 </select>
                 <input type="text" name="Name" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
-                <input type="submit" class="form-btn" value="Upload Question" />
+                <input type="submit" class="form-btn" value="Upload Question"  />
             </form>
         </div>
 
