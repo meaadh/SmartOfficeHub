@@ -22,7 +22,7 @@ if (isset($_POST["submit"])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Conference Paper Review System</title>
+  <title>Smart Office Hub</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -85,9 +85,7 @@ if (isset($_POST["submit"])) {
         <ul>
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#about">About Us</a></li>
-          <li><a href="#event">Events</a></li>
           <li><a href="#team">Board Members</a></li>
-          <li><a href="#contact">Contact Us</a></li>
           <a href="loginform.php" rel="noopener noreferrer" target="_self" class="btn-get-started"><i class="icofont-login"></i>
             | Login</a>
         </ul>
@@ -104,8 +102,8 @@ if (isset($_POST["submit"])) {
         <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
           <div class="carousel-container">
             <div class="carousel-content container">
-              <h2 class="animate__animated animate__fadeInDown"><span>PERSPECTIVES Proceedings Managment</span></h2>
-              <h6 class="animate__animated animate__fadeInUp">A Conference Paper Review Company</h6>
+              <h2 class="animate__animated animate__fadeInDown"><span>Smart Office Hub</span></h2>
+              <h6 class="animate__animated animate__fadeInUp">Empowering Learning, Connecting Minds: SmartOfficeHub, Where Office Hours Become Intelligent and Collaborative</h6>
               <a href="loginform.php" rel="noopener noreferrer" target="_self" class="btn-get-started animate__animated animate__fadeInUp scrollto"><i class="icofont-login"></i> | Login</a>
             </div>
           </div>
@@ -132,13 +130,13 @@ if (isset($_POST["submit"])) {
 
             <div class="section-title">
               <h2>About Us</h2>
-              <p>We are an organization that helps streamline peer review process for conferences around the world</p>
+              <p>We are an organization that helps streamline the office hour experience for students using help of AI</p>
             </div>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="bx bx-fingerprint"></i></div>
               <h4 class="title">Our Misson</h4>
-              <p class="description">"To streamline the peer-review process, enhance collaboration among researchers, and ensure the rigorous evaluation of scholarly contributions."</p>
+              <p class="description">"To streamline the office hour experience for students, combines the benefits of both online and in-person interactions, providing a comprehensive solution for efficient knowledge retrieval."</p>
             </div>
 
           </div>
@@ -147,121 +145,8 @@ if (isset($_POST["submit"])) {
 
       </div>
     </section><!-- End About Us Section -->
-    <!-- ======= Our Event Section ======= -->
-    <section id="event" class="event section-bg">
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="section-title">
-          <h2>Events</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12">
-            <ul id="event-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-Upcoming">Upcoming</li>
-              <li data-filter=".filter-Past">Past</li>
-            </ul>
-          </div>
-        </div>
-        <div class="row event-container">
-
-          <div class="col-lg-4 col-md-6 event-item filter-Upcoming">
-            <div class="card">
-              <img src="assets/img/Event-background.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Tech Conference</h2>
-                <h3>August 4, 2024</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-Upcoming">
-            <div class="card">
-              <img src="assets/img/Event-background.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Candy Conference</h2>
-                <h3>March 24, 2024</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-Upcoming">
-            <div class="card">
-              <img src="assets/img/Event-background.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Google Conference</h2>
-                <h3>December 14, 2023</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-Upcoming">
-            <div class="card">
-              <img src="assets/img/Event-background2.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Conference Dinner</h2>
-                <h3>July 19, 2024</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-Past">
-            <div class="card">
-              <img src="assets/img/Event-background.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Tech Conference</h2>
-                <h3>July 4, 2023</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-Past">
-            <div class="card">
-              <img src="assets/img/Event-background2.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Conference Dinner</h2>
-                <h3>September 19, 2023</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-Past">
-            <div class="card">
-              <img src="assets/img/Event-background2.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Conference Dinner</h2>
-                <h3>May 15, 2023</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-upcomming">
-            <div class="card">
-              <img src="assets/img/Event-background.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Food Conference</h2>
-                <h3>May 4, 2023</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 event-item filter-upcomming">
-            <div class="card">
-              <img src="assets/img/Event-background2.png" class="img-fluid" />
-              <div class="card-text">
-                <h2>Conference Dinner</h2>
-                <h3>December 25, 2023</h3>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Our Event Section -->
-
-    <!-- ======= Our Team Section ======= -->
-    <section id="team" class="team">
+        <!-- ======= Our Team Section ======= -->
+        <section id="team" class="team">
       <div class="container">
 
         <div class="section-title">
@@ -270,7 +155,7 @@ if (isset($_POST["submit"])) {
 
         <div class="row">
 
-          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <div class="our-team">
               <div class="picture">
                 <img class="img-fluid" src="assets/img/team/team-7.jpg">
@@ -284,7 +169,7 @@ if (isset($_POST["submit"])) {
             </div>
           </div>
 
-          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <div class="our-team">
               <div class="picture">
                 <img class="img-fluid" src="assets/img/team/team-5.jpg">
@@ -298,7 +183,7 @@ if (isset($_POST["submit"])) {
             </div>
           </div>
 
-          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <div class="our-team">
               <div class="picture">
                 <img class="img-fluid" src="assets/img/team/team-4.jpg">
@@ -312,7 +197,7 @@ if (isset($_POST["submit"])) {
             </div>
           </div>
 
-          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <div class="our-team">
               <div class="picture">
                 <img class="img-fluid" src="assets/img/team/team-3.jpg">
@@ -326,105 +211,15 @@ if (isset($_POST["submit"])) {
             </div>
           </div>
 
-          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
-            <div class="our-team">
-              <div class="picture">
-                <img class="img-fluid" src="assets/img/team/team-1.jpg">
-              </div>
-              <div class="team-content">
-                <h3 class="name">David Reef</h3>
-                <h4 class="title">IT</h4>
-              </div>
-              <ul class="social">
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
-            <div class="our-team">
-              <div class="picture">
-                <img class="img-fluid" src="assets/img/team/team-2.jpg">
-              </div>
-              <div class="team-content">
-                <h3 class="name">Catherne Holy</h3>
-                <h4 class="title">Marketing</h4>
-              </div>
-              <ul class="social">
-              </ul>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section><!-- End Our Team Section -->
-
-    <!-- ======= Contact Us Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Contact Us</h2>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-6 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="info-box">
-              <a href="https://maps.app.goo.gl/ghhN9Yndd9h77gUU9" rel="noopener noreferrer" target="_blank"><i class="bx bx-map"></i></a>
-              <h3>Our Address</h3>
-              <p>4901 Evergreen Rd Dearborn,MI 48128</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="info-box">
-              <a href="mailto:info@conference.com"><i class="bx bx-envelope"></i></a>
-              <h3>Email Us</h3>
-              <p>info@conference.com</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="info-box ">
-              <a href="tel:248-420-6969"><i class="bx bx-phone-call"></i></a>
-              <h3>Call Us</h3>
-              <p>+1 248-420-6969</p>
-            </div>
-          </div>
-
-          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
-            <form action="" method="post" class="php-email-form">
-              <div class="row">
-                <div class="col-lg-6 d-flex align-items-stretch">
-                  <input type="text" class="form-control" name="name" required placeholder="Your Name">
-                </div>
-                <div class="col-lg-6 d-flex align-items-stretch">
-                  <input type="email" class="form-control" name="email" required placeholder="Your Email">
-                </div>
-                <div class="col-lg-12">
-                  <input type="text" class="form-control" name="subjects" required placeholder="Subject">
-                </div>
-                <div class="col-lg-12">
-                  <textarea name="messages" class="form-control" rows="5" cols="40" required placeholder="Message"></textarea>
-                </div>
-              </div>
-              <div class="text-center"><input type="submit" name="submit" value="send message" class="form-btn"></div>
-
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Us Section -->
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>PERSPECTIVES PROCEEDINGS MANAGEMENT</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Smart Office Hub</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
