@@ -152,5 +152,4 @@ echo $statusMsg;
     ftruncate($file, 0);
     fwrite($file, $question ."\n");
     fclose($file);
-    header("location: officehours.php");
  ?>
