@@ -9,6 +9,14 @@ if (!isset($_SESSION['user_name'])) {
 
 if (isset($_POST["submit"])) {
    $inserts = "INSERT INTO studentquestion (question,Name,CourseName) VALUES ('$question','$name','$coursename')"; 
+   if (mysqli_query($conn, $insert)) {
+    $statusMsg = "Final Recommedation added successfully";
+  }
+  else
+  {
+    $statusMsg = "Final Recommedation failed successfully";
+
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -98,7 +106,7 @@ if (isset($_POST["submit"])) {
                 </select>
                 <input type="text" name="Name" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
-                <input type="submit" class="form-btn" value="Upload Question"  />
+                <input type="submit" name="submit" class="form-btn" value="Upload Question"  />
             </form>
         </div>
 
