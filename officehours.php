@@ -90,7 +90,7 @@ echo $statusMsg;
         </div>
         <div class="form-container">
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="" enctype="multipart/form-data">
                 <h3>Office Hour Form</h3>
                 <select name="CourseName">
                     <option value="CourseName1">EECS 482 Operation System</option>
@@ -99,8 +99,7 @@ echo $statusMsg;
                     <option value="CourseName4">EECS 388 Introduction to Computer Security</option>
                 </select>
                 <input type="text" name="question" required placeholder="Enter Question">
-                <input type="button" id="bt" class="form-btn" value="Upload Question" onclick="saveFormAsTextFile()" />
-
+                <input type="submit" class="form-btn" value="Upload Question" />
             </form>
         </div>
 
@@ -144,65 +143,18 @@ echo $statusMsg;
     <script src="assets/vendor/aos/aos.js"></script>
 
     <!-- Template Main JS File -->
-    <script type="text/javascript">
-    // Current date - http://stackoverflow.com/a/4929629/412329
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-    var yyyy = today.getFullYear();
 
-    if(dd<10) {
-        dd='0'+dd
-        } 
 
-    if(mm<10) {
-        mm='0'+mm
-        } 
-
-    today = yyyy+'-'+mm+'-'+dd;
-    function saveFormAsTextFile()
-    
-        // Based on https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
-        {
-            alert("Bazinga!!!  you called letMeCallYou")
-
-            let saveFile = () => {
-        // Get the data from each element on the form.
-        const name = document.getElementById("CourseName");
-        const msg = document.getElementById("question");
-
-        // This variable stores all the data.
-        let data = "\r CourseName: " + name.value + "question: " + msg.value;
-        console.log(data); //printing form data into the console
-        // Convert the text to BLOB.
-        const textToBLOB = new Blob([data], { type: "text/plain" });
-        var filename = new Date();
-        var month =new Date(); //months from 1-12
-        month = month.getMonth();
-
-        var day = new Date();
-        var day = day.getUTCDate();
-
-        var year = new Date();
-        var year = year.getUTCFullYear();
-
-        newdate = year + "/" + month + "/" + day;
-        const sFileName = filename; // The file to save the data.
-
-        let newLink = document.createElement("a");
-        newLink.download = new Date();
-
-        if (window.webkitURL != null) {
-            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-        } else {
-            newLink.href = window.URL.createObjectURL(textToBLOB);
-            newLink.style.display = "none";
-            document.body.appendChild(newLink);
-        }
-
-        newLink.click();
-    };
-}
-  </script>
 </body>
 </html>
+<?php
+    extract($_REQUEST);
+    $file=fopen("form-save.txt","a");
+
+    fwrite($file,"CourseName :");
+    fwrite($file, $CourseName ."\n");
+    fwrite($file,"question :");
+    fwrite($file, $question ."\n");
+    fclose($file);
+    header("location: officehours.php");
+ ?>
