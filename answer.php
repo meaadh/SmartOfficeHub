@@ -90,29 +90,42 @@ if (isset($_POST["submit"])) {
         <div class="user-container">
             <div class="content">
                 <h3>Hi, <span><?php echo $_SESSION['user_name'] ?></span></h3>
-                <h4>Choose your class and type in your question below</h4>
+                <h4>We've found the following Piazza post and video for you!</h4>
             </div>
-
         </div>
-        <div class="form-container">
-
-            <form action="" enctype="multipart/form-data">
-                <h3>Office Hour Form</h3>
-                <select name="CourseName">
-                    <option value="CourseName1">EECS 482 Operation System</option>
-                    <option value="CourseName2">EECS 280 Introduction to Data Structure</option>
-                    <option value="CourseName3">EECS 281 Data Structure and Algorithms</option>
-                    <option value="CourseName4">EECS 388 Introduction to Computer Security</option>
-                </select>
-                <input type="text" name="Name" required placeholder="Enter Name">
-                <input type="text" name="question" required placeholder="Enter Question">
-                <input type="submit" name="submit" class="form-btn" value="Upload Question"  />
-            </form>
-       
+        <!-- <h4>This is your piazza post:</h4> -->
+        <div class="user-container">
+            <h5 id="piazzaText">Loading content...</h5>
         </div>
+        <script>
+        fetch('piazza.txt')
+            .then(response => response.text())
+            .then(text => {
+            document.getElementById('piazzaText').innerText = text;
+        })
+        .catch(error => console.error('Error fetching piazza.txt:', error));
+        </script>
+        <div class="user-container">
+        <iframe width="640" height="360" src="" frameborder="0" allowfullscreen id="youtubePlayer"></iframe>
+        </div>
+        <script>
+        fetch('video.txt')
+            .then(response => response.text())
+            .then(youtubeLink => {
+            const videoId = getYouTubeVideoId(youtubeLink);
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            youtubePlayer.src = `https://www.youtube.com/embed/${videoId}`;
+        })
+        .catch(error => console.error('Error fetching video.txt:', error));
+        function getYouTubeVideoId(url) {
+        const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+        }
+        </script>
         <div class="form-container">
         <form action="authorPage.php" method="get" target="">
-         <button class="form-btn" type="submit">Click me</button>
+         <button class="form-btn" type="submit">Still Join OH Queue</button>
       </form>
         </div>
     </main><!-- End #main -->
