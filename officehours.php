@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_name'])) {
 // if (isset($_POST["submit"])) {
 //     $inserts = "INSERT INTO studentquestion (question,CourseName) VALUES ('$question','$coursename')"; 
 // }
-echo $statusMsg;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,6 +96,7 @@ echo $statusMsg;
                     <option value="CourseName3">EECS 281 Data Structure and Algorithms</option>
                     <option value="CourseName4">EECS 388 Introduction to Computer Security</option>
                 </select>
+                <input type="text" name="Name" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
                 <input type="submit" class="form-btn" value="Upload Question" />
             </form>
