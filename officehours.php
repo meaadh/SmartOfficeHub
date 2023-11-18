@@ -1,5 +1,4 @@
 <?php
-
 @include 'config.php';
 $statusMsg = '';
 session_start();
@@ -150,10 +149,7 @@ echo $statusMsg;
 <?php
     extract($_REQUEST);
     $file=fopen("form-save.txt","a");
-
-    fwrite($file,"CourseName :");
-    fwrite($file, $CourseName ."\n");
-    fwrite($file,"question :");
+    ftruncate($file, 0);
     fwrite($file, $question ."\n");
     fclose($file);
     header("location: officehours.php");
