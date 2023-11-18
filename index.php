@@ -59,7 +59,7 @@ if (isset($_POST["submit"])) {
   <section id="topbar" class="d-none d-lg-block">
     <div class="container clearfix">
       <div class="contact-info float-left">
-        <i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact.admin@MoistureConference.com</a>
+        <i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact.admin@SmartOfficeHub.com</a>
         <i class="icofont-phone"></i><a href="tel:586-489-9689"> +1 248-420-6969</a>
       </div>
       <div class="social-links float-right">
