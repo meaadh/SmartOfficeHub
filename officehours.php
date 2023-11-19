@@ -8,21 +8,26 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 if (isset($_POST["submit"])) {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $question = mysqli_real_escape_string($conn, $_POST['question']);
+    $CourseName = mysqli_real_escape_string($conn, $_POST['CourseName']);
+    $insert = "INSERT INTO finalsubmission (username,recommendation) VALUES ('$username', '$question')";
+  if (mysqli_query($conn, $insert)) {
+    $statusMsg = "Final Recommedation added successfully";
     extract($_REQUEST);
     $file=fopen("form-save.txt","a");
     ftruncate($file, 0);
     fwrite($file, $question ."\n");
     fclose($file);
-    $inserts = "INSERT INTO question (question,CourseName) VALUES ('$question','$coursename')"; 
-    if (mysqli_query($conn, $insert)) {
-     $statusMsg = "Final Recommedation added successfully";
-   }
-   else
-   {
-     $statusMsg = "Final Recommedation failed successfully";
- 
-   }
- };
+  } else {
+    $statusMsg = "Final Recommendation upload failed, please try again.";
+    extract($_REQUEST);
+    $file=fopen("form-save.txt","a");
+    ftruncate($file, 0);
+    fwrite($file, $question ."\n");
+    fclose($file);
+  }
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +114,7 @@ if (isset($_POST["submit"])) {
                     <option value="CourseName3">EECS 281 Data Structure and Algorithms</option>
                     <option value="CourseName4">EECS 388 Introduction to Computer Security</option>
                 </select>
-                <input type="text" name="Name" required placeholder="Enter Name">
+                <input type="text" name="username" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
                 <input type="submit" name="submit" class="form-btn" value="Upload Question"  />
             </form>

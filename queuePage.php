@@ -121,8 +121,11 @@ echo $statusMsg;
                 <div class="table">
                         <table class="center">
                             <thead>
-                                <th>Recommedation</th>
-                                <th>Paper</th>
+                                <th>Position</th>
+                                <th>Name</th>
+                                <th>Question</th>
+                                <th>Course</th>
+
 
                             </thead>
                             <tbody>
@@ -132,8 +135,11 @@ echo $statusMsg;
                                 $result = $conn->query($query);
                                 foreach ($result as $file) : ?>
                                     <tr>
-                                        <td><?php echo $file['recommendation']; ?></td>
-                                        <td><?php echo $file['file_name']; ?></td>
+                                        <td><?php echo $file['id']; ?></td>
+                                        <td><?php echo $file['name']; ?></td>
+                                        <td><?php echo $file['question']; ?></td>
+                                        <td><?php echo $file['coursename']; ?></td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
