@@ -73,7 +73,6 @@ def output_qa():
 file_path = 'piazzadata.txt'
 qa_dict = parser(file_path)
 
-
 if __name__ == '__main__':
     w = Watcher()
     w.run()
