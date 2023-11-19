@@ -8,32 +8,53 @@ if (!isset($_SESSION['user_name'])) {
     header('location:loginform.php');
 }
 
-$targetDir = "Uploads/";
-
+$filename3 = 'queue.txt';  // Replace with the path to your file
+if (file_exists($filename3)) {
+    // File exists, read its content
+    $fileContent = file_get_contents($filename3);
+   
+}
 if (isset($_POST["Merge"])) {
-    /* $sql = "SELECT id, GROUP_CONCAT('name' SEPARATOR ', ') AS concatenated_values FROM finalsubmission GROUP BY id";
+    echo $fileContent;
+    $primaryKeyColumn = 'id';
+    $sqlLastRow = "SELECT MAX($primaryKeyColumn) AS lastID FROM finalsubmission";
 
-    $result = $conn->query($sql);
+    $resultLastRow = $conn->query($sqlLastRow);
+    $rowId = 2; // Replace with the actual ID of the row you want to update
+    $columnValue = "Jose"; // Replace with the actual value you want to insert
+    $columnName = "name"; // Replace with the actual column name
     
-    if ($result->num_rows > 0) {
-        // Fetch the result as an associative array
-        while ($row = $result->fetch_assoc()) {
-            // Access the ID and concatenated values
-            $id = $row['id'];
-            $concatenatedValues = $row['concatenated_values'];
-    
-            // Output or use the results as needed
-            echo "ID: $id, Concatenated Values: $concatenatedValues<br>";
-        }
+    // SQL query to update a specific row and column in your_table
+    $sql = "UPDATE finalsubmission SET $columnName = '$columnValue' WHERE id = $rowId";
+    if ($resultLastRow->num_rows > 0) {
+        $rowLast = $resultLastRow->fetch_assoc();
+        $lastID = $rowLast['lastID'];
+      
+        
+
+        // SQL query to delete the last row based on the primary key
+       // $sqlDeleteLastRow = "DELETE FROM finalsubmission WHERE $primaryKeyColumn = $lastID";
+       if(2== $primaryKeyColumn)
+       {
+           $insert =  "UPDATE finalsubmission SET $columnName = '$columnValue' WHERE id = $primaryKeyColumn";
+       }
+
+/*         if ($conn->query($sqlDeleteLastRow) === TRUE) {
+            echo "Last row deleted successfully.";
+            header('location:queuePage.php');
+            if($fileContent== $primaryKeyColumn)
+            {
+                $insert = "INSERT INTO finalsubmission (name) VALUES ('Jose')";
+            }
+
+        } else {
+            echo "Error deleting last row: " . $conn->error;
+        } */
     } else {
         echo "No rows found in the table.";
-    } */
-    header('location:ResultPage.php');         
-
+    }
 }
-if (isset($_POST["Stay"])) {
 
-}
 echo $statusMsg;
 ?>
 <!DOCTYPE html>
@@ -98,49 +119,64 @@ echo $statusMsg;
         </div>
     </header><!-- End Header -->
     <div class="hero-text">
-                <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HOUR</span></h2>
-                <h6 class="animate__animated animate__fadeInUp">To streamline the office hour experience for students</h6>
-            </div>
+        <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HOUR</span></h2>
+        <h6 class="animate__animated animate__fadeInUp">To streamline the office hour experience for students</h6>
+    </div>
     <main id="main">
         <div class="user-container">
             <div class="content">
                 <h3>HI, <span><?php echo $_SESSION['user_name'] ?></span></h3>
                 <h3>Welcome to Introduction to Computer Security Office Hours</h3>
-                <div class="form-container">
-        <form action="" method="post" enctype="multipart/form-data">
-        <input type="text" name="Stay" class="form-btn" value="Stay Position"  />
-            <input type="submit" name="Merge" class="form-btn" value="Merge Position"  />
-            <input type="submit" name="Stay" class="form-btn" value="Stay Position"  />
-            </form>
-        </div>
+                <?php
+                $fileSize = filesize($filename3);
+
+                // Check if the file size is greater than 0 (i.e., the file has content)
+                if ($fileSize > 0) { ?>
+                    <div class="form-container">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <input type="text" name="Stay" class="form-btn" value="Stay Position" />
+                            <input type="submit" name="Merge" class="form-btn" value="Merge Position" />
+                            <input type="submit" name="Stay" class="form-btn" value="Stay Position" />
+                        </form>
+                    </div> <?php
+
+                        } else {
+                        }
+                        if (isset($_POST["Stay"])) {
+                            file_put_contents($filename3, '');
+
+                        }
+                            ?>
+
                 <div class="table">
-                        <table class="center">
-                            <thead>
-                                <th>Position</th>
-                                <th>Name</th>
-                                <th>Question</th>
-                                <th>Course</th>
+                    <table class="center">
+                        <thead>
+                            <th>Position</th>
+                            <th>Name</th>
+                            <th>Question</th>
+                            <th>Course</th>
 
 
-                            </thead>
-                            <tbody>
-                                <?php
-                                $query = "SELECT * FROM `finalsubmission`;";
-                                // FETCHING DATA FROM DATABASE 
-                                $result = $conn->query($query);
-                                foreach ($result as $file) : ?>
-                                    <tr>
-                                        <td><?php  if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')echo $file['id']; ?></td>
-                                        <td><?php  if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')echo $file['name']; ?></td>
-                                        <td><?php  if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')echo $file['question']; ?></td>
-                                        <td><?php if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')
-                                        {echo $file['coursename'];} ?></td>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $query = "SELECT * FROM `finalsubmission`;";
+                            // FETCHING DATA FROM DATABASE 
+                            $result = $conn->query($query);
+                            foreach ($result as $file) : ?>
+                                <tr>
+                                    <td><?php if ($file['coursename'] == 'EECS 281 Data Structure and Algorithms') echo $file['id']; ?></td>
+                                    <td><?php if ($file['coursename'] == 'EECS 281 Data Structure and Algorithms') echo $file['name']; ?></td>
+                                    <td><?php if ($file['coursename'] == 'EECS 281 Data Structure and Algorithms') echo $file['question']; ?></td>
+                                    <td><?php if ($file['coursename'] == 'EECS 281 Data Structure and Algorithms') {
+                                            echo $file['coursename'];
+                                        } ?></td>
 
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>                
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
