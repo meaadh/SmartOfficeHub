@@ -1,0 +1,104 @@
+ID: L41
+Time: 0.00
+Transcript: Today we're going to learn Insertion Sort.
+
+ID: L42
+Time: 3.00
+Transcript: Let's dive right in.
+
+ID: L43
+Time: 5.00
+Transcript: We're given this array, and we want it sorted in increasing order.
+
+ID: L44
+Time: 9.00
+Transcript: Here's what we're going to do. We'll start at the left and work our way to the right,.
+
+ID: L45
+Time: 14.00
+Transcript: examining each item and comparing it to the items on its left.
+
+ID: L46
+Time: 18.00
+Transcript: We'll then insert it in the correct position in the array.
+
+ID: L47
+Time: 22.00
+Transcript: You'll notice that part of our array will be sorted as we progress.
+
+ID: L48
+Time: 26.00
+Transcript: We'll mark those items with a green background.
+
+ID: L49
+Time: 30.00
+Transcript: Let's begin and you'll see what I mean.
+
+ID: L410
+Time: 32.00
+Transcript: We start at 2.
+
+ID: L411
+Time: 34.00
+Transcript: Of course, there are no items to the left of 2, so we mark it as sorted.
+
+ID: L412
+Time: 41.00
+Transcript: Moving on to 8, we compare it to 2 and leave it where it is.
+
+ID: L413
+Time: 46.00
+Transcript: Our first two items are now sorted.
+
+ID: L414
+Time: 50.00
+Transcript: Next we have 5, which we can see is out of place.
+
+ID: L415
+Time: 54.00
+Transcript: We know it needs to be after 2, so we swap it with 8.
+
+ID: L416
+Time: 59.00
+Transcript: Our first three items are now sorted.
+
+ID: L417
+Time: 65.00
+Transcript: On to 3. Again, it's out of place.
+
+ID: L418
+Time: 69.00
+Transcript: We swap it with 8 and 5 until it's in the correct position.
+
+ID: L419
+Time: 79.00
+Transcript: We're at our fifth item, 9, and I'm sure you can see that it's in the correct spot.
+
+ID: L420
+Time: 85.00
+Transcript: Let's move to 4 and insert it in the correct place in the array.
+
+ID: L421
+Time: 102.00
+Transcript: And that's it. We're done.
+
+ID: L422
+Time: 104.00
+Transcript: Insertion sort is one of the most straightforward sorting algorithms.
+
+ID: L423
+Time: 108.00
+Transcript: For your reference, here's the pseudocode.
+
+ID: L424
+Time: 111.00
+Transcript: Insertion sort has the worst case time complexity of O of n squared, where n is the size of the array.
+
+ID: L425
+Time: 118.00
+Transcript: For example, when an array starts in decreasing order, you need to swap and compare every single item, which leads to O of n squared.
+
+ID: L426
+Time: 127.00
+Transcript: Thank you for watching. I'd love it if you'd subscribe. Please post suggestions for future videos below.
+

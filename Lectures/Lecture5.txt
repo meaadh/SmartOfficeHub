@@ -1,0 +1,92 @@
+ID: L51
+Time: 0.00
+Transcript: Today we're going to learn heap sort. Let's start with some terminology. A heap is simply an ordered binary tree. A max heap has a restriction that the value of.
+
+ID: L52
+Time: 11.60
+Transcript: the parent nodes are greater than the value of the child nodes. Here's an.
+
+ID: L53
+Time: 17.10
+Transcript: example of a max heap. We'll make use of a few functions when running heap sort.
+
+ID: L54
+Time: 22.68
+Transcript: First we have buildMaxHeap. This creates a max heap from an unsorted array. We'll also use heapify. This is similar to buildMaxHeap, except faster because we.
+
+ID: L55
+Time: 36.74
+Transcript: assume part of the array is already sorted. You'll see what I mean. One note. For this video I'm less concerned with you knowing how these.
+
+ID: L56
+Time: 45.60
+Transcript: methods work, but rather that they exist and when to use them. Once you understand the basics of heap sort, you'll understand these functions from their.
+
+ID: L57
+Time: 53.84
+Transcript: pseudocode. Let's get started. We have the following array that we're tasked to sort. In a nutshell, we'll continuously create max heaps to find the largest.
+
+ID: L58
+Time: 65.28
+Transcript: item. We'll then remove that item from the heap and into a sorted partition. We'll begin by representing our array as a tree. To see how we did that, simply.
+
+ID: L59
+Time: 77.00
+Transcript: look at the array from left to right and the tree from top to bottom.
+
+ID: L510
+Time: 82.64
+Transcript: Now that we have a tree, let's create our first heap. We assume this is an.
+
+ID: L511
+Time: 93.28
+Transcript: unsorted array, so we call buildMaxHeap. Now that we have our max heap, we know the largest item, 9. We swap 9 with the.
+
+ID: L512
+Time: 106.52
+Transcript: item at the end of the array, 1. Finally, we remove 9 from the tree and consider it sorted. Looks good so far,.
+
+ID: L513
+Time: 118.56
+Transcript: except we're back to having a tree and not a heap. This time we call heapify.
+
+ID: L514
+Time: 123.80
+Transcript: since only the item 1 is out of place.
+
+ID: L515
+Time: 128.32
+Transcript: 1 floats down to the bottom and the largest number heads to the top. We're back to having a max heap. Let's swap the largest number 8 with the item.
+
+ID: L516
+Time: 144.00
+Transcript: at the end of the unsorted part of the array, 2. We remove 8 and consider it.
+
+ID: L517
+Time: 149.64
+Transcript: sorted.
+
+ID: L518
+Time: 156.00
+Transcript: Again, we need our heap back, so let's call heapify. I think you see the pattern. I'll let you watch the rest of the video without.
+
+ID: L519
+Time: 170.80
+Transcript: voiceover.
+
+ID: L520
+Time: 224.80
+Transcript: We're all done. Our array is fully sorted. Here's the pseudocode for heap sort. The time complexity of heap sort is O of n log n. buildMaxHeap takes O.
+
+ID: L521
+Time: 239.04
+Transcript: of n time. heapify runs in O of log n time, but we end up calling it n minus 1.
+
+ID: L522
+Time: 245.44
+Transcript: times. Thank you for watching. If you enjoyed the video, please like it and.
+
+ID: L523
+Time: 251.40
+Transcript: subscribe.
+

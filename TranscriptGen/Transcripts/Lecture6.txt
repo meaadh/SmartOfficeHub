@@ -1,0 +1,60 @@
+ID: L61
+Time: 0.00
+Transcript: Today we're going to learn Bubble Sort.
+
+ID: L62
+Time: 3.00
+Transcript: Here's what we'll do.
+
+ID: L63
+Time: 5.00
+Transcript: We're going to compare consecutive items.
+
+ID: L64
+Time: 8.00
+Transcript: If they're out of place, we'll swap them.
+
+ID: L65
+Time: 12.00
+Transcript: The highest number will bubble its way to the right with each iteration.
+
+ID: L66
+Time: 18.00
+Transcript: A sorted partition will form at the end of the array.
+
+ID: L67
+Time: 22.00
+Transcript: It's pretty simple, so I'll be quiet and let you watch.
+
+ID: L68
+Time: 30.00
+Transcript: Let's see how it works.
+
+ID: L69
+Time: 48.00
+Transcript: Done with the first iteration.
+
+ID: L610
+Time: 50.00
+Transcript: 9 is now in the correct spot. Let's continue.
+
+ID: L611
+Time: 60.00
+Transcript: You get the picture. I'll see you at the end of the algorithm.
+
+ID: L612
+Time: 90.00
+Transcript: We're done. Our array is sorted.
+
+ID: L613
+Time: 112.00
+Transcript: Here's the pseudocode for Bubble Sort.
+
+ID: L614
+Time: 116.00
+Transcript: As you can guess from the nested for loop, the worst case time complexity is O of n squared, where n is the size of the array.
+
+ID: L615
+Time: 125.00
+Transcript: If you have questions, please ask them below. Thank you for watching.
+

@@ -1,0 +1,176 @@
+ID: L21
+Time: 0.00
+Transcript: Today, we're going to learn quicksort.
+
+ID: L22
+Time: 3.54
+Transcript: Like merge sort, quicksort is a recursive algorithm.
+
+ID: L23
+Time: 6.72
+Transcript: However, when you think of quicksort, I want you to think of the word pivot.
+
+ID: L24
+Time: 11.88
+Transcript: A pivot is simply one of the items in the array that meets the following three conditions.
+
+ID: L25
+Time: 16.60
+Transcript: after we sorted it.
+
+ID: L26
+Time: 18.60
+Transcript: First, the pivot is in its correct position in the final sorted array.
+
+ID: L27
+Time: 23.72
+Transcript: This means that all items to the left are smaller, and all items to the right are larger.
+
+ID: L28
+Time: 29.64
+Transcript: Let's look at an example.
+
+ID: L29
+Time: 32.64
+Transcript: We're asked to sort the following array.
+
+ID: L210
+Time: 35.68
+Transcript: Let's choose a pivot.
+
+ID: L211
+Time: 37.50
+Transcript: I'll explain the best way to do this later, but for now, let's just choose three.
+
+ID: L212
+Time: 42.72
+Transcript: First, we move the pivot to the end of the array to get it out of our way.
+
+ID: L213
+Time: 48.72
+Transcript: Next, we're going to look for two items.
+
+ID: L214
+Time: 53.54
+Transcript: Item from left, which is the first item, starting from the left, that is larger than our pivot.
+
+ID: L215
+Time: 59.52
+Transcript: Second, item from right, which is the first item, starting from the right, that is smaller.
+
+ID: L216
+Time: 64.80
+Transcript: than our pivot.
+
+ID: L217
+Time: 69.30
+Transcript: Starting at two, we can see that six is item from left.
+
+ID: L218
+Time: 75.44
+Transcript: Now starting at the right, we see that one is item from right.
+
+ID: L219
+Time: 81.92
+Transcript: Let's swap item from left with item from right.
+
+ID: L220
+Time: 88.16
+Transcript: We repeat the process.
+
+ID: L221
+Time: 90.10
+Transcript: This time, five is item from left, and zero is item from right.
+
+ID: L222
+Time: 96.72
+Transcript: Again, we swap the two.
+
+ID: L223
+Time: 105.96
+Transcript: One more time. This time, we see that item from left has a greater index than item from right, so we.
+
+ID: L224
+Time: 112.24
+Transcript: know we're done.
+
+ID: L225
+Time: 118.08
+Transcript: We swap item from left with our pivot.
+
+ID: L226
+Time: 123.64
+Transcript: Three, our pivot is now in its correct spot.
+
+ID: L227
+Time: 131.00
+Transcript: To prove it, let's review our three conditions.
+
+ID: L228
+Time: 134.40
+Transcript: As you can see, all items to the left are smaller, and all items to the right are larger.
+
+ID: L229
+Time: 141.60
+Transcript: We said quicksort is recursive.
+
+ID: L230
+Time: 143.84
+Transcript: Let's go through the process one more time with the larger partition we just made.
+
+ID: L231
+Time: 149.20
+Transcript: We'll choose seven as our pivot and move it to the end.
+
+ID: L232
+Time: 159.48
+Transcript: I'll let you watch without voiceover.
+
+ID: L233
+Time: 189.48
+Transcript: Now, we have three and seven in their correct positions.
+
+ID: L234
+Time: 196.04
+Transcript: I think you understand the concept, so we'll let recursion handle the rest. One important question is how do we choose the pivot?.
+
+ID: L235
+Time: 207.40
+Transcript: This makes a large difference in the performance of the algorithm, as we want to choose a pivot.
+
+ID: L236
+Time: 212.20
+Transcript: that divides the array in half or as close as possible to even out the work.
+
+ID: L237
+Time: 218.48
+Transcript: One popular method is called median of three.
+
+ID: L238
+Time: 221.16
+Transcript: In this method, we look at the first, middle, and last elements of the array.
+
+ID: L239
+Time: 228.20
+Transcript: We sort them properly and choose the middle item as our pivot. We're making the guess that the middle of these three items could be close to the median.
+
+ID: L240
+Time: 236.64
+Transcript: of the entire array, and as you can see, it's not too far off.
+
+ID: L241
+Time: 242.20
+Transcript: Here's the pseudocode for quicksort. Quicksort has the worst case time complexity of big O of n squared, but if a pivot is chosen.
+
+ID: L242
+Time: 253.08
+Transcript: properly, it can be shown to have an average case of big O of n log n.
+
+ID: L243
+Time: 257.32
+Transcript: Thank you for watching.
+
+ID: L244
+Time: 260.80
+Transcript: Please like and subscribe if you enjoyed the video.
+

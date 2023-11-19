@@ -1,0 +1,108 @@
+1
+00:00:00,000 --> 00:00:03,000
+Today we're going to learn Insertion Sort.
+
+2
+00:00:03,000 --> 00:00:05,000
+Let's dive right in.
+
+3
+00:00:05,000 --> 00:00:09,000
+We're given this array, and we want it sorted in increasing order.
+
+4
+00:00:09,000 --> 00:00:11,000
+Here's what we're going to do.
+
+5
+00:00:11,000 --> 00:00:14,000
+We'll start at the left and work our way to the right,
+
+6
+00:00:14,000 --> 00:00:18,000
+examining each item and comparing it to the items on its left.
+
+7
+00:00:18,000 --> 00:00:22,000
+We'll then insert it in the correct position in the array.
+
+8
+00:00:22,000 --> 00:00:26,000
+You'll notice that part of our array will be sorted as we progress.
+
+9
+00:00:26,000 --> 00:00:29,000
+We'll mark those items with a green background.
+
+10
+00:00:30,000 --> 00:00:32,000
+Let's begin and you'll see what I mean.
+
+11
+00:00:32,000 --> 00:00:34,000
+We start at 2.
+
+12
+00:00:34,000 --> 00:00:40,000
+Of course, there are no items to the left of 2, so we mark it as sorted.
+
+13
+00:00:41,000 --> 00:00:46,000
+Moving on to 8, we compare it to 2 and leave it where it is.
+
+14
+00:00:46,000 --> 00:00:49,000
+Our first two items are now sorted.
+
+15
+00:00:50,000 --> 00:00:54,000
+Next we have 5, which we can see is out of place.
+
+16
+00:00:54,000 --> 00:00:58,000
+We know it needs to be after 2, so we swap it with 8.
+
+17
+00:00:59,000 --> 00:01:05,000
+Our first three items are now sorted.
+
+18
+00:01:05,000 --> 00:01:09,000
+On to 3. Again, it's out of place.
+
+19
+00:01:09,000 --> 00:01:15,000
+We swap it with 8 and 5 until it's in the correct position.
+
+20
+00:01:19,000 --> 00:01:25,000
+We're at our fifth item, 9, and I'm sure you can see that it's in the correct spot.
+
+21
+00:01:25,000 --> 00:01:30,000
+Let's move to 4 and insert it in the correct place in the array.
+
+22
+00:01:42,000 --> 00:01:44,000
+And that's it. We're done.
+
+23
+00:01:44,000 --> 00:01:48,000
+Insertion sort is one of the most straightforward sorting algorithms.
+
+24
+00:01:48,000 --> 00:01:51,000
+For your reference, here's the pseudocode.
+
+25
+00:01:51,000 --> 00:01:58,000
+Insertion sort has the worst case time complexity of O of n squared, where n is the size of the array.
+
+26
+00:01:58,000 --> 00:02:07,000
+For example, when an array starts in decreasing order, you need to swap and compare every single item, which leads to O of n squared.
+
+27
+00:02:07,000 --> 00:02:14,000
+Thank you for watching. I'd love it if you'd subscribe. Please post suggestions for future videos below.
+

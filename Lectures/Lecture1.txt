@@ -1,0 +1,600 @@
+ID: L11
+Time: 0.00
+Transcript: Today we're going to learn selection sort. Let's say we're given the following array and we want it sorted in increasing order. How will we do this? During each iteration.
+
+ID: L12
+Time: 11.56
+Transcript: we'll select the smallest item from the unsorted partition of our array and move it to the.
+
+ID: L13
+Time: 16.18
+Transcript: sorted partition. We'll keep track of the current minimum and current item with red and blue arrows. Let's get started. We always set the current.
+
+ID: L14
+Time: 26.72
+Transcript: minimum to the first number in the unsorted partition, in this case 2. We progress the.
+
+ID: L15
+Time: 32.80
+Transcript: length of the array looking for a smaller number. We find 1 at the end of the array.
+
+ID: L16
+Time: 47.96
+Transcript: and set it as our current minimum. We swap 1 and 2. We now have one item in our sorted partition. Moving on, we set 8 as our current minimum.
+
+ID: L17
+Time: 60.84
+Transcript: and scan the remainder of the array for a smaller number, updating the current minimum.
+
+ID: L18
+Time: 65.44
+Transcript: as we progress. At the end we find 2 and swap it with 8.
+
+ID: L19
+Time: 81.40
+Transcript: We're ready for the next iteration. This time 3 moves into our sorted partition.
+
+ID: L110
+Time: 99.52
+Transcript: Let's watch the rest of the algorithm play out.
+
+ID: L111
+Time: 129.52
+Transcript: Pretty simple. With each iteration you select the smallest item that hasn't yet been sorted.
+
+ID: L112
+Time: 144.24
+Transcript: Here's the pseudocode for selection sort. As you can tell from the code and the nested.
+
+ID: L113
+Time: 150.00
+Transcript: for loop, selection sort has a time complexity of O of n squared, where n is the size of.
+
+ID: L114
+Time: 156.12
+Transcript: the array. Thank you for watching. Please subscribe and comment suggestions for future.
+
+ID: L115
+Time: 161.28
+Transcript: videos.
+
+ID: L21
+Time: 0.00
+Transcript: Today, we're going to learn quicksort.
+
+ID: L22
+Time: 3.54
+Transcript: Like merge sort, quicksort is a recursive algorithm.
+
+ID: L23
+Time: 6.72
+Transcript: However, when you think of quicksort, I want you to think of the word pivot.
+
+ID: L24
+Time: 11.88
+Transcript: A pivot is simply one of the items in the array that meets the following three conditions.
+
+ID: L25
+Time: 16.60
+Transcript: after we sorted it.
+
+ID: L26
+Time: 18.60
+Transcript: First, the pivot is in its correct position in the final sorted array.
+
+ID: L27
+Time: 23.72
+Transcript: This means that all items to the left are smaller, and all items to the right are larger.
+
+ID: L28
+Time: 29.64
+Transcript: Let's look at an example.
+
+ID: L29
+Time: 32.64
+Transcript: We're asked to sort the following array.
+
+ID: L210
+Time: 35.68
+Transcript: Let's choose a pivot.
+
+ID: L211
+Time: 37.50
+Transcript: I'll explain the best way to do this later, but for now, let's just choose three.
+
+ID: L212
+Time: 42.72
+Transcript: First, we move the pivot to the end of the array to get it out of our way.
+
+ID: L213
+Time: 48.72
+Transcript: Next, we're going to look for two items.
+
+ID: L214
+Time: 53.54
+Transcript: Item from left, which is the first item, starting from the left, that is larger than our pivot.
+
+ID: L215
+Time: 59.52
+Transcript: Second, item from right, which is the first item, starting from the right, that is smaller.
+
+ID: L216
+Time: 64.80
+Transcript: than our pivot.
+
+ID: L217
+Time: 69.30
+Transcript: Starting at two, we can see that six is item from left.
+
+ID: L218
+Time: 75.44
+Transcript: Now starting at the right, we see that one is item from right.
+
+ID: L219
+Time: 81.92
+Transcript: Let's swap item from left with item from right.
+
+ID: L220
+Time: 88.16
+Transcript: We repeat the process.
+
+ID: L221
+Time: 90.10
+Transcript: This time, five is item from left, and zero is item from right.
+
+ID: L222
+Time: 96.72
+Transcript: Again, we swap the two.
+
+ID: L223
+Time: 105.96
+Transcript: One more time. This time, we see that item from left has a greater index than item from right, so we.
+
+ID: L224
+Time: 112.24
+Transcript: know we're done.
+
+ID: L225
+Time: 118.08
+Transcript: We swap item from left with our pivot.
+
+ID: L226
+Time: 123.64
+Transcript: Three, our pivot is now in its correct spot.
+
+ID: L227
+Time: 131.00
+Transcript: To prove it, let's review our three conditions.
+
+ID: L228
+Time: 134.40
+Transcript: As you can see, all items to the left are smaller, and all items to the right are larger.
+
+ID: L229
+Time: 141.60
+Transcript: We said quicksort is recursive.
+
+ID: L230
+Time: 143.84
+Transcript: Let's go through the process one more time with the larger partition we just made.
+
+ID: L231
+Time: 149.20
+Transcript: We'll choose seven as our pivot and move it to the end.
+
+ID: L232
+Time: 159.48
+Transcript: I'll let you watch without voiceover.
+
+ID: L233
+Time: 189.48
+Transcript: Now, we have three and seven in their correct positions.
+
+ID: L234
+Time: 196.04
+Transcript: I think you understand the concept, so we'll let recursion handle the rest. One important question is how do we choose the pivot?.
+
+ID: L235
+Time: 207.40
+Transcript: This makes a large difference in the performance of the algorithm, as we want to choose a pivot.
+
+ID: L236
+Time: 212.20
+Transcript: that divides the array in half or as close as possible to even out the work.
+
+ID: L237
+Time: 218.48
+Transcript: One popular method is called median of three.
+
+ID: L238
+Time: 221.16
+Transcript: In this method, we look at the first, middle, and last elements of the array.
+
+ID: L239
+Time: 228.20
+Transcript: We sort them properly and choose the middle item as our pivot. We're making the guess that the middle of these three items could be close to the median.
+
+ID: L240
+Time: 236.64
+Transcript: of the entire array, and as you can see, it's not too far off.
+
+ID: L241
+Time: 242.20
+Transcript: Here's the pseudocode for quicksort. Quicksort has the worst case time complexity of big O of n squared, but if a pivot is chosen.
+
+ID: L242
+Time: 253.08
+Transcript: properly, it can be shown to have an average case of big O of n log n.
+
+ID: L243
+Time: 257.32
+Transcript: Thank you for watching.
+
+ID: L244
+Time: 260.80
+Transcript: Please like and subscribe if you enjoyed the video.
+
+ID: L31
+Time: 0.00
+Transcript: Today we're going to learn merge sort.
+
+ID: L32
+Time: 2.88
+Transcript: A few quick points, then we'll get to the example.
+
+ID: L33
+Time: 6.12
+Transcript: Merge sort is usually done recursively.
+
+ID: L34
+Time: 9.16
+Transcript: When you think of merge sort, as with other recursive algorithms, I want you to think of divide and conquer.
+
+ID: L35
+Time: 15.56
+Transcript: We're going to break our problem into smaller problems in order to solve it.
+
+ID: L36
+Time: 20.52
+Transcript: Let's get started. We have the following array and we want it sorted.
+
+ID: L37
+Time: 25.60
+Transcript: We're going to continuously split the array in half, our divide step.
+
+ID: L38
+Time: 30.04
+Transcript: Until we are left with the individual items.
+
+ID: L39
+Time: 33.00
+Transcript: Watch and see.
+
+ID: L310
+Time: 49.12
+Transcript: Our array is now broken down into individual items.
+
+ID: L311
+Time: 52.16
+Transcript: One note before we start sorting. When you implement this in code, these steps will be done in a different order because of recursion.
+
+ID: L312
+Time: 61.64
+Transcript: But I think this human friendly order provides more clarity in learning.
+
+ID: L313
+Time: 66.28
+Transcript: Let's continue. We're ready to sort.
+
+ID: L314
+Time: 69.48
+Transcript: We'll examine the individual items, compare their values, and merge them into temporary arrays.
+
+ID: L315
+Time: 83.04
+Transcript: The temporary arrays are sorted, but there's work left to do. Let's jump up the recursion stack and continue.
+
+ID: L316
+Time: 91.12
+Transcript: We merge our smaller arrays into a larger one, inserting items in the correct order.
+
+ID: L317
+Time: 101.08
+Transcript: We'll use the same array again.
+
+ID: L318
+Time: 103.08
+Transcript: We'll merge our larger arrays into a larger one, inserting items in the correct order.
+
+ID: L319
+Time: 124.84
+Transcript: One more merge and we'll have our sorted array.
+
+ID: L320
+Time: 133.08
+Transcript: And that's it. Our array is now sorted.
+
+ID: L321
+Time: 142.08
+Transcript: Here's the pseudocode for merge sort. On the left you have the recursive part, which halves the arrays.
+
+ID: L322
+Time: 149.08
+Transcript: On the right is the merge function which combines the arrays.
+
+ID: L323
+Time: 154.08
+Transcript: Merge sort has a worst case time complexity of O of n times log n.
+
+ID: L324
+Time: 160.08
+Transcript: The easiest way to think about it is to start with the merge step.
+
+ID: L325
+Time: 163.08
+Transcript: Looking at the while loop, we see we have to visit n items.
+
+ID: L326
+Time: 167.08
+Transcript: The log n comes from the maximum height of a binary tree we create, which is on the order of log n.
+
+ID: L327
+Time: 175.08
+Transcript: Thank you for watching. Please comment suggestions for future videos below, as well as any questions you may have.
+
+ID: L41
+Time: 0.00
+Transcript: Today we're going to learn Insertion Sort.
+
+ID: L42
+Time: 3.00
+Transcript: Let's dive right in.
+
+ID: L43
+Time: 5.00
+Transcript: We're given this array, and we want it sorted in increasing order.
+
+ID: L44
+Time: 9.00
+Transcript: Here's what we're going to do. We'll start at the left and work our way to the right,.
+
+ID: L45
+Time: 14.00
+Transcript: examining each item and comparing it to the items on its left.
+
+ID: L46
+Time: 18.00
+Transcript: We'll then insert it in the correct position in the array.
+
+ID: L47
+Time: 22.00
+Transcript: You'll notice that part of our array will be sorted as we progress.
+
+ID: L48
+Time: 26.00
+Transcript: We'll mark those items with a green background.
+
+ID: L49
+Time: 30.00
+Transcript: Let's begin and you'll see what I mean.
+
+ID: L410
+Time: 32.00
+Transcript: We start at 2.
+
+ID: L411
+Time: 34.00
+Transcript: Of course, there are no items to the left of 2, so we mark it as sorted.
+
+ID: L412
+Time: 41.00
+Transcript: Moving on to 8, we compare it to 2 and leave it where it is.
+
+ID: L413
+Time: 46.00
+Transcript: Our first two items are now sorted.
+
+ID: L414
+Time: 50.00
+Transcript: Next we have 5, which we can see is out of place.
+
+ID: L415
+Time: 54.00
+Transcript: We know it needs to be after 2, so we swap it with 8.
+
+ID: L416
+Time: 59.00
+Transcript: Our first three items are now sorted.
+
+ID: L417
+Time: 65.00
+Transcript: On to 3. Again, it's out of place.
+
+ID: L418
+Time: 69.00
+Transcript: We swap it with 8 and 5 until it's in the correct position.
+
+ID: L419
+Time: 79.00
+Transcript: We're at our fifth item, 9, and I'm sure you can see that it's in the correct spot.
+
+ID: L420
+Time: 85.00
+Transcript: Let's move to 4 and insert it in the correct place in the array.
+
+ID: L421
+Time: 102.00
+Transcript: And that's it. We're done.
+
+ID: L422
+Time: 104.00
+Transcript: Insertion sort is one of the most straightforward sorting algorithms.
+
+ID: L423
+Time: 108.00
+Transcript: For your reference, here's the pseudocode.
+
+ID: L424
+Time: 111.00
+Transcript: Insertion sort has the worst case time complexity of O of n squared, where n is the size of the array.
+
+ID: L425
+Time: 118.00
+Transcript: For example, when an array starts in decreasing order, you need to swap and compare every single item, which leads to O of n squared.
+
+ID: L426
+Time: 127.00
+Transcript: Thank you for watching. I'd love it if you'd subscribe. Please post suggestions for future videos below.
+
+ID: L51
+Time: 0.00
+Transcript: Today we're going to learn heap sort. Let's start with some terminology. A heap is simply an ordered binary tree. A max heap has a restriction that the value of.
+
+ID: L52
+Time: 11.60
+Transcript: the parent nodes are greater than the value of the child nodes. Here's an.
+
+ID: L53
+Time: 17.10
+Transcript: example of a max heap. We'll make use of a few functions when running heap sort.
+
+ID: L54
+Time: 22.68
+Transcript: First we have buildMaxHeap. This creates a max heap from an unsorted array. We'll also use heapify. This is similar to buildMaxHeap, except faster because we.
+
+ID: L55
+Time: 36.74
+Transcript: assume part of the array is already sorted. You'll see what I mean. One note. For this video I'm less concerned with you knowing how these.
+
+ID: L56
+Time: 45.60
+Transcript: methods work, but rather that they exist and when to use them. Once you understand the basics of heap sort, you'll understand these functions from their.
+
+ID: L57
+Time: 53.84
+Transcript: pseudocode. Let's get started. We have the following array that we're tasked to sort. In a nutshell, we'll continuously create max heaps to find the largest.
+
+ID: L58
+Time: 65.28
+Transcript: item. We'll then remove that item from the heap and into a sorted partition. We'll begin by representing our array as a tree. To see how we did that, simply.
+
+ID: L59
+Time: 77.00
+Transcript: look at the array from left to right and the tree from top to bottom.
+
+ID: L510
+Time: 82.64
+Transcript: Now that we have a tree, let's create our first heap. We assume this is an.
+
+ID: L511
+Time: 93.28
+Transcript: unsorted array, so we call buildMaxHeap. Now that we have our max heap, we know the largest item, 9. We swap 9 with the.
+
+ID: L512
+Time: 106.52
+Transcript: item at the end of the array, 1. Finally, we remove 9 from the tree and consider it sorted. Looks good so far,.
+
+ID: L513
+Time: 118.56
+Transcript: except we're back to having a tree and not a heap. This time we call heapify.
+
+ID: L514
+Time: 123.80
+Transcript: since only the item 1 is out of place.
+
+ID: L515
+Time: 128.32
+Transcript: 1 floats down to the bottom and the largest number heads to the top. We're back to having a max heap. Let's swap the largest number 8 with the item.
+
+ID: L516
+Time: 144.00
+Transcript: at the end of the unsorted part of the array, 2. We remove 8 and consider it.
+
+ID: L517
+Time: 149.64
+Transcript: sorted.
+
+ID: L518
+Time: 156.00
+Transcript: Again, we need our heap back, so let's call heapify. I think you see the pattern. I'll let you watch the rest of the video without.
+
+ID: L519
+Time: 170.80
+Transcript: voiceover.
+
+ID: L520
+Time: 224.80
+Transcript: We're all done. Our array is fully sorted. Here's the pseudocode for heap sort. The time complexity of heap sort is O of n log n. buildMaxHeap takes O.
+
+ID: L521
+Time: 239.04
+Transcript: of n time. heapify runs in O of log n time, but we end up calling it n minus 1.
+
+ID: L522
+Time: 245.44
+Transcript: times. Thank you for watching. If you enjoyed the video, please like it and.
+
+ID: L523
+Time: 251.40
+Transcript: subscribe.
+
+ID: L61
+Time: 0.00
+Transcript: Today we're going to learn Bubble Sort.
+
+ID: L62
+Time: 3.00
+Transcript: Here's what we'll do.
+
+ID: L63
+Time: 5.00
+Transcript: We're going to compare consecutive items.
+
+ID: L64
+Time: 8.00
+Transcript: If they're out of place, we'll swap them.
+
+ID: L65
+Time: 12.00
+Transcript: The highest number will bubble its way to the right with each iteration.
+
+ID: L66
+Time: 18.00
+Transcript: A sorted partition will form at the end of the array.
+
+ID: L67
+Time: 22.00
+Transcript: It's pretty simple, so I'll be quiet and let you watch.
+
+ID: L68
+Time: 30.00
+Transcript: Let's see how it works.
+
+ID: L69
+Time: 48.00
+Transcript: Done with the first iteration.
+
+ID: L610
+Time: 50.00
+Transcript: 9 is now in the correct spot. Let's continue.
+
+ID: L611
+Time: 60.00
+Transcript: You get the picture. I'll see you at the end of the algorithm.
+
+ID: L612
+Time: 90.00
+Transcript: We're done. Our array is sorted.
+
+ID: L613
+Time: 112.00
+Transcript: Here's the pseudocode for Bubble Sort.
+
+ID: L614
+Time: 116.00
+Transcript: As you can guess from the nested for loop, the worst case time complexity is O of n squared, where n is the size of the array.
+
+ID: L615
+Time: 125.00
+Transcript: If you have questions, please ask them below. Thank you for watching.
+

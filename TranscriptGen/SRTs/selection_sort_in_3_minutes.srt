@@ -1,0 +1,72 @@
+1
+00:00:00,000 --> 00:00:06,200
+Today we're going to learn selection sort. Let's say we're given the following array
+
+2
+00:00:06,200 --> 00:00:11,560
+and we want it sorted in increasing order. How will we do this? During each iteration
+
+3
+00:00:11,560 --> 00:00:16,180
+we'll select the smallest item from the unsorted partition of our array and move it to the
+
+4
+00:00:16,180 --> 00:00:21,420
+sorted partition. We'll keep track of the current minimum and current item with red
+
+5
+00:00:21,420 --> 00:00:26,720
+and blue arrows. Let's get started. We always set the current
+
+6
+00:00:26,720 --> 00:00:32,800
+minimum to the first number in the unsorted partition, in this case 2. We progress the
+
+7
+00:00:32,800 --> 00:00:47,960
+length of the array looking for a smaller number. We find 1 at the end of the array
+
+8
+00:00:47,960 --> 00:00:54,520
+and set it as our current minimum. We swap 1 and 2. We now have one item in our sorted
+
+9
+00:00:54,520 --> 00:01:00,840
+partition. Moving on, we set 8 as our current minimum
+
+10
+00:01:00,840 --> 00:01:05,440
+and scan the remainder of the array for a smaller number, updating the current minimum
+
+11
+00:01:05,440 --> 00:01:21,400
+as we progress. At the end we find 2 and swap it with 8.
+
+12
+00:01:21,400 --> 00:01:39,520
+We're ready for the next iteration. This time 3 moves into our sorted partition.
+
+13
+00:01:39,520 --> 00:01:41,360
+Let's watch the rest of the algorithm play out.
+
+14
+00:02:09,520 --> 00:02:24,240
+Pretty simple. With each iteration you select the smallest item that hasn't yet been sorted.
+
+15
+00:02:24,240 --> 00:02:30,000
+Here's the pseudocode for selection sort. As you can tell from the code and the nested
+
+16
+00:02:30,000 --> 00:02:36,120
+for loop, selection sort has a time complexity of O of n squared, where n is the size of
+
+17
+00:02:36,120 --> 00:02:41,280
+the array. Thank you for watching. Please subscribe and comment suggestions for future
+
+18
+00:02:41,280 --> 00:02:41,800
+videos.
+

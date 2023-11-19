@@ -1,0 +1,3443 @@
+WEBVTT
+
+00:00.000 --> 00:03.120
+The following content is provided under a Creative
+
+00:03.120 --> 00:04.520
+Commons license.
+
+00:04.520 --> 00:07.560
+Your support will help MIT OpenCourseWare continue to
+
+00:07.560 --> 00:11.200
+offer high quality educational resources for free.
+
+00:11.200 --> 00:14.120
+To make a donation or view additional materials from
+
+00:14.120 --> 00:18.040
+hundreds of MIT courses, visit MIT OpenCourseWare at
+
+00:18.040 --> 00:19.280
+ocw.mit.edu.
+
+00:19.280 --> 00:21.280
+PROFESSOR 1 STEVEN SCOTT BRADY
+
+00:21.280 --> 00:35.440
+So for the last two lectures, we've been talking about
+
+00:35.440 --> 00:38.440
+analyzing algorithms, complexity, orders of growth.
+
+00:38.440 --> 00:41.920
+How do we estimate the cost of an algorithm as the size of
+
+00:41.920 --> 00:43.560
+the input grows?
+
+00:43.560 --> 00:45.560
+And as I've said several times, I'll say at least once
+
+00:45.560 --> 00:47.880
+more, how do we also turn it the other direction?
+
+00:47.880 --> 00:52.240
+How do we use thoughts about choices of pieces of algorithm
+
+00:52.240 --> 00:54.880
+in terms of implications on the cost it's going to take us
+
+00:54.880 --> 00:56.720
+to compute?
+
+00:56.720 --> 01:01.200
+We saw last time a set of examples, constant algorithms,
+
+01:01.200 --> 01:03.600
+linear algorithms, sorry, constant algorithms,
+
+01:03.600 --> 01:07.000
+logarithmic algorithms, linear algorithms, quadratic
+
+01:07.000 --> 01:09.840
+algorithms, exponential algorithms.
+
+01:09.840 --> 01:12.980
+Today, what I'm going to do is fill in one more piece, a log
+
+01:12.980 --> 01:15.320
+linear algorithm, something that's really a nice kind of
+
+01:15.360 --> 01:19.560
+algorithm to have, and use it to talk about one last class
+
+01:19.560 --> 01:21.560
+of algorithms that are really valuable.
+
+01:21.560 --> 01:25.640
+And those are searching and sorting algorithms.
+
+01:25.640 --> 01:29.440
+So a search algorithm, kind of an obvious statement.
+
+01:29.440 --> 01:31.920
+You use them all the time when you go to Google or Bing
+
+01:31.920 --> 01:35.720
+or whatever your favorite search mechanism on the web is.
+
+01:35.720 --> 01:39.320
+It's just a way to find an item or a group of items
+
+01:39.320 --> 01:41.280
+from a collection.
+
+01:41.280 --> 01:43.400
+If you think about it, that collection
+
+01:43.440 --> 01:47.000
+could be either implicit or explicit.
+
+01:47.000 --> 01:48.720
+So way back at the beginning of the term,
+
+01:48.720 --> 01:50.640
+we saw an example of a search algorithm
+
+01:50.640 --> 01:53.600
+when you were looking for square roots.
+
+01:53.600 --> 01:56.600
+And we saw simple things like exhaustive enumeration.
+
+01:56.600 --> 01:58.540
+We'd go through all the possibilities.
+
+01:58.540 --> 02:00.780
+We saw our first version of bisection search
+
+02:00.780 --> 02:03.400
+there where you would do approximations, Newton-Raphson.
+
+02:03.400 --> 02:05.960
+These are all examples of a search algorithm
+
+02:05.960 --> 02:08.040
+where the collection is implicit.
+
+02:08.040 --> 02:11.920
+It's all the numbers between some point and some other point.
+
+02:11.920 --> 02:13.600
+More common is a search algorithm
+
+02:13.600 --> 02:16.520
+where the collection is explicit.
+
+02:16.520 --> 02:17.060
+I don't know.
+
+02:17.060 --> 02:19.800
+For example, I've got all the data records of students.
+
+02:19.800 --> 02:22.180
+And I want to know, how do I find a particular student so I
+
+02:22.180 --> 02:24.960
+can record that A-plus that everybody in this room
+
+02:24.960 --> 02:27.960
+is going to get next Tuesday on that exam?
+
+02:27.960 --> 02:29.160
+That's not a promise, sorry.
+
+02:29.160 --> 02:30.800
+But we'll work on it.
+
+02:30.800 --> 02:33.240
+So could do it implicit, could do it explicit.
+
+02:33.240 --> 02:36.920
+Today I want to focus on doing search explicitly.
+
+02:36.920 --> 02:39.300
+And it could be on different kinds of collections.
+
+02:39.300 --> 02:41.280
+But I'm going to focus, just as an example,
+
+02:41.320 --> 02:42.840
+on search over lists.
+
+02:42.840 --> 02:44.600
+And to make it a little easier, let's just
+
+02:44.600 --> 02:46.060
+do search over lists of numbers.
+
+02:46.060 --> 02:49.560
+But it could obviously be other kinds of elements.
+
+02:49.560 --> 02:51.360
+Now, you've already seen some of this, right?
+
+02:51.360 --> 02:54.920
+We did search where we said we could do linear search,
+
+02:54.920 --> 02:55.680
+brute force.
+
+02:55.680 --> 02:58.000
+Just walk down the list looking at everything
+
+02:58.000 --> 03:00.200
+till we either find the thing we're looking for
+
+03:00.200 --> 03:02.160
+or we get to the end of the list.
+
+03:02.160 --> 03:04.400
+Sometimes also called British Museum algorithm
+
+03:04.400 --> 03:05.560
+or exhaustive enumeration.
+
+03:05.560 --> 03:07.880
+I go through everything in the list.
+
+03:07.880 --> 03:10.180
+Nice news is the list doesn't have to be sorted.
+
+03:10.220 --> 03:12.460
+It could be just an arbitrary order.
+
+03:12.460 --> 03:16.420
+What we saw is that the expected, sorry, not expected,
+
+03:16.420 --> 03:18.420
+the worst case behavior is linear.
+
+03:18.420 --> 03:20.660
+In the worst case, the element's not in the list.
+
+03:20.660 --> 03:21.960
+I've got to look at everything.
+
+03:21.960 --> 03:25.000
+So it's going to be linear in terms of complexity.
+
+03:25.000 --> 03:27.420
+And then we looked at bisection search, where we said
+
+03:27.420 --> 03:29.780
+the list needs to be sorted.
+
+03:29.780 --> 03:32.940
+But if it is, we can actually be much more efficient
+
+03:32.940 --> 03:35.660
+because we can take advantage of the sorting
+
+03:35.660 --> 03:38.100
+to cut down the size of the problem.
+
+03:38.100 --> 03:39.760
+And I'll remind you of both of those.
+
+03:39.840 --> 03:42.920
+There was our simple linear search.
+
+03:42.920 --> 03:45.040
+Set a flag that says I haven't yet found it.
+
+03:45.040 --> 03:48.140
+And then just loop over the indices into the list.
+
+03:48.140 --> 03:51.220
+I could have also just looped directly over the list itself.
+
+03:51.220 --> 03:53.600
+Checking to see if the ith member of the list
+
+03:53.600 --> 03:55.480
+is the thing I'm looking for.
+
+03:55.480 --> 03:57.200
+If it is, change the flag to true
+
+03:57.200 --> 04:00.400
+so that when I come out of all of this, I'll return the flag.
+
+04:00.400 --> 04:02.520
+Either false because it was set that way initially
+
+04:02.520 --> 04:03.960
+or true because I found it.
+
+04:03.960 --> 04:06.400
+And of course, what we knew is we have to look at everything
+
+04:06.400 --> 04:08.560
+to see if it's there or not.
+
+04:08.560 --> 04:12.800
+I could speed this up by just returning true at this point.
+
+04:12.800 --> 04:15.640
+Well, that would improve the average case.
+
+04:15.640 --> 04:16.960
+Doesn't improve the worst case.
+
+04:16.960 --> 04:18.680
+And that's the thing we usually are concerned about
+
+04:18.680 --> 04:21.220
+because in the worst case, I've got to go through everything.
+
+04:21.220 --> 04:22.880
+And just to remind you, we said this
+
+04:22.880 --> 04:26.600
+is order length of the list to go around this part, the loop
+
+04:26.600 --> 04:27.520
+right here.
+
+04:27.520 --> 04:30.120
+And inside the loop, it's constant work.
+
+04:30.120 --> 04:32.520
+I'm doing the same number of things each time.
+
+04:32.520 --> 04:35.080
+That's order n times order 1.
+
+04:35.080 --> 04:36.840
+And by our rules, that's just order n.
+
+04:36.840 --> 04:39.280
+So it's linear in the size of the problem.
+
+04:43.000 --> 04:45.920
+We said we could do it on sorted lists.
+
+04:45.920 --> 04:48.000
+But just again, walk down the list.
+
+04:48.000 --> 04:50.400
+Again, here I could loop over everything in the list,
+
+04:50.400 --> 04:53.640
+checking to see if it's a thing I want, return true.
+
+04:53.640 --> 04:56.560
+And if I ever get to a point where the element of the list
+
+04:56.560 --> 04:59.360
+is bigger than the thing I'm looking for,
+
+04:59.360 --> 05:01.160
+I know it can't be in the rest of the list
+
+05:01.160 --> 05:03.280
+because all the things to the right are bigger yet,
+
+05:03.280 --> 05:06.780
+I could just return false and drop out.
+
+05:06.780 --> 05:08.520
+In terms of average behavior, this
+
+05:08.520 --> 05:10.820
+is better because it's going to stop as soon
+
+05:10.820 --> 05:14.020
+as it gets to a point where it can rule everything else out.
+
+05:14.020 --> 05:18.500
+But in terms of complexity, it's still order n.
+
+05:18.500 --> 05:21.060
+Because I still, on average, have to not average.
+
+05:21.060 --> 05:22.440
+In the worst case, I'm still going
+
+05:22.440 --> 05:24.660
+to be looking n times through the loop
+
+05:24.660 --> 05:27.540
+before I get to a point where I can decide to bail out of it.
+
+05:27.540 --> 05:30.020
+So order n.
+
+05:30.020 --> 05:35.300
+And then finally, last piece of recap, bisection search.
+
+05:35.300 --> 05:35.920
+Repeat again.
+
+05:35.960 --> 05:39.160
+The idea here is take the midpoint of the list.
+
+05:39.160 --> 05:40.320
+Look at that element.
+
+05:40.320 --> 05:42.040
+If it's the thing I'm looking for, great.
+
+05:42.040 --> 05:43.560
+I just won the lottery.
+
+05:43.560 --> 05:45.960
+If it isn't, decide is the thing I'm
+
+05:45.960 --> 05:49.560
+looking for bigger or less than that middle point.
+
+05:49.560 --> 05:53.740
+If it's bigger than that, I only use the upper half of the list.
+
+05:53.740 --> 05:57.360
+If it's less than that, I only use the lower half of the list.
+
+05:57.360 --> 06:00.880
+And the characteristic here was at each step,
+
+06:00.880 --> 06:03.080
+I'm reducing the size of the problem in half.
+
+06:03.080 --> 06:06.440
+I'm throwing away half of the remaining list at each step.
+
+06:06.440 --> 06:08.080
+And I'll just remind you of that code.
+
+06:08.080 --> 06:09.040
+I know it's a lot here.
+
+06:09.040 --> 06:11.680
+But just to remind you, it said down here,
+
+06:11.680 --> 06:13.920
+if I've got an empty list, can't be there.
+
+06:13.920 --> 06:15.400
+I'm going to return false.
+
+06:15.400 --> 06:17.800
+Otherwise, call this little helper function
+
+06:17.800 --> 06:21.140
+with the list, the thing for which I'm searching,
+
+06:21.140 --> 06:24.760
+and the beginning and end point indices into the list.
+
+06:24.760 --> 06:27.940
+Initially, the start and the very end.
+
+06:27.940 --> 06:31.120
+And this code up here basically says,
+
+06:31.120 --> 06:33.760
+if those two numbers are the same,
+
+06:33.760 --> 06:34.920
+I'm down to a list of one.
+
+06:34.920 --> 06:37.640
+Just check to see if it's the thing I'm looking for.
+
+06:37.640 --> 06:40.720
+Otherwise, pick something halfway in between.
+
+06:40.720 --> 06:42.200
+And ignore this case for the moment.
+
+06:42.200 --> 06:45.040
+Basically, then check to see, is the thing at that point
+
+06:45.040 --> 06:46.520
+bigger than e?
+
+06:46.520 --> 06:48.520
+In which case, I'm in general going
+
+06:48.520 --> 06:51.880
+to call this only with from the low point to the midpoint.
+
+06:51.880 --> 06:55.240
+Otherwise, I'm going to call this with the midpoint to high.
+
+06:55.240 --> 06:57.480
+And that was just this idea of keep cutting down
+
+06:57.480 --> 07:00.620
+in half the size of the list.
+
+07:00.620 --> 07:03.220
+Last piece of the recap, the thing we wanted you to see here
+
+07:03.220 --> 07:05.300
+is there are the two recursive calls.
+
+07:05.300 --> 07:08.620
+I'm only going to do one because I'm making a decision.
+
+07:08.620 --> 07:12.580
+At each step, I'm cutting down the problem by half.
+
+07:12.580 --> 07:15.340
+And that says the number of steps, the number of times
+
+07:15.340 --> 07:17.060
+I'm going to iterate through here
+
+07:17.060 --> 07:19.800
+will be log in the length of the list.
+
+07:19.800 --> 07:21.580
+And if that still doesn't make sense to you,
+
+07:21.580 --> 07:24.460
+it says I need to know when 1 over 2 to the k, where
+
+07:24.460 --> 07:27.380
+k is the number of steps, is equal to 1.
+
+07:27.380 --> 07:29.700
+Because in each step, I'm reducing by half.
+
+07:29.700 --> 07:31.860
+And that's when k is log base 2 of n.
+
+07:31.860 --> 07:34.980
+So that's why it's log linear.
+
+07:34.980 --> 07:38.140
+And so this just reminds you, again, that recap.
+
+07:38.140 --> 07:39.740
+Number of calls reduces, or sorry,
+
+07:39.740 --> 07:42.040
+the call gets reduced by a factor of 2 each time.
+
+07:42.040 --> 07:44.420
+I'm going to have log n work going around it.
+
+07:44.420 --> 07:46.780
+And inside, it's constant amount of work
+
+07:46.780 --> 07:49.740
+because I'm just passing the pointers, not actually
+
+07:49.740 --> 07:50.820
+copying the list.
+
+07:50.820 --> 07:53.580
+And that's a nice state to be.
+
+07:53.580 --> 07:57.460
+OK, so sounds good.
+
+07:57.460 --> 07:58.780
+Could just use linear search.
+
+07:58.780 --> 07:59.780
+It's going to be linear.
+
+07:59.780 --> 08:03.020
+When you use binary search or bisection search,
+
+08:03.020 --> 08:04.300
+we can do it in log time.
+
+08:04.300 --> 08:05.540
+That's great.
+
+08:05.540 --> 08:08.420
+We assumed the list was sorted, but all right.
+
+08:08.420 --> 08:14.220
+So that basically says, OK, so when does it make sense
+
+08:14.220 --> 08:18.420
+to sort the list and then do the search?
+
+08:18.420 --> 08:20.220
+Because if I can sort the list cheaply,
+
+08:20.220 --> 08:22.100
+then the search is going to be logarithmic.
+
+08:22.100 --> 08:24.700
+That's really what I would like.
+
+08:24.700 --> 08:27.160
+This little expression basically says,
+
+08:27.160 --> 08:30.040
+let's let sort be the cost of sorting the list.
+
+08:30.040 --> 08:32.880
+I want to know when that cost plus something that's
+
+08:32.880 --> 08:34.420
+order log n, which is what it's going
+
+08:34.420 --> 08:36.440
+to cost me to do the search, when
+
+08:36.440 --> 08:40.140
+is that less than something that's order n?
+
+08:40.140 --> 08:42.560
+Because then it's going to be better to do the sort first
+
+08:42.560 --> 08:43.760
+and do the search.
+
+08:43.760 --> 08:45.080
+And so I can just rearrange it.
+
+08:45.080 --> 08:47.120
+It needs to be when does the cost of sorting,
+
+08:47.120 --> 08:50.280
+when is it less than this expression, which basically
+
+08:50.280 --> 08:53.280
+says when is sorting going to be less
+
+08:53.280 --> 08:54.720
+expensive than the linear cost?
+
+08:57.800 --> 08:59.220
+Crud.
+
+08:59.220 --> 09:00.680
+Actually, good news for you, right?
+
+09:00.680 --> 09:03.160
+This is a really short lecture because it
+
+09:03.160 --> 09:05.200
+says it's never true.
+
+09:05.200 --> 09:06.280
+Ouch.
+
+09:06.280 --> 09:09.020
+Don't worry, we've got more to go in the lecture.
+
+09:09.020 --> 09:11.480
+The reason it can't be true, if you think about it just
+
+09:11.480 --> 09:14.320
+informally, is if I've got a collection of n elements
+
+09:14.320 --> 09:17.360
+and I want to sort it, I've got to look
+
+09:17.360 --> 09:21.320
+at each one of those elements at least once, right?
+
+09:21.320 --> 09:23.760
+I have to look at them to decide where they go.
+
+09:23.760 --> 09:25.120
+Oh, that's n elements.
+
+09:25.120 --> 09:28.240
+So the sorting must be at least order n because I
+
+09:28.240 --> 09:30.040
+got to look at everything.
+
+09:30.040 --> 09:31.840
+And in fact, as it says there, I'm
+
+09:31.840 --> 09:36.800
+going to have to use at least linear time to do the sort.
+
+09:36.800 --> 09:40.640
+Sounds like we're stuck, but we're not.
+
+09:40.640 --> 09:44.080
+And the reason is often when I want to search something,
+
+09:44.080 --> 09:46.320
+I'm going to do multiple searches,
+
+09:46.320 --> 09:48.160
+but I may only want to sort the list once.
+
+09:48.160 --> 09:51.360
+In fact, I probably only want to sort the list once.
+
+09:51.360 --> 09:53.880
+So in that case, I'm spreading out the cost.
+
+09:53.880 --> 09:57.400
+I'm amortizing the expense of the sort.
+
+09:57.400 --> 09:59.320
+And now what I want to know is if I'm
+
+09:59.320 --> 10:03.160
+going to do k searches, the cost of those k searches I know
+
+10:03.160 --> 10:07.120
+is going to be k log n because it's log to do the search.
+
+10:07.120 --> 10:11.440
+And I simply need to know is the cost of sorting plus this,
+
+10:11.440 --> 10:14.920
+can I have something where it's less than k searches just
+
+10:14.920 --> 10:16.980
+using linear search?
+
+10:16.980 --> 10:19.200
+And the answer is yes.
+
+10:19.200 --> 10:22.060
+There are going to be, for large case, ways in which we
+
+10:22.060 --> 10:25.220
+can do the sort where the sort time becomes irrelevant,
+
+10:25.220 --> 10:28.780
+that the cost is really dominated by the search.
+
+10:28.780 --> 10:30.860
+And so what I want to do now is look at, all right,
+
+10:30.860 --> 10:34.100
+how could we do the sort reasonably efficiently?
+
+10:34.100 --> 10:35.900
+It's going to have to be at least linear.
+
+10:35.900 --> 10:38.400
+We're going to see it's going to be a little more than linear.
+
+10:38.400 --> 10:39.980
+But if I could do it reasonably, I'm
+
+10:39.980 --> 10:42.020
+going to be in good shape here.
+
+10:42.020 --> 10:44.020
+So what I want to do is show you a number of ways
+
+10:44.020 --> 10:46.220
+in which we can do sorting.
+
+10:46.220 --> 10:49.020
+Take a list of elements and sort them from, in this case,
+
+10:49.020 --> 10:52.940
+smaller to higher or in increasing order.
+
+10:52.940 --> 10:54.380
+So here's my goal.
+
+10:54.380 --> 10:56.340
+I want to efficiently sort a list.
+
+10:56.340 --> 11:00.980
+I want to see if we can do this as efficiently as possible.
+
+11:00.980 --> 11:03.340
+I'm going to start, I'm going to say,
+
+11:03.340 --> 11:05.100
+with a humorous version of sort.
+
+11:05.100 --> 11:07.500
+You've all convinced that my humor is nonexistent.
+
+11:07.500 --> 11:08.420
+You're right.
+
+11:08.420 --> 11:09.580
+But it sets the stage for it.
+
+11:09.580 --> 11:10.260
+This is a sort.
+
+11:10.260 --> 11:11.020
+You can look it up.
+
+11:11.020 --> 11:14.220
+It's called monkey sort, bogo sort, stupid sort, slow sort,
+
+11:14.220 --> 11:16.060
+permutation sort, shotgun sort.
+
+11:16.060 --> 11:17.540
+And here's how it works.
+
+11:17.580 --> 11:20.700
+Anna has nicely given me a set of numbers on cards here.
+
+11:20.700 --> 11:24.180
+Here's how you do bogo sort.
+
+11:24.180 --> 11:25.460
+I got to do that better.
+
+11:25.460 --> 11:29.340
+I got to spread them out randomly like this.
+
+11:29.340 --> 11:29.900
+Oh, good.
+
+11:29.900 --> 11:30.380
+I'm going to have to.
+
+11:30.380 --> 11:30.900
+Sorry, Tom.
+
+11:30.900 --> 11:31.580
+I'm now walking.
+
+11:31.580 --> 11:34.820
+And now I pick them up saying, is that less than this,
+
+11:34.820 --> 11:37.120
+which is less than, oh, crud.
+
+11:37.120 --> 11:38.520
+They're not sorted.
+
+11:38.520 --> 11:40.300
+All right.
+
+11:40.300 --> 11:43.060
+I pick them all up.
+
+11:43.060 --> 11:45.140
+And I do it again.
+
+11:45.140 --> 11:47.460
+A little brain damage, right?
+
+11:47.900 --> 11:49.420
+It's intended to get your attention.
+
+11:49.420 --> 11:49.740
+I did.
+
+11:49.740 --> 11:50.860
+I heard a couple of chuckles.
+
+11:50.860 --> 11:52.240
+Those are A students, by the way.
+
+11:52.240 --> 11:54.860
+I heard a couple of chuckles here.
+
+11:54.860 --> 11:58.400
+We could actually do this exhaustively.
+
+11:58.400 --> 12:00.180
+Basically, it's called permutation sort
+
+12:00.180 --> 12:03.620
+because you could search through all possible permutations
+
+12:03.620 --> 12:06.460
+to see if you find something that's sorted.
+
+12:06.460 --> 12:08.860
+That, by the way, the complexity of that
+
+12:08.860 --> 12:12.980
+is something like n factorial, which for large n
+
+12:12.980 --> 12:16.380
+is n to the nth power.
+
+12:16.380 --> 12:19.700
+And if n's anything bigger than about 2, don't do it.
+
+12:19.700 --> 12:21.740
+But it would be a way to think about doing this.
+
+12:21.740 --> 12:22.240
+All right.
+
+12:22.240 --> 12:24.400
+Now, having caught in the humorous version of this,
+
+12:24.400 --> 12:27.820
+how could we do this a little bit better?
+
+12:27.820 --> 12:28.340
+No, sorry.
+
+12:28.340 --> 12:29.860
+I should say, what's the complexity?
+
+12:29.860 --> 12:33.700
+There's a nice, crisp definition of BOGO sort.
+
+12:33.700 --> 12:37.900
+Its best case is order n because I just need to check it sorted.
+
+12:37.900 --> 12:40.260
+Its average case is n factorial.
+
+12:40.260 --> 12:42.700
+And its worst case, if I'm just doing it randomly,
+
+12:42.700 --> 12:45.460
+is god knows because I could be doing it here forever.
+
+12:45.460 --> 12:48.100
+So we're going to move on.
+
+12:48.100 --> 12:50.380
+Here's a second way to do it.
+
+12:50.380 --> 12:51.180
+Called bubble sort.
+
+12:51.180 --> 12:52.980
+I'm going to do this with a small version of this.
+
+12:52.980 --> 12:54.060
+I'm going to put out a set.
+
+12:54.060 --> 12:58.000
+I'll turn these up so you can see them in a second.
+
+12:58.000 --> 13:00.260
+The idea of bubble sort is I'm going to start at,
+
+13:00.260 --> 13:02.340
+I'm going to call this the front end of the list.
+
+13:02.340 --> 13:05.660
+And I'm going to walk down comparing elements pairwise.
+
+13:05.660 --> 13:08.300
+And I'm always going to move the larger one over.
+
+13:08.300 --> 13:11.740
+So I start here and I say, 1's less than 11.
+
+13:11.740 --> 13:12.940
+I'm OK.
+
+13:12.940 --> 13:14.700
+11's bigger than 5.
+
+13:14.700 --> 13:16.460
+I'm going to bubble that up.
+
+13:16.460 --> 13:17.740
+11's bigger than 6.
+
+13:17.740 --> 13:18.900
+I'm going to bubble that up.
+
+13:18.900 --> 13:20.780
+11's bigger than 2.
+
+13:20.780 --> 13:22.660
+I've basically bubbled 11 to the end.
+
+13:22.660 --> 13:23.500
+Now I go back here.
+
+13:23.500 --> 13:24.940
+I say 1 is less than 5.
+
+13:24.940 --> 13:25.860
+That's good.
+
+13:25.860 --> 13:27.060
+5 is less than 6.
+
+13:27.060 --> 13:28.060
+That's good.
+
+13:28.060 --> 13:30.180
+6 is bigger than 2.
+
+13:30.180 --> 13:31.220
+Bubble that.
+
+13:31.220 --> 13:33.500
+6 is less than 11.
+
+13:33.500 --> 13:34.380
+You get the idea.
+
+13:34.380 --> 13:40.060
+Comparison, comparison, and swap, comparison, comparison.
+
+13:40.060 --> 13:42.020
+And now if I go back to this part and do it,
+
+13:42.020 --> 13:44.500
+you'll notice that's in the right order.
+
+13:44.500 --> 13:46.220
+That's in the right order.
+
+13:46.220 --> 13:48.020
+That's in the right order.
+
+13:48.020 --> 13:49.460
+That's in the right order.
+
+13:49.460 --> 13:51.420
+I'm done.
+
+13:51.420 --> 13:52.780
+Small round of applause, please.
+
+13:52.780 --> 13:54.340
+I was able to sort five elements.
+
+13:54.340 --> 13:57.300
+Thank you.
+
+13:57.300 --> 13:59.340
+The little video is sort of showing the same thing.
+
+13:59.340 --> 14:00.700
+You can see the idea here.
+
+14:00.700 --> 14:03.080
+It's called bubble sort because you're literally bubbling
+
+14:03.080 --> 14:05.220
+things up to the end of the list.
+
+14:05.220 --> 14:06.340
+It's pretty simple to do.
+
+14:06.340 --> 14:07.700
+You're just swapping pairs.
+
+14:07.700 --> 14:09.740
+And as you saw, when I get to the end of the list,
+
+14:09.740 --> 14:11.900
+I go back and do it until I have a pass where
+
+14:11.940 --> 14:14.820
+I go all the way through the list and I don't do any swaps.
+
+14:14.820 --> 14:17.020
+And in that case, I know I'm done because everything's
+
+14:17.020 --> 14:18.900
+in order and I can stop.
+
+14:18.900 --> 14:21.800
+One of the properties of it is that the largest unsorted
+
+14:21.800 --> 14:25.500
+element is always at the end after the pass.
+
+14:25.500 --> 14:27.280
+In other words, after the first one,
+
+14:27.280 --> 14:28.860
+I know that the largest element's at the end.
+
+14:28.860 --> 14:30.700
+After the second one, the largest thing left
+
+14:30.700 --> 14:32.180
+is going to be in the next place.
+
+14:32.180 --> 14:34.560
+And that tells me, among other things,
+
+14:34.560 --> 14:37.580
+that this is going to take no more than n times
+
+14:37.580 --> 14:40.060
+through the list to succeed.
+
+14:40.060 --> 14:42.500
+Might actually take fewer than that.
+
+14:42.500 --> 14:44.060
+OK.
+
+14:44.060 --> 14:45.820
+Again, let's look at some code for it.
+
+14:45.820 --> 14:46.940
+Let's look at its complexity.
+
+14:46.940 --> 14:48.100
+And let's actually run this.
+
+14:48.100 --> 14:52.220
+So here is a little simple version of bubble sort.
+
+14:52.220 --> 14:53.900
+I'm going to set a flag up here.
+
+14:53.900 --> 14:56.480
+I'm going to call it swap initially to false.
+
+14:56.480 --> 14:58.440
+That's going to let me tell when I'm done,
+
+14:58.440 --> 15:00.360
+when I'm gone through everything in the list
+
+15:00.360 --> 15:01.860
+without doing a swap.
+
+15:01.860 --> 15:02.980
+And then I'm going to loop.
+
+15:02.980 --> 15:05.620
+As long as swap is false, so the first time through,
+
+15:05.620 --> 15:07.260
+it's going to do that loop.
+
+15:07.260 --> 15:09.100
+I set swap initially to true.
+
+15:09.140 --> 15:11.180
+And notice what I then do.
+
+15:11.180 --> 15:15.740
+I let j range from 1 up to the length of the list.
+
+15:15.740 --> 15:19.380
+And I look at the j-th element and the previous element.
+
+15:19.380 --> 15:22.100
+If the previous element is bigger,
+
+15:22.100 --> 15:24.180
+I'm going to flip them right there.
+
+15:24.180 --> 15:27.460
+And that's just doing that swap, what I just did down here.
+
+15:27.460 --> 15:30.860
+And if that's the case, I'm going to set the flag to false,
+
+15:30.860 --> 15:33.900
+which says I've done at least one bubble as part of this.
+
+15:33.900 --> 15:36.180
+Which means when I come out of here and go back around
+
+15:36.180 --> 15:38.020
+to the loop, it's going to do it again.
+
+15:38.060 --> 15:41.140
+And it will do it until all of this
+
+15:41.140 --> 15:43.460
+succeeds without this ever being true, in which case
+
+15:43.460 --> 15:45.940
+that's true, which makes that false, and it will drop out.
+
+15:50.420 --> 15:52.900
+Let's look at an example of this running.
+
+15:52.900 --> 15:55.100
+Just to give you a sense of that,
+
+15:55.100 --> 15:57.780
+assuming I can find the right place here.
+
+15:57.780 --> 16:01.220
+So there is, again, a version of bubble sort on the side.
+
+16:01.220 --> 16:03.500
+And I'm going to bring this down to the bottom.
+
+16:03.500 --> 16:05.180
+I've got a little test list there.
+
+16:05.180 --> 16:07.220
+And I've put a print statement in it
+
+16:07.220 --> 16:10.020
+so you can see each time through the loop what's
+
+16:10.020 --> 16:12.420
+the form of the list as it starts.
+
+16:12.420 --> 16:17.940
+And assuming I've done this right, here you go.
+
+16:17.940 --> 16:20.340
+There's the list the first time through.
+
+16:20.340 --> 16:24.060
+Notice after one pass, 25 is at the end of the list,
+
+16:24.060 --> 16:25.820
+the biggest element, exactly what I like.
+
+16:25.820 --> 16:28.620
+But you can also see a few other things have flipped.
+
+16:28.620 --> 16:30.620
+Right in there, there have been some other swaps
+
+16:30.620 --> 16:32.220
+as it bubbled through.
+
+16:32.220 --> 16:35.900
+And in fact, you can see that idea.
+
+16:35.940 --> 16:38.020
+You can see 25 moving through.
+
+16:38.020 --> 16:42.260
+Notice on the next step, a whole bunch of the list
+
+16:42.260 --> 16:44.140
+is actually in the right order.
+
+16:44.140 --> 16:45.340
+It's just because I got lucky.
+
+16:45.340 --> 16:47.780
+All I can guarantee is that the second largest element
+
+16:47.780 --> 16:51.180
+is at the second from the end of the list.
+
+16:51.180 --> 16:53.540
+But you can see here, even though the list is, I think,
+
+16:53.540 --> 16:57.100
+nine long, it only took us four passes through.
+
+16:57.100 --> 16:57.900
+So this is nice.
+
+16:57.900 --> 17:01.420
+It says at most, n times through the list.
+
+17:01.420 --> 17:03.300
+And at the end, we actually get out something
+
+17:03.340 --> 17:06.020
+that's in the right form.
+
+17:06.020 --> 17:10.020
+OK, so let's go back to this and basically say,
+
+17:10.020 --> 17:13.580
+what's the complexity?
+
+17:13.580 --> 17:16.020
+Well, that's length n.
+
+17:16.020 --> 17:16.500
+Has to be.
+
+17:16.500 --> 17:18.800
+I'm going through the entire list.
+
+17:18.800 --> 17:24.220
+And inside of there is just constant work.
+
+17:24.220 --> 17:25.140
+Four operations.
+
+17:25.140 --> 17:26.140
+I'm doing a test.
+
+17:26.140 --> 17:26.920
+That's right, five.
+
+17:26.920 --> 17:27.900
+I'm doing a test.
+
+17:27.900 --> 17:29.980
+And then depending whether that test is true or not,
+
+17:29.980 --> 17:32.100
+I'm setting a flag and doing some movement of things around.
+
+17:32.100 --> 17:32.780
+But it's just constant.
+
+17:32.780 --> 17:35.340
+I don't care about the five.
+
+17:35.340 --> 17:39.660
+And there, how many times do I go around the loop?
+
+17:39.660 --> 17:42.140
+In the worst case, n.
+
+17:42.140 --> 17:44.420
+All I can guarantee is after the first pass,
+
+17:44.420 --> 17:45.740
+the biggest thing is here.
+
+17:45.740 --> 17:48.080
+After the second pass, the second biggest thing is there.
+
+17:48.080 --> 17:50.180
+After the third pass, you get the idea.
+
+17:50.180 --> 17:54.500
+So I've got order n things inside the loop.
+
+17:54.500 --> 17:57.500
+And I'm doing that loop n times.
+
+17:57.500 --> 17:58.820
+And I hope that looks familiar.
+
+17:58.820 --> 18:00.100
+We've talked about this, right?
+
+18:00.100 --> 18:01.820
+This is nested loops.
+
+18:01.860 --> 18:02.900
+What's this?
+
+18:02.900 --> 18:05.020
+Quadratic.
+
+18:05.020 --> 18:09.020
+So it's order n squared, where n is the length of the list.
+
+18:09.020 --> 18:10.540
+Now, as you also saw, on average,
+
+18:10.540 --> 18:11.660
+it could be less than that.
+
+18:11.660 --> 18:14.420
+But it's going to be order n squared.
+
+18:14.420 --> 18:16.700
+OK.
+
+18:16.700 --> 18:18.900
+That's one possibility.
+
+18:18.900 --> 18:22.700
+Here's the second nice, simple sort algorithm
+
+18:22.700 --> 18:24.940
+called selection sort.
+
+18:24.940 --> 18:27.140
+You can kind of think of this as going the other way.
+
+18:27.140 --> 18:28.420
+Not completely, but going the other way.
+
+18:28.420 --> 18:30.060
+When I say going the other way, the idea
+
+18:30.300 --> 18:33.500
+is that I'm going to find the smallest element in the list.
+
+18:33.500 --> 18:36.060
+And I'm going to stick it at the front of the list when I'm done
+
+18:36.060 --> 18:39.820
+and simply swap that place with whatever was there.
+
+18:39.820 --> 18:40.740
+Flip them.
+
+18:40.740 --> 18:42.540
+I might do a few other flips along the way,
+
+18:42.540 --> 18:45.020
+depending how I implement this.
+
+18:45.020 --> 18:47.380
+Next pass, I'm just going to look
+
+18:47.380 --> 18:48.920
+at everything but the first element.
+
+18:48.920 --> 18:49.900
+Because I know that one's done.
+
+18:49.900 --> 18:51.220
+I'm going to do the same thing.
+
+18:51.220 --> 18:53.500
+Find the smallest element remaining in the list.
+
+18:53.500 --> 18:55.340
+Put it in the second spot.
+
+18:55.340 --> 18:57.380
+And keep doing that.
+
+18:57.380 --> 19:00.000
+What I know is if I implement this correctly,
+
+19:00.000 --> 19:04.260
+after i steps, the first i elements of the list
+
+19:04.260 --> 19:05.600
+will be sorted.
+
+19:05.600 --> 19:07.180
+And everything in the rest of the list
+
+19:07.180 --> 19:09.160
+has to be bigger than the largest thing
+
+19:09.160 --> 19:11.800
+in the first part of the list.
+
+19:11.800 --> 19:12.680
+OK.
+
+19:12.680 --> 19:13.920
+So we could build that.
+
+19:13.920 --> 19:16.340
+Before we do it, I'm going to show you a little video starring
+
+19:16.340 --> 19:17.840
+Professor Guttag.
+
+19:17.840 --> 19:19.960
+This is his cameo performance here.
+
+19:19.960 --> 19:22.720
+But I want to just show you an example of this using
+
+19:22.720 --> 19:25.400
+not numbers, but people.
+
+19:25.400 --> 19:29.080
+All right, so now we're going to do selection sort.
+
+19:29.080 --> 19:31.560
+The idea here is that each step, we're
+
+19:31.560 --> 19:34.060
+going to select the shortest person
+
+19:34.060 --> 19:38.240
+and put them next in line of the sorted group.
+
+19:38.240 --> 19:41.640
+So we'll bring the leftmost person forward.
+
+19:41.640 --> 19:44.240
+And we will compare her to everybody else.
+
+19:44.240 --> 19:47.520
+So one at a time, step forward.
+
+19:47.520 --> 19:48.440
+You're still the winner.
+
+19:48.440 --> 19:50.120
+You go back.
+
+19:50.120 --> 19:52.600
+Please step forward.
+
+19:52.600 --> 19:54.060
+And watch the number of comparisons
+
+19:54.060 --> 19:54.960
+that go on, by the way.
+
+19:54.960 --> 19:56.400
+We're going to come back to that.
+
+19:59.800 --> 20:01.840
+Still the winner.
+
+20:01.840 --> 20:04.120
+Next.
+
+20:04.120 --> 20:06.240
+Ah, a new winner.
+
+20:06.240 --> 20:07.080
+All right.
+
+20:07.080 --> 20:10.440
+So you can take her place.
+
+20:10.440 --> 20:12.340
+So here we're choosing to actually insert
+
+20:12.340 --> 20:13.480
+into the spot in the line.
+
+20:13.480 --> 20:14.720
+We could have put her back at the front,
+
+20:14.720 --> 20:16.100
+but this would be the one to work.
+
+20:16.100 --> 20:17.400
+Now we'll compare.
+
+20:17.400 --> 20:18.200
+Same old winner.
+
+20:22.840 --> 20:23.560
+Same winner.
+
+20:23.560 --> 20:24.060
+Next.
+
+20:28.080 --> 20:29.920
+No change.
+
+20:29.920 --> 20:33.560
+This is getting kind of boring.
+
+20:33.560 --> 20:35.080
+Don't fall.
+
+20:35.080 --> 20:37.000
+Same winner.
+
+20:37.000 --> 20:39.400
+Please.
+
+20:39.400 --> 20:42.440
+This is a tough one.
+
+20:42.440 --> 20:45.560
+Oh, close, but I think you're still shorter.
+
+20:45.560 --> 20:46.240
+All right.
+
+20:46.240 --> 20:46.760
+Next.
+
+20:49.840 --> 20:53.280
+No change, which means you are the first in line.
+
+20:53.320 --> 20:54.320
+Congratulations.
+
+20:54.320 --> 20:55.960
+So smallest element now guaranteed
+
+20:55.960 --> 20:56.960
+to be at the first spot.
+
+20:56.960 --> 20:59.200
+All right, now you step forward, and we'll compare you.
+
+21:11.960 --> 21:14.680
+And I would invite you to watch the left hand of the list.
+
+21:14.680 --> 21:17.720
+Notice how it is slowly building up at each stage
+
+21:17.720 --> 21:20.120
+to have that portion sorted.
+
+21:23.400 --> 21:24.840
+And we deliberately admit students
+
+21:24.840 --> 21:28.960
+to be of different heights so John can do this demo.
+
+21:28.960 --> 21:30.120
+You are the winner.
+
+21:30.120 --> 21:32.280
+Take your place in line.
+
+21:32.280 --> 21:35.000
+Next.
+
+21:35.000 --> 21:35.560
+It's you.
+
+21:41.640 --> 21:45.040
+And once again, we have a lovely group of students
+
+21:45.040 --> 21:48.160
+sorted in height order.
+
+21:48.160 --> 21:50.640
+And check out, I want you to remember
+
+21:50.640 --> 21:51.680
+number of comparisons.
+
+21:51.680 --> 21:52.800
+55.
+
+21:52.960 --> 21:55.000
+Not that the 50, but I want you to see a comparison
+
+21:55.000 --> 21:56.920
+as we go on in a second.
+
+21:56.920 --> 21:58.360
+So gain selection sort.
+
+21:58.360 --> 22:00.720
+This is this idea of find the smallest element,
+
+22:00.720 --> 22:02.040
+put it at the front.
+
+22:02.040 --> 22:03.800
+And I might do a little number of flips,
+
+22:03.800 --> 22:05.160
+as you can see here along the way.
+
+22:05.160 --> 22:07.160
+But this is the same sort of animation of that.
+
+22:07.160 --> 22:10.280
+So let's, first of all, convince ourselves
+
+22:10.280 --> 22:13.440
+it will do the right thing, and then look at some code,
+
+22:13.440 --> 22:15.720
+and then run the code.
+
+22:15.720 --> 22:17.520
+So to convince ourselves that this is going
+
+22:17.520 --> 22:20.200
+to do the right thing, we could talk about something
+
+22:20.200 --> 22:22.240
+that we often refer to as a loop invariant.
+
+22:22.280 --> 22:23.280
+We're going to write a loop where
+
+22:23.280 --> 22:24.880
+we're going to walk through this.
+
+22:24.880 --> 22:27.480
+And the invariant here, we want to just demonstrate
+
+22:27.480 --> 22:29.820
+if it's true at the beginning and it's true at each step.
+
+22:29.820 --> 22:32.080
+Therefore, by induction, as we did earlier,
+
+22:32.080 --> 22:34.080
+I can conclude it's true always, is
+
+22:34.080 --> 22:37.760
+that if I'm given a prefix or the first part of a list,
+
+22:37.760 --> 22:41.800
+from 0 up to i, and a suffix or a second part of the list,
+
+22:41.800 --> 22:46.400
+from i plus 1 up to the end of the overall list, given that,
+
+22:46.400 --> 22:48.280
+then I'm going to assert that the invariant is
+
+22:48.280 --> 22:52.120
+that the prefix is sorted, and no element of the prefix
+
+22:52.160 --> 22:55.040
+is larger than the smallest element of the suffix.
+
+22:55.040 --> 22:57.280
+Just what I said earlier, it says, at any stage
+
+22:57.280 --> 22:59.920
+here, if this is the amount of sort I've done so far,
+
+22:59.920 --> 23:02.920
+I can guarantee, I'm going to claim, this will be sorted,
+
+23:02.920 --> 23:07.440
+and everything here is bigger than that thing there.
+
+23:07.440 --> 23:09.440
+How do I prove it?
+
+23:09.440 --> 23:12.360
+Well, the base case is really easy.
+
+23:12.360 --> 23:14.240
+In the base case, the prefix is empty.
+
+23:14.240 --> 23:16.240
+I don't have anything, so it's obviously sorted.
+
+23:16.240 --> 23:18.400
+And everything in the suffix is bigger than anything
+
+23:18.400 --> 23:20.620
+in the prefix, so I'm fine.
+
+23:20.620 --> 23:23.300
+And then I just want to say, as long as I write my code
+
+23:23.300 --> 23:25.540
+so that this step is true, that I'm
+
+23:25.540 --> 23:28.700
+going to move the smallest element from the suffix,
+
+23:28.700 --> 23:32.460
+the second part of the list, to the end of the prefix.
+
+23:32.460 --> 23:35.820
+Since the prefix was sorted, this is now sorted.
+
+23:35.820 --> 23:38.860
+And everything in the suffix is still
+
+23:38.860 --> 23:41.940
+going to be bigger than everything in the prefix.
+
+23:41.940 --> 23:43.540
+And as a consequence, by induction,
+
+23:43.540 --> 23:45.700
+this is going to give me something that says it's
+
+23:45.700 --> 23:48.980
+always going to be correct.
+
+23:49.020 --> 23:52.700
+So here's code that would do that.
+
+23:52.700 --> 23:54.700
+Here I'm just going to set a little thing called
+
+23:54.700 --> 23:56.860
+the start of suffix, or suffix start.
+
+23:56.860 --> 24:00.660
+Initially it's going to point to the beginning of the list.
+
+24:00.660 --> 24:02.040
+And then I'm going to run a loop.
+
+24:02.040 --> 24:04.860
+And as long as I still have things to search in the list,
+
+24:04.860 --> 24:08.340
+so that pointer doesn't point to the end of the list,
+
+24:08.340 --> 24:09.980
+what am I going to do?
+
+24:09.980 --> 24:12.260
+I'm going to loop over everything from that point
+
+24:12.260 --> 24:16.140
+to the end of the list, comparing it
+
+24:16.140 --> 24:19.060
+to the thing at that point.
+
+24:19.060 --> 24:22.780
+If it's less than, I'm going to do a swap,
+
+24:22.780 --> 24:24.600
+because I wanted to move it up.
+
+24:24.600 --> 24:26.900
+And you can see by the time I get through this loop,
+
+24:26.900 --> 24:29.300
+I will have found the smallest element
+
+24:29.300 --> 24:30.940
+in the remainder of the list.
+
+24:30.940 --> 24:33.660
+And I would have put it at that spot, whatever
+
+24:33.660 --> 24:36.740
+suffix start points to.
+
+24:36.740 --> 24:41.180
+And when I've done all of that, I just change this by 1.
+
+24:41.180 --> 24:42.580
+Having found the smallest element,
+
+24:42.580 --> 24:43.700
+I've stuck it at spot 0.
+
+24:43.700 --> 24:44.460
+I'll do the same thing.
+
+24:44.460 --> 24:46.080
+Having found the next smallest element,
+
+24:46.520 --> 24:47.480
+I know it's at point 1.
+
+24:47.480 --> 24:51.360
+And I'll just continue around.
+
+24:51.360 --> 24:53.400
+One of the things you can see here is, as opposed
+
+24:53.400 --> 24:56.960
+to bubble sort, this one is going
+
+24:56.960 --> 25:01.480
+to take n times around the loop, because I'm only
+
+25:01.480 --> 25:03.520
+moving this pointer by 1.
+
+25:03.520 --> 25:05.960
+So it starts at 0, and then 1, and then 2, all the way up
+
+25:05.960 --> 25:08.640
+to n minus 1.
+
+25:08.640 --> 25:12.080
+You can also see in this particular implementation,
+
+25:12.080 --> 25:15.000
+while I'm certainly ensuring that the smallest element goes
+
+25:15.040 --> 25:19.680
+into that spot, I may do a few other flips along the way.
+
+25:19.680 --> 25:22.140
+I'm going to find something I think is the smallest element,
+
+25:22.140 --> 25:23.980
+put it there, and put that element here.
+
+25:23.980 --> 25:25.900
+And then when I find another smaller element,
+
+25:25.900 --> 25:27.240
+I may do that flip.
+
+25:27.240 --> 25:29.200
+I could have implemented this where I literally
+
+25:29.200 --> 25:32.320
+search for the smallest element and only move that.
+
+25:32.320 --> 25:36.720
+Doesn't make any difference in terms of the complexity.
+
+25:36.720 --> 25:39.280
+What's the complexity here?
+
+25:39.280 --> 25:40.520
+Already said this part.
+
+25:40.520 --> 25:45.160
+I will loop n times, because I start at 0 and then 1,
+
+25:45.160 --> 25:46.720
+you get the idea.
+
+25:46.720 --> 25:51.240
+Inside of the loop, I'm going to walk down
+
+25:51.240 --> 25:54.760
+the remainder of the list, which is initially n, and then n
+
+25:54.760 --> 25:58.000
+minus 1, and then n minus 2 times.
+
+25:58.000 --> 25:59.480
+But we've seen that before as well.
+
+25:59.480 --> 26:05.600
+While they get shorter, that complexity is still quadratic.
+
+26:05.600 --> 26:09.980
+Order n times going through this process, within the process,
+
+26:09.980 --> 26:12.860
+order n things that I have to compare.
+
+26:12.860 --> 26:16.140
+And yes, n gets smaller, but we know that that n term,
+
+26:16.140 --> 26:17.100
+if you like, dominates.
+
+26:17.100 --> 26:21.060
+So again, this is quadratic.
+
+26:21.060 --> 26:23.540
+OK, before you believe that all sorting algorithms are
+
+26:23.540 --> 26:26.740
+quadratic, I want to show you the last one, the one that
+
+26:26.740 --> 26:30.660
+actually is one of the, I think, the prettiest algorithms around
+
+26:30.660 --> 26:33.460
+and a great example of a more efficient algorithm.
+
+26:33.460 --> 26:36.180
+It's called merge sort.
+
+26:36.180 --> 26:39.500
+Merge sort takes an approach we've seen before.
+
+26:39.540 --> 26:40.860
+Talked about divide and conquer.
+
+26:40.860 --> 26:44.060
+Break the problem down into smaller versions
+
+26:44.060 --> 26:45.660
+of the same problem.
+
+26:45.660 --> 26:47.340
+And once you've got those solutions,
+
+26:47.340 --> 26:49.740
+bring the answer back together.
+
+26:49.740 --> 26:51.500
+For merge sort, that's pretty easy.
+
+26:51.500 --> 26:55.020
+It says if I've got a list of 0 or 1 elements, it's sorted.
+
+26:55.020 --> 26:55.980
+Duh.
+
+26:55.980 --> 26:57.220
+OK?
+
+26:57.220 --> 27:00.900
+If I got a list of more than one element, here's my trick.
+
+27:00.900 --> 27:03.380
+I'm going to split it into two lists.
+
+27:03.380 --> 27:04.780
+I'm going to sort them.
+
+27:04.780 --> 27:07.680
+And when I'm done, I'm just going to merge those two
+
+27:07.720 --> 27:09.560
+lists into one list.
+
+27:09.560 --> 27:11.280
+And the merge is easy.
+
+27:11.280 --> 27:13.200
+Because if I've got two lists that are sorted,
+
+27:13.200 --> 27:16.040
+I just need to look at the first element of each,
+
+27:16.040 --> 27:18.480
+take the one that's smaller, add it to my result,
+
+27:18.480 --> 27:20.840
+and keep doing that until one of the lists is empty,
+
+27:20.840 --> 27:25.300
+and then just copy the remainder of the other list.
+
+27:25.300 --> 27:27.160
+You can probably already get a sense
+
+27:27.160 --> 27:28.660
+of what the cost is going to be here,
+
+27:28.660 --> 27:31.440
+because this is cutting the problem in half.
+
+27:31.440 --> 27:35.200
+Now, I've got two pieces, so I need to think about both of them.
+
+27:35.200 --> 27:37.480
+I want to give you a couple of visualizations of this.
+
+27:37.760 --> 27:38.760
+Here's the first one.
+
+27:38.760 --> 27:41.120
+It says, basically, I've got a big unsorted list.
+
+27:41.120 --> 27:42.720
+I'm going to split it.
+
+27:42.720 --> 27:44.040
+And I'm going to split it.
+
+27:44.040 --> 27:46.520
+And I'm going to split it until I get down
+
+27:46.520 --> 27:51.340
+to just lists that are either 0 or 1, which by definition
+
+27:51.340 --> 27:52.880
+are sorted.
+
+27:52.880 --> 27:55.360
+And once I'm at that level, then I just
+
+27:55.360 --> 27:58.720
+have to merge them into a sorted list,
+
+27:58.720 --> 28:01.820
+and then merge them pairwise into a sorted list,
+
+28:01.820 --> 28:04.520
+and you get the idea.
+
+28:04.520 --> 28:05.800
+So it's divide and conquer.
+
+28:05.800 --> 28:08.400
+The divide is dividing it up into smaller pieces.
+
+28:08.400 --> 28:12.080
+The conquer is merging them back together.
+
+28:12.080 --> 28:15.240
+And we have Professor Guttag back for an encore
+
+28:15.240 --> 28:16.600
+together with his students.
+
+28:16.600 --> 28:19.880
+So let's show you an example of merge sort.
+
+28:19.880 --> 28:23.040
+So we're about to demonstrate merge sort.
+
+28:23.040 --> 28:25.680
+And we're going to sort this rather motley collection
+
+28:25.680 --> 28:29.440
+of MIT students by height.
+
+28:29.440 --> 28:32.400
+So the first thing we need to do is
+
+28:32.400 --> 28:36.200
+we're going to ask everyone to split into a group of two.
+
+28:36.200 --> 28:38.600
+So you split a little bit.
+
+28:38.600 --> 28:40.240
+You two are together.
+
+28:40.240 --> 28:42.000
+You two are together.
+
+28:42.000 --> 28:43.920
+You two are together.
+
+28:43.920 --> 28:44.840
+You two are together.
+
+28:44.840 --> 28:46.840
+And you are all by yourself.
+
+28:46.840 --> 28:49.120
+I'm sorry.
+
+28:49.120 --> 28:50.480
+All right.
+
+28:50.480 --> 28:55.600
+So now, let's take the first group, take a step down.
+
+28:55.600 --> 28:57.800
+And what we do is we sort this group
+
+28:57.800 --> 29:01.320
+by height with the shortest on the left.
+
+29:01.320 --> 29:02.040
+And look at this.
+
+29:02.080 --> 29:03.680
+We don't have to do anything.
+
+29:03.680 --> 29:04.320
+Thank you.
+
+29:04.320 --> 29:07.160
+Feel free to go back up.
+
+29:07.160 --> 29:10.680
+We then sort the next pair, please.
+
+29:10.680 --> 29:13.880
+And it looks to me like we need to switch.
+
+29:13.880 --> 29:14.640
+All right.
+
+29:14.640 --> 29:15.600
+Take a step back.
+
+29:18.240 --> 29:18.740
+Ladies.
+
+29:24.000 --> 29:26.680
+OK.
+
+29:26.680 --> 29:29.960
+Ladies, gentlemen.
+
+29:30.000 --> 29:31.040
+Also OK.
+
+29:34.640 --> 29:37.840
+And again, OK.
+
+29:37.840 --> 29:42.080
+Notice each subgroup is now sorted, which is great.
+
+29:42.080 --> 29:47.760
+Now what we do is we take these groups and merge the groups.
+
+29:47.760 --> 29:50.040
+So let's have these two.
+
+29:50.040 --> 29:54.640
+Going to sort these groups, have them step forward.
+
+29:54.640 --> 29:56.520
+And now what we're doing is we're
+
+29:56.520 --> 30:00.200
+doing a merge of the two sorted groups.
+
+30:00.200 --> 30:03.640
+So we start by merging them.
+
+30:03.640 --> 30:06.560
+We'll take the leftmost person in this group
+
+30:06.560 --> 30:09.280
+and compare her to the first person in this group
+
+30:09.280 --> 30:11.760
+and decide she's still the shortest.
+
+30:11.760 --> 30:12.680
+Take a step back.
+
+30:16.400 --> 30:20.320
+Now we're going to look at you and say,
+
+30:20.320 --> 30:23.320
+you're actually taller than this fellow.
+
+30:23.320 --> 30:25.640
+So you now step up there.
+
+30:29.040 --> 30:31.280
+And we're good here.
+
+30:31.280 --> 30:32.800
+Both of you take a step back.
+
+30:36.000 --> 30:40.320
+Now we'll take these two groups and follow the same procedure.
+
+30:40.320 --> 30:42.040
+We'll merge them.
+
+30:42.040 --> 30:45.960
+Let's see, we'll compare you, the first person in this group,
+
+30:45.960 --> 30:48.220
+to the first person in this group.
+
+30:48.220 --> 30:49.480
+Now it's a little tricky.
+
+30:49.480 --> 30:51.920
+So let's see the two of you compare.
+
+30:51.920 --> 30:54.840
+Let's see, back to back.
+
+30:54.840 --> 30:56.840
+We have a winner.
+
+30:56.840 --> 30:58.120
+Step back.
+
+30:58.120 --> 31:01.800
+And now we need to compare the shortest person in this group
+
+31:01.800 --> 31:04.180
+to the shortest person in this group.
+
+31:04.180 --> 31:04.940
+We have a winner.
+
+31:04.940 --> 31:07.560
+It's you.
+
+31:07.560 --> 31:09.280
+I'm sorry.
+
+31:09.280 --> 31:12.880
+And now we just, we're OK.
+
+31:12.880 --> 31:13.800
+Please step back.
+
+31:17.000 --> 31:21.160
+Now we'll have these two groups come forward.
+
+31:21.160 --> 31:23.160
+We'll compare the shortest person in this group
+
+31:23.160 --> 31:25.480
+to the shortest person in that group.
+
+31:25.480 --> 31:27.600
+I actually need you guys to get back to back here.
+
+31:30.360 --> 31:32.880
+You are the winner.
+
+31:32.880 --> 31:35.520
+And it's pretty clear that the shortest person in this group
+
+31:35.520 --> 31:38.400
+is shorter than the shortest person in that group.
+
+31:38.400 --> 31:40.840
+So you go there and you step back.
+
+31:40.840 --> 31:42.080
+Notice the groups.
+
+31:42.080 --> 31:44.240
+And now we repeat the same process.
+
+31:52.160 --> 31:54.320
+And notice how the whole subgroup now goes up,
+
+31:54.320 --> 31:56.000
+once we know that one group is empty.
+
+32:04.120 --> 32:08.040
+And you can see that we have a group of students sorted
+
+32:08.040 --> 32:09.040
+in order by height.
+
+32:12.700 --> 32:16.060
+Remember the first number, 55, 28.
+
+32:16.060 --> 32:19.400
+Now this is just numbers, but you can see the expectation
+
+32:19.440 --> 32:20.880
+is this is going to take less time,
+
+32:20.880 --> 32:22.560
+and it certainly did there.
+
+32:22.560 --> 32:27.560
+So again, just the demo another way visually, I'm sorting.
+
+32:27.560 --> 32:29.860
+Sorry, I'm splitting down until I get small things
+
+32:29.860 --> 32:31.400
+and then just merging them up.
+
+32:31.400 --> 32:33.840
+I may have to do multiple passes through here,
+
+32:33.840 --> 32:36.280
+but it's going to be hopefully faster than the other methods
+
+32:36.280 --> 32:38.240
+we looked at.
+
+32:38.240 --> 32:39.920
+I'm going to show you code in a second,
+
+32:39.920 --> 32:41.820
+and then we're going to run it just to see it.
+
+32:41.820 --> 32:45.400
+But let me stress one more time just the idea of merging.
+
+32:45.400 --> 32:47.200
+You can see the idea I keep splitting down
+
+32:47.200 --> 32:48.400
+until I got something small enough,
+
+32:48.400 --> 32:49.440
+I want to merge them back.
+
+32:49.440 --> 32:52.080
+The idea of merging, you've seen it from Professor Guttag,
+
+32:52.080 --> 32:55.720
+but I just want to highlight why this is going to be efficient.
+
+32:55.720 --> 32:59.920
+If I've got two lists, list one and list two,
+
+32:59.920 --> 33:03.520
+the things left there, process is very simple.
+
+33:03.520 --> 33:07.480
+I pull out the smallest element of each, I compare them.
+
+33:07.480 --> 33:11.100
+And I simply put the smallest one into the result,
+
+33:11.100 --> 33:13.160
+move on in that first list.
+
+33:13.160 --> 33:15.200
+So the one disappears from that left list,
+
+33:15.200 --> 33:17.760
+and now again, I pull out just the smallest element
+
+33:17.800 --> 33:19.680
+of each one, do the comparison.
+
+33:19.680 --> 33:22.200
+Smallest one goes to the end of my result,
+
+33:22.200 --> 33:24.360
+and I drop that element from its list.
+
+33:24.360 --> 33:27.080
+So I've now taken one from list one, excuse me,
+
+33:27.080 --> 33:28.800
+one from list two.
+
+33:28.800 --> 33:30.600
+You get the idea.
+
+33:30.600 --> 33:33.240
+The reason I want to give you this visualization,
+
+33:33.240 --> 33:34.480
+sorry, let me do the last step.
+
+33:34.480 --> 33:37.640
+Once I get to a place where one of the lists is empty,
+
+33:37.640 --> 33:42.240
+just copy the rest of the list onto the end.
+
+33:42.240 --> 33:46.300
+You can see already a hint of the code,
+
+33:46.300 --> 33:49.100
+and that is that I'm only going to ever look
+
+33:49.100 --> 33:54.140
+at each element of each sublist once as I do the merge.
+
+33:54.140 --> 33:55.300
+And that's a nice property.
+
+33:55.300 --> 33:56.860
+Having had them sorted, I don't need
+
+33:56.860 --> 33:58.480
+to do lots of interior comparisons.
+
+33:58.480 --> 34:00.820
+I'm only comparing the ends of the list.
+
+34:00.820 --> 34:03.460
+I only therefore look at each element,
+
+34:03.460 --> 34:05.740
+or the number of comparisons rather, I should say.
+
+34:05.740 --> 34:07.500
+I may look at each element more than once.
+
+34:07.500 --> 34:09.220
+The number of comparisons is going
+
+34:09.220 --> 34:12.740
+to be at most the number of elements in both lists.
+
+34:12.740 --> 34:14.160
+And that's going to be a nice cue
+
+34:14.160 --> 34:17.080
+as we think about how to solve it.
+
+34:17.080 --> 34:19.620
+So here's the code to merge, and then we'll write merge sort.
+
+34:19.620 --> 34:21.200
+And I know there's a lot of code here,
+
+34:21.200 --> 34:23.860
+but we can walk through it and get a good sense of it.
+
+34:23.860 --> 34:26.820
+I'm going to set up a variable called result that's
+
+34:26.820 --> 34:29.280
+going to hold my answer.
+
+34:29.280 --> 34:31.340
+And I'm going to set up two indices, i and j,
+
+34:31.340 --> 34:32.280
+that are initially 0.
+
+34:32.280 --> 34:33.680
+They're pointing to the beginning.
+
+34:33.680 --> 34:35.800
+And remember, the input here is two lists
+
+34:35.800 --> 34:37.760
+that we know are sorted, or should be sorted,
+
+34:37.760 --> 34:39.700
+or we screwed up in some way.
+
+34:39.700 --> 34:41.640
+So initially, i and j are both pointing
+
+34:41.640 --> 34:44.160
+to the beginning of the left and right list.
+
+34:44.160 --> 34:45.120
+And look at what we do.
+
+34:45.120 --> 34:48.500
+We say, as long as there's still something in the left list
+
+34:48.500 --> 34:50.040
+and still something in the right list,
+
+34:50.040 --> 34:51.480
+i is less than the length of left,
+
+34:51.480 --> 34:56.400
+j is less than the length of right, do the comparison.
+
+34:56.400 --> 35:00.840
+If the left one's smaller, add it to the end of result.
+
+35:00.840 --> 35:02.800
+To the end of result, right, I'm appending it
+
+35:02.800 --> 35:07.200
+because I want it to be in that sorted order, and increase i.
+
+35:07.200 --> 35:11.500
+If it's not, add the right one to the end of result,
+
+35:11.500 --> 35:13.500
+and increase j.
+
+35:13.500 --> 35:15.840
+And I'll just keep doing that until I exhaust
+
+35:15.840 --> 35:16.660
+one of the lists.
+
+35:16.660 --> 35:19.460
+And when I do, I can basically say,
+
+35:19.460 --> 35:22.980
+if the right list is empty, I know if I get out of here,
+
+35:22.980 --> 35:24.060
+they can't both be true.
+
+35:24.060 --> 35:26.600
+In other words, if there's still something in the left list,
+
+35:26.600 --> 35:29.420
+just put it on the end.
+
+35:29.420 --> 35:31.660
+Otherwise, if the only thing's left on the right list,
+
+35:31.660 --> 35:34.400
+just put them on the end.
+
+35:34.400 --> 35:36.960
+So I'm just walking down the list doing the comparison,
+
+35:36.960 --> 35:38.680
+adding the smallest element to my result.
+
+35:38.680 --> 35:42.840
+And when I'm done, I just return result.
+
+35:42.840 --> 35:45.440
+Complexity we can already begin to see here, right?
+
+35:45.440 --> 35:47.360
+This says left and right sublists are ordered,
+
+35:47.360 --> 35:49.760
+so I'm just moving the indices depending on which
+
+35:49.760 --> 35:51.700
+one holds the smaller element.
+
+35:51.700 --> 35:53.480
+And when I get done, I'm just returning
+
+35:53.480 --> 35:56.760
+the rest of the list.
+
+35:56.760 --> 35:59.220
+So what's the complexity here?
+
+35:59.220 --> 36:01.160
+I'm going to do this a little more informally.
+
+36:01.160 --> 36:03.160
+You could actually do that kind of relationship
+
+36:03.160 --> 36:04.000
+I did last time.
+
+36:04.000 --> 36:04.800
+But what am I doing?
+
+36:04.800 --> 36:07.360
+I'm going through the two lists, but only one time
+
+36:07.400 --> 36:09.560
+through each of those two lists.
+
+36:09.560 --> 36:11.920
+I'm only comparing the smallest elements.
+
+36:11.920 --> 36:15.000
+So as I already said, this says that the number of elements
+
+36:15.000 --> 36:17.760
+I copy will be everything in the left list
+
+36:17.760 --> 36:19.120
+and everything in the right list.
+
+36:19.120 --> 36:21.440
+So that order is just the length of left
+
+36:21.440 --> 36:23.360
+plus the length of right.
+
+36:23.360 --> 36:26.480
+And how many comparisons do I do?
+
+36:26.480 --> 36:30.280
+The most I have to do is however many are in the longer list.
+
+36:30.280 --> 36:33.280
+That's the maximum number I need to have.
+
+36:33.280 --> 36:34.000
+Oh, that's nice.
+
+36:34.000 --> 36:36.520
+That says if the lists are of order n,
+
+36:36.520 --> 36:39.760
+I'm doing order n copies, because order n plus order n
+
+36:39.760 --> 36:41.800
+is just 2n, which is order n.
+
+36:41.800 --> 36:44.600
+And I'm doing order n comparisons.
+
+36:44.600 --> 36:48.400
+So it's linear in the length of the list.
+
+36:48.400 --> 36:50.600
+Sounds good.
+
+36:50.600 --> 36:52.360
+That just does the merge.
+
+36:52.360 --> 36:54.280
+How do I do merge sort?
+
+36:54.280 --> 36:55.760
+Well, we set it.
+
+36:55.760 --> 36:56.920
+Break the problem in half.
+
+36:56.920 --> 36:59.000
+Keep doing it until I get sorted lists,
+
+36:59.000 --> 37:00.600
+and then grow them back up.
+
+37:00.600 --> 37:01.720
+So there's merge sort.
+
+37:01.720 --> 37:04.800
+It says if the list is either empty or of length 1,
+
+37:04.800 --> 37:07.400
+just return a copy of the list.
+
+37:07.400 --> 37:09.040
+It's sorted.
+
+37:09.040 --> 37:10.800
+Otherwise, find the middle point.
+
+37:10.800 --> 37:12.640
+There's that integer division.
+
+37:12.640 --> 37:13.840
+And split.
+
+37:13.840 --> 37:16.660
+Split the list everything up to the middle point.
+
+37:16.660 --> 37:17.820
+And do merge sort on that.
+
+37:17.820 --> 37:20.560
+Split everything in the list from the middle point on.
+
+37:20.560 --> 37:22.040
+Do merge sort on that.
+
+37:22.040 --> 37:28.200
+And when I get back those two sorted lists, just merge them.
+
+37:28.200 --> 37:30.320
+Again, I hope you can see what the order of growth
+
+37:30.320 --> 37:31.840
+should be here.
+
+37:31.840 --> 37:35.400
+Cutting the problem down in half at each step.
+
+37:35.400 --> 37:37.920
+So the number of times I should have to go through this
+
+37:37.920 --> 37:42.120
+should be log in the size of the original list.
+
+37:42.120 --> 37:44.160
+And you can see why we call it divide and conquer.
+
+37:44.160 --> 37:45.920
+I'm dividing it down into small pieces
+
+37:45.920 --> 37:47.300
+until I have a simple solution.
+
+37:47.300 --> 37:50.840
+And then I'm growing that solution back up.
+
+37:50.840 --> 37:52.920
+So there's the base case.
+
+37:52.920 --> 37:54.760
+There's the divide.
+
+37:54.760 --> 37:58.320
+And there's the nice conquer piece of this.
+
+37:58.320 --> 37:59.480
+OK.
+
+37:59.480 --> 38:01.160
+I'm going to show you an example of that.
+
+38:01.160 --> 38:02.920
+But let's actually look at some code.
+
+38:02.920 --> 38:03.660
+Sorry about that.
+
+38:03.660 --> 38:06.000
+Let's look at some code to do this.
+
+38:06.000 --> 38:09.000
+And in fact, I meant to do this earlier and didn't.
+
+38:09.000 --> 38:14.120
+I also have a version of selection sort.
+
+38:14.120 --> 38:15.400
+I've already done bubble sort.
+
+38:15.400 --> 38:16.480
+There's selection sort.
+
+38:16.480 --> 38:18.680
+Let's uncomment this.
+
+38:21.240 --> 38:22.960
+And let's run both of those and just see
+
+38:22.960 --> 38:25.760
+the comparison between them.
+
+38:25.760 --> 38:28.260
+Sorry, just to make that a little easier to read.
+
+38:28.260 --> 38:30.920
+There we go.
+
+38:30.920 --> 38:32.000
+So we saw bubble sort.
+
+38:32.000 --> 38:34.720
+It only went through four times, so less than n times.
+
+38:34.720 --> 38:36.920
+There's selection sort.
+
+38:36.920 --> 38:39.800
+And as I said to you, it has to do n passes,
+
+38:39.800 --> 38:41.880
+because it can only ever guarantee that it gets
+
+38:41.880 --> 38:43.840
+one element at the beginning.
+
+38:43.840 --> 38:47.080
+So you can in fact see in this case,
+
+38:47.080 --> 38:50.240
+after the initial input until the end of the first step,
+
+38:50.240 --> 38:52.180
+it looks like it didn't do anything,
+
+38:52.180 --> 38:54.200
+because it determined eventually that one
+
+38:54.200 --> 38:56.240
+was in the right spot.
+
+38:56.240 --> 38:58.840
+And similarly, I think there's another one right there
+
+38:58.840 --> 39:00.000
+where it doesn't do any.
+
+39:00.000 --> 39:01.280
+It appears not to do anything.
+
+39:01.280 --> 39:03.520
+All it's guaranteeing is that the next smallest element
+
+39:03.520 --> 39:05.200
+is in the right spot.
+
+39:05.200 --> 39:07.160
+As we get to the end of it, it in fact
+
+39:07.160 --> 39:09.240
+ends up in the right place.
+
+39:09.240 --> 39:10.680
+And then let's look at merge sort
+
+39:10.680 --> 39:14.280
+and do one more visualization of this.
+
+39:14.280 --> 39:17.800
+So again, let me remove that.
+
+39:17.800 --> 39:23.120
+And if we run it, again, I've just put some print statements
+
+39:23.120 --> 39:24.760
+in there.
+
+39:24.760 --> 39:28.160
+Here you can see a nice behavior.
+
+39:28.160 --> 39:30.840
+I start off calling merge sort with that,
+
+39:30.840 --> 39:33.240
+which splits down into doing merge sort of this portion.
+
+39:33.240 --> 39:34.620
+Eventually it's going to come back down there
+
+39:34.620 --> 39:36.000
+and do the second one.
+
+39:36.000 --> 39:39.480
+It keeps doing it until it gets down to simple lists
+
+39:39.480 --> 39:41.380
+that it knows are sorted.
+
+39:41.380 --> 39:43.080
+And then it merges it.
+
+39:43.080 --> 39:45.480
+Does the smaller pieces, and then merges it.
+
+39:45.480 --> 39:47.560
+And having now two merge things, it
+
+39:47.560 --> 39:50.160
+can do the next level of merge.
+
+39:50.160 --> 39:53.000
+So you can see that it gets this nice reduction of problems
+
+39:53.000 --> 39:57.240
+until it gets down to the smallest size.
+
+39:57.240 --> 39:59.640
+So let's just look at one more visualization of that
+
+39:59.640 --> 40:01.680
+and then get the complexity.
+
+40:01.680 --> 40:06.600
+So if I start out with this list, sorry about that.
+
+40:06.600 --> 40:09.060
+What I need to do is split it.
+
+40:09.060 --> 40:10.520
+Take the first one, split it.
+
+40:10.520 --> 40:13.680
+Keep doing that until I get down to a base case
+
+40:13.680 --> 40:17.400
+where I know what those are and I simply merge them.
+
+40:17.400 --> 40:18.960
+Pass it back up.
+
+40:18.960 --> 40:22.040
+Take the second piece, split it until I get down to base cases,
+
+40:22.040 --> 40:24.600
+do the merge, which is nice and linear.
+
+40:24.600 --> 40:25.560
+Pass that back up.
+
+40:25.640 --> 40:29.680
+Having done those two pieces, I do one more merge.
+
+40:29.680 --> 40:30.640
+And I do the same thing.
+
+40:33.480 --> 40:35.360
+I want you to see this because, again, you
+
+40:35.360 --> 40:40.680
+can notice how many levels in this tree log.
+
+40:40.680 --> 40:42.600
+Log in the size because at each stage
+
+40:42.600 --> 40:46.140
+here I went from a problem of eight to two problems of four.
+
+40:46.140 --> 40:47.880
+Each of those went to two problems of two.
+
+40:47.880 --> 40:52.240
+And each of those went to two problems of size one.
+
+40:52.240 --> 40:58.040
+All right, so the last piece is what's the complexity?
+
+40:58.040 --> 41:01.000
+Here's a simple way to think about it.
+
+41:01.000 --> 41:04.360
+At the top level, I start off with n elements.
+
+41:04.360 --> 41:08.640
+I've got two sorted lists of size n over 2.
+
+41:08.640 --> 41:13.560
+And to merge them together, I need to do order n work.
+
+41:13.560 --> 41:17.120
+Because as I said, I've got to do at least n comparisons where
+
+41:17.120 --> 41:18.960
+n is the length of the list.
+
+41:18.960 --> 41:21.840
+And then I've got to do n plus n copies, which is just order n.
+
+41:22.240 --> 41:24.640
+So I'm doing order n work.
+
+41:24.640 --> 41:28.000
+At the second level, it gets a little more complicated.
+
+41:28.000 --> 41:31.760
+Now I've got problems of size n over 4.
+
+41:31.760 --> 41:34.240
+But how many of them do I have?
+
+41:34.240 --> 41:35.800
+Four.
+
+41:35.800 --> 41:37.200
+Oh, that's nice.
+
+41:37.200 --> 41:38.640
+Because what do I know about this?
+
+41:38.640 --> 41:41.960
+I know that I have to copy each element at least once.
+
+41:41.960 --> 41:42.960
+Sorry, not at least once.
+
+41:42.960 --> 41:45.240
+I would copy each element exactly once.
+
+41:45.240 --> 41:48.160
+And I'll do comparisons that are equal to the length
+
+41:48.160 --> 41:49.840
+of the longer list.
+
+41:49.840 --> 41:52.320
+So I've got four sub lists of length n over 4.
+
+41:52.320 --> 41:54.240
+That says n elements.
+
+41:54.240 --> 41:55.720
+Oh, that's nice.
+
+41:55.720 --> 41:57.040
+Order n.
+
+41:57.040 --> 42:01.120
+At each step, sub problems get smaller, but I have more of them.
+
+42:01.120 --> 42:03.280
+But the total size of the problem is n.
+
+42:03.280 --> 42:07.560
+So the cost at each step is order n.
+
+42:07.560 --> 42:09.560
+How many times do I do it?
+
+42:09.560 --> 42:11.160
+Log n.
+
+42:11.160 --> 42:16.880
+So this is log n iterations with order n work at each step.
+
+42:16.880 --> 42:20.360
+And this is a wonderful example of a log linear algorithm.
+
+42:20.360 --> 42:25.880
+It's n log n, where n is the length of the list.
+
+42:25.880 --> 42:30.500
+So what you end up with then is a joke version,
+
+42:30.500 --> 42:32.520
+some reasonable ways of doing sort
+
+42:32.520 --> 42:35.560
+that are quick and easy to implement but are quadratic,
+
+42:35.560 --> 42:39.840
+and then an elegant way of doing the search that's n log n.
+
+42:39.840 --> 42:41.560
+And I'll remind you, I started by saying,
+
+42:41.560 --> 42:45.080
+as long as I can make the cost of sorting small enough,
+
+42:45.080 --> 42:46.640
+I can amortize that cost.
+
+42:46.640 --> 42:48.840
+And if you go back and look at last lecture's notes,
+
+42:48.840 --> 42:52.880
+you'll see n log n grows pretty slowly.
+
+42:52.880 --> 42:54.480
+And it's actually a nice thing to do.
+
+42:54.480 --> 42:56.520
+It makes it reasonable to do the sort,
+
+42:56.520 --> 43:00.040
+and then I can do the search in order n time.
+
+43:00.040 --> 43:02.480
+And here's the last punch line.
+
+43:02.480 --> 43:04.440
+It's the fastest we can do.
+
+43:04.440 --> 43:05.820
+I'm going to look at John again.
+
+43:05.820 --> 43:08.840
+I don't think anybody has found a faster sort algorithm.
+
+43:08.840 --> 43:11.280
+This is the best one can do, unless you do.
+
+43:11.280 --> 43:12.720
+The best worst case.
+
+43:12.720 --> 43:13.960
+Sorry, the best worst case.
+
+43:13.960 --> 43:14.400
+I'm sorry.
+
+43:14.400 --> 43:15.240
+John is absolutely right.
+
+43:15.240 --> 43:16.360
+There are better average cases.
+
+43:16.400 --> 43:18.120
+Again, our concern is worst case.
+
+43:18.120 --> 43:20.080
+So this is as good as we're going to do in terms
+
+43:20.080 --> 43:22.120
+of a worst case algorithm.
+
+43:22.120 --> 43:24.600
+So there you now have sorting algorithms and searching
+
+43:24.600 --> 43:25.620
+algorithms.
+
+43:25.620 --> 43:32.000
+And you've now seen constant, log, linear, log-linear,
+
+43:32.000 --> 43:34.760
+quadratic, and exponential algorithms.
+
+43:34.760 --> 43:36.920
+I'll remind you, we want things as high up
+
+43:36.920 --> 43:40.640
+in that hierarchy as possible.
+
+43:40.640 --> 43:42.240
+All right.
+
+43:42.240 --> 43:44.320
+I have six minutes left.
+
+43:44.320 --> 43:45.760
+Some of you are going to leave us.
+
+43:45.800 --> 43:46.520
+We're going to miss you.
+
+43:46.520 --> 43:47.060
+But that's OK.
+
+43:47.060 --> 43:48.400
+I'm sure we'll see you later on.
+
+43:48.400 --> 43:49.960
+For those of you hanging around, this
+
+43:49.960 --> 43:52.080
+isn't a bad time just to step back and say,
+
+43:52.080 --> 43:53.000
+so what have we seen?
+
+43:53.000 --> 43:55.840
+And I want to do this just very quickly.
+
+43:55.840 --> 43:59.000
+I'm sorry, I want to remind you, we started by, in some sense,
+
+43:59.000 --> 44:01.000
+giving you a little bit of a contract of things
+
+44:01.000 --> 44:02.080
+we were going to show you.
+
+44:02.080 --> 44:05.960
+And I would simply suggest to you, what have we done?
+
+44:05.960 --> 44:08.140
+We've given you a sense of how to represent knowledge
+
+44:08.140 --> 44:09.440
+with data structures.
+
+44:09.440 --> 44:13.660
+Tuples, lists, dictionaries, more complicated structures.
+
+44:13.660 --> 44:17.300
+We've shown you some good computational metaphors,
+
+44:17.300 --> 44:20.060
+iteration and loops, recursion as a great way
+
+44:20.060 --> 44:21.780
+of breaking problems down into simpler
+
+44:21.780 --> 44:23.860
+versions of the same problem.
+
+44:23.860 --> 44:25.140
+And they really are metaphors.
+
+44:25.140 --> 44:28.040
+They're ways of thinking about problems.
+
+44:28.040 --> 44:31.980
+We've given you abstraction, the idea of capture computation,
+
+44:31.980 --> 44:33.500
+bury it in a procedure.
+
+44:33.500 --> 44:34.620
+You now have a contract.
+
+44:34.620 --> 44:36.960
+You don't need to know what happens inside the procedure.
+
+44:36.960 --> 44:39.500
+As long as it delivers the answer, it says it would.
+
+44:39.500 --> 44:42.100
+Or another way of saying it, you can delegate it to somebody
+
+44:42.100 --> 44:44.920
+and trust that you're going to get what you like out of it.
+
+44:44.920 --> 44:47.460
+We've seen classes and methods as a wonderful way
+
+44:47.460 --> 44:51.580
+to modularize systems, to capture combinations of data
+
+44:51.580 --> 44:54.940
+and things that operate on them in a nice, elegant way.
+
+44:54.940 --> 44:57.140
+And we just spent a week and a half talking
+
+44:57.140 --> 45:01.460
+about classes of algorithms and their complexity.
+
+45:01.460 --> 45:06.260
+If you step up a level, what we hope you've gotten out of this
+
+45:06.260 --> 45:07.900
+are a couple of things.
+
+45:07.900 --> 45:10.100
+You've begun to learn computational modes
+
+45:10.100 --> 45:11.260
+of thinking.
+
+45:11.260 --> 45:13.300
+How do I tackle a problem and divide and conquer?
+
+45:13.300 --> 45:15.460
+How do I think about recursion as a tool
+
+45:15.460 --> 45:17.500
+in dealing with something?
+
+45:17.500 --> 45:20.340
+You've begun to begun, I will use that word deliberately,
+
+45:20.340 --> 45:22.820
+to master the art of computational problem solving.
+
+45:22.820 --> 45:26.340
+How can you take a problem and turn it into an algorithm?
+
+45:26.340 --> 45:28.780
+And especially, you've begun to have the ability
+
+45:28.780 --> 45:31.100
+to make the computer do what you want it to.
+
+45:31.100 --> 45:33.780
+To say, if I've got a problem from biology or chemistry
+
+45:33.780 --> 45:36.220
+or math or physics or chemical engineering
+
+45:36.220 --> 45:38.860
+or mechanical engineering, how do I take that problem
+
+45:38.860 --> 45:41.140
+and say, here's how I would design an algorithm
+
+45:41.180 --> 45:45.700
+to give me a simulation and a way of evaluating what it does?
+
+45:45.700 --> 45:47.100
+And so what we hope we've done is
+
+45:47.100 --> 45:50.340
+we've started you down the path to being able to think and act
+
+45:50.340 --> 45:52.500
+like a computer scientist.
+
+45:52.500 --> 45:53.500
+All right, don't panic.
+
+45:53.500 --> 45:55.300
+That doesn't mean you stare at people's shoes
+
+45:55.300 --> 45:56.020
+when you talk to them.
+
+45:56.020 --> 45:57.580
+Not all computer scientists do that.
+
+45:57.580 --> 46:00.820
+Just faculty.
+
+46:00.820 --> 46:02.180
+Sorry, John.
+
+46:02.180 --> 46:04.100
+So what do computer scientists do?
+
+46:04.100 --> 46:05.780
+And this is actually meant to be serious.
+
+46:05.780 --> 46:08.140
+And I put up two of my famous historical figures
+
+46:08.140 --> 46:10.100
+of computer scientists.
+
+46:10.100 --> 46:11.860
+They do think computationally.
+
+46:11.860 --> 46:15.420
+They think about abstractions, about algorithms,
+
+46:15.420 --> 46:16.860
+about automated execution.
+
+46:16.860 --> 46:18.740
+So the three A's of computational thinking.
+
+46:18.740 --> 46:21.020
+And in the same way that traditionally you
+
+46:21.020 --> 46:23.940
+had the three R's of reading, writing, and arithmetic,
+
+46:23.940 --> 46:27.100
+computational thinking, we hope, is becoming a fundamental
+
+46:27.100 --> 46:30.860
+that every well-educated person is going to need.
+
+46:30.860 --> 46:35.140
+And that says, you think about the right abstraction.
+
+46:35.140 --> 46:37.060
+When you have a problem in your Europe,
+
+46:37.060 --> 46:38.300
+what's the right abstraction?
+
+46:38.300 --> 46:40.780
+How do I pull apart the pieces?
+
+46:40.780 --> 46:43.900
+How do I think about that in terms of decomposing things
+
+46:43.900 --> 46:48.100
+into a relationship that I can use to solve problems?
+
+46:48.100 --> 46:49.940
+How do I automate?
+
+46:49.940 --> 46:51.620
+How do I mechanize that abstraction?
+
+46:51.620 --> 46:54.540
+How do I use what I know happens inside of the machine
+
+46:54.540 --> 46:56.800
+to write a sequence of steps in a language I'm
+
+46:56.800 --> 46:59.500
+using to capture that process?
+
+46:59.500 --> 47:02.600
+And then finally, how do I turn that into an algorithm?
+
+47:02.600 --> 47:06.060
+And that not only means I need a language for describing
+
+47:06.060 --> 47:08.220
+those automated processes.
+
+47:08.700 --> 47:11.860
+And if you like allowing the abstraction of details,
+
+47:11.860 --> 47:14.500
+but frankly also a way to communicate.
+
+47:14.500 --> 47:17.340
+If you have to think crisply about how do I describe
+
+47:17.340 --> 47:19.460
+an algorithm, it's actually giving you
+
+47:19.460 --> 47:23.520
+a way to crystallize or clarify your thinking about a problem.
+
+47:23.520 --> 47:26.140
+This is not to say you should talk to your friends in Python.
+
+47:26.140 --> 47:27.540
+I don't recommend it.
+
+47:27.540 --> 47:29.840
+But it does say you should use that thinking
+
+47:29.840 --> 47:33.720
+as a way of capturing your ideas of what you're going to do.
+
+47:33.720 --> 47:37.380
+And that leads then to this idea of how difficult
+
+47:37.380 --> 47:40.260
+is a problem, how best can I solve it?
+
+47:40.260 --> 47:42.140
+We've shown you these complexity classes.
+
+47:42.140 --> 47:44.860
+And we've hinted at the idea that, in fact, some problems
+
+47:44.860 --> 47:47.300
+are inherently more difficult than others.
+
+47:47.300 --> 47:50.060
+That's something I hope you come back to as you go along.
+
+47:50.060 --> 47:53.620
+And especially, we want you to start thinking recursively.
+
+47:53.620 --> 47:56.940
+We want you to think about how do I take a hard problem,
+
+47:56.940 --> 47:59.540
+break it up into simpler versions of the same problem,
+
+47:59.540 --> 48:02.540
+and then construct the solution.
+
+48:02.540 --> 48:06.120
+And that shows up lots of places.
+
+48:06.120 --> 48:08.160
+Recursion is in all sorts of wonderful places.
+
+48:08.160 --> 48:09.960
+So just to give you an example, I
+
+48:09.960 --> 48:12.680
+could say to you recursively, this lecture
+
+48:12.680 --> 48:15.880
+will end when I'm done talking about this lecture, which
+
+48:15.880 --> 48:18.620
+will end when I'm done talking about this lecture, which
+
+48:18.620 --> 48:19.760
+will end when I'm done.
+
+48:19.760 --> 48:21.680
+All right, you don't like infinite recursion.
+
+48:21.680 --> 48:23.720
+Good luck on the exam.
+

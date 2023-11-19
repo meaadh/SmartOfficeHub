@@ -1,0 +1,108 @@
+ID: L31
+Time: 0.00
+Transcript: Today we're going to learn merge sort.
+
+ID: L32
+Time: 2.88
+Transcript: A few quick points, then we'll get to the example.
+
+ID: L33
+Time: 6.12
+Transcript: Merge sort is usually done recursively.
+
+ID: L34
+Time: 9.16
+Transcript: When you think of merge sort, as with other recursive algorithms, I want you to think of divide and conquer.
+
+ID: L35
+Time: 15.56
+Transcript: We're going to break our problem into smaller problems in order to solve it.
+
+ID: L36
+Time: 20.52
+Transcript: Let's get started. We have the following array and we want it sorted.
+
+ID: L37
+Time: 25.60
+Transcript: We're going to continuously split the array in half, our divide step.
+
+ID: L38
+Time: 30.04
+Transcript: Until we are left with the individual items.
+
+ID: L39
+Time: 33.00
+Transcript: Watch and see.
+
+ID: L310
+Time: 49.12
+Transcript: Our array is now broken down into individual items.
+
+ID: L311
+Time: 52.16
+Transcript: One note before we start sorting. When you implement this in code, these steps will be done in a different order because of recursion.
+
+ID: L312
+Time: 61.64
+Transcript: But I think this human friendly order provides more clarity in learning.
+
+ID: L313
+Time: 66.28
+Transcript: Let's continue. We're ready to sort.
+
+ID: L314
+Time: 69.48
+Transcript: We'll examine the individual items, compare their values, and merge them into temporary arrays.
+
+ID: L315
+Time: 83.04
+Transcript: The temporary arrays are sorted, but there's work left to do. Let's jump up the recursion stack and continue.
+
+ID: L316
+Time: 91.12
+Transcript: We merge our smaller arrays into a larger one, inserting items in the correct order.
+
+ID: L317
+Time: 101.08
+Transcript: We'll use the same array again.
+
+ID: L318
+Time: 103.08
+Transcript: We'll merge our larger arrays into a larger one, inserting items in the correct order.
+
+ID: L319
+Time: 124.84
+Transcript: One more merge and we'll have our sorted array.
+
+ID: L320
+Time: 133.08
+Transcript: And that's it. Our array is now sorted.
+
+ID: L321
+Time: 142.08
+Transcript: Here's the pseudocode for merge sort. On the left you have the recursive part, which halves the arrays.
+
+ID: L322
+Time: 149.08
+Transcript: On the right is the merge function which combines the arrays.
+
+ID: L323
+Time: 154.08
+Transcript: Merge sort has a worst case time complexity of O of n times log n.
+
+ID: L324
+Time: 160.08
+Transcript: The easiest way to think about it is to start with the merge step.
+
+ID: L325
+Time: 163.08
+Transcript: Looking at the while loop, we see we have to visit n items.
+
+ID: L326
+Time: 167.08
+Transcript: The log n comes from the maximum height of a binary tree we create, which is on the order of log n.
+
+ID: L327
+Time: 175.08
+Transcript: Thank you for watching. Please comment suggestions for future videos below, as well as any questions you may have.
+

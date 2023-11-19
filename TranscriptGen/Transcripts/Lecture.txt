@@ -1,0 +1,3040 @@
+ID: L71
+Time: 0
+Transcript: The following content is provided under a Creative.
+
+ID: L72
+Time: 3
+Transcript: Commons license. Your support will help MIT OpenCourseWare continue to.
+
+ID: L73
+Time: 7
+Transcript: offer high quality educational resources for free. To make a donation or view additional materials from hundreds of MIT courses, visit MIT OpenCourseWare at.
+
+ID: L74
+Time: 18
+Transcript: ocw.mit.edu. PROFESSOR 1 STEVEN SCOTT BRADY So for the last two lectures, we've been talking about.
+
+ID: L75
+Time: 35
+Transcript: analyzing algorithms, complexity, orders of growth. How do we estimate the cost of an algorithm as the size of the input grows?.
+
+ID: L76
+Time: 43
+Transcript: And as I've said several times, I'll say at least once more, how do we also turn it the other direction?.
+
+ID: L77
+Time: 47
+Transcript: How do we use thoughts about choices of pieces of algorithm in terms of implications on the cost it's going to take us to compute?.
+
+ID: L78
+Time: 56
+Transcript: We saw last time a set of examples, constant algorithms, linear algorithms, sorry, constant algorithms, logarithmic algorithms, linear algorithms, quadratic.
+
+ID: L79
+Time: 67
+Transcript: algorithms, exponential algorithms. Today, what I'm going to do is fill in one more piece, a log linear algorithm, something that's really a nice kind of.
+
+ID: L710
+Time: 75
+Transcript: algorithm to have, and use it to talk about one last class.
+
+ID: L711
+Time: 79
+Transcript: of algorithms that are really valuable.
+
+ID: L712
+Time: 81
+Transcript: And those are searching and sorting algorithms.
+
+ID: L713
+Time: 85
+Transcript: So a search algorithm, kind of an obvious statement. You use them all the time when you go to Google or Bing.
+
+ID: L714
+Time: 91
+Transcript: or whatever your favorite search mechanism on the web is. It's just a way to find an item or a group of items.
+
+ID: L715
+Time: 99
+Transcript: from a collection. If you think about it, that collection.
+
+ID: L716
+Time: 103
+Transcript: could be either implicit or explicit. So way back at the beginning of the term, we saw an example of a search algorithm.
+
+ID: L717
+Time: 110
+Transcript: when you were looking for square roots.
+
+ID: L718
+Time: 113
+Transcript: And we saw simple things like exhaustive enumeration.
+
+ID: L719
+Time: 116
+Transcript: We'd go through all the possibilities. We saw our first version of bisection search.
+
+ID: L720
+Time: 120
+Transcript: there where you would do approximations, Newton-Raphson. These are all examples of a search algorithm.
+
+ID: L721
+Time: 125
+Transcript: where the collection is implicit.
+
+ID: L722
+Time: 128
+Transcript: It's all the numbers between some point and some other point. More common is a search algorithm.
+
+ID: L723
+Time: 133
+Transcript: where the collection is explicit.
+
+ID: L724
+Time: 136
+Transcript: I don't know.
+
+ID: L725
+Time: 137
+Transcript: For example, I've got all the data records of students. And I want to know, how do I find a particular student so I.
+
+ID: L726
+Time: 142
+Transcript: can record that A-plus that everybody in this room is going to get next Tuesday on that exam?.
+
+ID: L727
+Time: 147
+Transcript: That's not a promise, sorry.
+
+ID: L728
+Time: 149
+Transcript: But we'll work on it.
+
+ID: L729
+Time: 150
+Transcript: So could do it implicit, could do it explicit.
+
+ID: L730
+Time: 153
+Transcript: Today I want to focus on doing search explicitly.
+
+ID: L731
+Time: 156
+Transcript: And it could be on different kinds of collections. But I'm going to focus, just as an example,.
+
+ID: L732
+Time: 161
+Transcript: on search over lists. And to make it a little easier, let's just.
+
+ID: L733
+Time: 164
+Transcript: do search over lists of numbers.
+
+ID: L734
+Time: 166
+Transcript: But it could obviously be other kinds of elements. Now, you've already seen some of this, right? We did search where we said we could do linear search,.
+
+ID: L735
+Time: 174
+Transcript: brute force. Just walk down the list looking at everything till we either find the thing we're looking for.
+
+ID: L736
+Time: 180
+Transcript: or we get to the end of the list. Sometimes also called British Museum algorithm.
+
+ID: L737
+Time: 184
+Transcript: or exhaustive enumeration.
+
+ID: L738
+Time: 185
+Transcript: I go through everything in the list.
+
+ID: L739
+Time: 187
+Transcript: Nice news is the list doesn't have to be sorted.
+
+ID: L740
+Time: 190
+Transcript: It could be just an arbitrary order. What we saw is that the expected, sorry, not expected,.
+
+ID: L741
+Time: 196
+Transcript: the worst case behavior is linear.
+
+ID: L742
+Time: 198
+Transcript: In the worst case, the element's not in the list.
+
+ID: L743
+Time: 200
+Transcript: I've got to look at everything.
+
+ID: L744
+Time: 201
+Transcript: So it's going to be linear in terms of complexity. And then we looked at bisection search, where we said.
+
+ID: L745
+Time: 207
+Transcript: the list needs to be sorted. But if it is, we can actually be much more efficient because we can take advantage of the sorting.
+
+ID: L746
+Time: 215
+Transcript: to cut down the size of the problem.
+
+ID: L747
+Time: 218
+Transcript: And I'll remind you of both of those.
+
+ID: L748
+Time: 219
+Transcript: There was our simple linear search.
+
+ID: L749
+Time: 222
+Transcript: Set a flag that says I haven't yet found it.
+
+ID: L750
+Time: 225
+Transcript: And then just loop over the indices into the list.
+
+ID: L751
+Time: 228
+Transcript: I could have also just looped directly over the list itself. Checking to see if the ith member of the list.
+
+ID: L752
+Time: 233
+Transcript: is the thing I'm looking for. If it is, change the flag to true.
+
+ID: L753
+Time: 237
+Transcript: so that when I come out of all of this, I'll return the flag. Either false because it was set that way initially.
+
+ID: L754
+Time: 242
+Transcript: or true because I found it. And of course, what we knew is we have to look at everything.
+
+ID: L755
+Time: 246
+Transcript: to see if it's there or not.
+
+ID: L756
+Time: 248
+Transcript: I could speed this up by just returning true at this point.
+
+ID: L757
+Time: 252
+Transcript: Well, that would improve the average case.
+
+ID: L758
+Time: 255
+Transcript: Doesn't improve the worst case. And that's the thing we usually are concerned about.
+
+ID: L759
+Time: 258
+Transcript: because in the worst case, I've got to go through everything. And just to remind you, we said this.
+
+ID: L760
+Time: 262
+Transcript: is order length of the list to go around this part, the loop.
+
+ID: L761
+Time: 266
+Transcript: right here.
+
+ID: L762
+Time: 267
+Transcript: And inside the loop, it's constant work.
+
+ID: L763
+Time: 270
+Transcript: I'm doing the same number of things each time.
+
+ID: L764
+Time: 272
+Transcript: That's order n times order 1.
+
+ID: L765
+Time: 275
+Transcript: And by our rules, that's just order n.
+
+ID: L766
+Time: 276
+Transcript: So it's linear in the size of the problem.
+
+ID: L767
+Time: 283
+Transcript: We said we could do it on sorted lists.
+
+ID: L768
+Time: 285
+Transcript: But just again, walk down the list. Again, here I could loop over everything in the list,.
+
+ID: L769
+Time: 290
+Transcript: checking to see if it's a thing I want, return true. And if I ever get to a point where the element of the list.
+
+ID: L770
+Time: 296
+Transcript: is bigger than the thing I'm looking for, I know it can't be in the rest of the list because all the things to the right are bigger yet,.
+
+ID: L771
+Time: 303
+Transcript: I could just return false and drop out. In terms of average behavior, this is better because it's going to stop as soon.
+
+ID: L772
+Time: 310
+Transcript: as it gets to a point where it can rule everything else out.
+
+ID: L773
+Time: 314
+Transcript: But in terms of complexity, it's still order n.
+
+ID: L774
+Time: 318
+Transcript: Because I still, on average, have to not average. In the worst case, I'm still going to be looking n times through the loop.
+
+ID: L775
+Time: 324
+Transcript: before I get to a point where I can decide to bail out of it.
+
+ID: L776
+Time: 327
+Transcript: So order n.
+
+ID: L777
+Time: 330
+Transcript: And then finally, last piece of recap, bisection search.
+
+ID: L778
+Time: 335
+Transcript: Repeat again.
+
+ID: L779
+Time: 335
+Transcript: The idea here is take the midpoint of the list.
+
+ID: L780
+Time: 339
+Transcript: Look at that element.
+
+ID: L781
+Time: 340
+Transcript: If it's the thing I'm looking for, great.
+
+ID: L782
+Time: 342
+Transcript: I just won the lottery. If it isn't, decide is the thing I'm.
+
+ID: L783
+Time: 345
+Transcript: looking for bigger or less than that middle point.
+
+ID: L784
+Time: 349
+Transcript: If it's bigger than that, I only use the upper half of the list.
+
+ID: L785
+Time: 353
+Transcript: If it's less than that, I only use the lower half of the list. And the characteristic here was at each step,.
+
+ID: L786
+Time: 360
+Transcript: I'm reducing the size of the problem in half.
+
+ID: L787
+Time: 363
+Transcript: I'm throwing away half of the remaining list at each step.
+
+ID: L788
+Time: 366
+Transcript: And I'll just remind you of that code.
+
+ID: L789
+Time: 368
+Transcript: I know it's a lot here. But just to remind you, it said down here,.
+
+ID: L790
+Time: 371
+Transcript: if I've got an empty list, can't be there.
+
+ID: L791
+Time: 373
+Transcript: I'm going to return false. Otherwise, call this little helper function with the list, the thing for which I'm searching,.
+
+ID: L792
+Time: 381
+Transcript: and the beginning and end point indices into the list.
+
+ID: L793
+Time: 384
+Transcript: Initially, the start and the very end. And this code up here basically says, if those two numbers are the same,.
+
+ID: L794
+Time: 393
+Transcript: I'm down to a list of one.
+
+ID: L795
+Time: 394
+Transcript: Just check to see if it's the thing I'm looking for.
+
+ID: L796
+Time: 397
+Transcript: Otherwise, pick something halfway in between.
+
+ID: L797
+Time: 400
+Transcript: And ignore this case for the moment. Basically, then check to see, is the thing at that point bigger than e? In which case, I'm in general going.
+
+ID: L798
+Time: 408
+Transcript: to call this only with from the low point to the midpoint.
+
+ID: L799
+Time: 411
+Transcript: Otherwise, I'm going to call this with the midpoint to high. And that was just this idea of keep cutting down.
+
+ID: L7100
+Time: 417
+Transcript: in half the size of the list. Last piece of the recap, the thing we wanted you to see here.
+
+ID: L7101
+Time: 423
+Transcript: is there are the two recursive calls.
+
+ID: L7102
+Time: 425
+Transcript: I'm only going to do one because I'm making a decision.
+
+ID: L7103
+Time: 428
+Transcript: At each step, I'm cutting down the problem by half. And that says the number of steps, the number of times I'm going to iterate through here.
+
+ID: L7104
+Time: 437
+Transcript: will be log in the length of the list. And if that still doesn't make sense to you,.
+
+ID: L7105
+Time: 441
+Transcript: it says I need to know when 1 over 2 to the k, where.
+
+ID: L7106
+Time: 444
+Transcript: k is the number of steps, is equal to 1.
+
+ID: L7107
+Time: 447
+Transcript: Because in each step, I'm reducing by half.
+
+ID: L7108
+Time: 449
+Transcript: And that's when k is log base 2 of n.
+
+ID: L7109
+Time: 451
+Transcript: So that's why it's log linear.
+
+ID: L7110
+Time: 454
+Transcript: And so this just reminds you, again, that recap. Number of calls reduces, or sorry,.
+
+ID: L7111
+Time: 459
+Transcript: the call gets reduced by a factor of 2 each time.
+
+ID: L7112
+Time: 462
+Transcript: I'm going to have log n work going around it. And inside, it's constant amount of work because I'm just passing the pointers, not actually.
+
+ID: L7113
+Time: 469
+Transcript: copying the list.
+
+ID: L7114
+Time: 470
+Transcript: And that's a nice state to be.
+
+ID: L7115
+Time: 473
+Transcript: OK, so sounds good.
+
+ID: L7116
+Time: 477
+Transcript: Could just use linear search.
+
+ID: L7117
+Time: 478
+Transcript: It's going to be linear. When you use binary search or bisection search,.
+
+ID: L7118
+Time: 483
+Transcript: we can do it in log time.
+
+ID: L7119
+Time: 484
+Transcript: That's great.
+
+ID: L7120
+Time: 485
+Transcript: We assumed the list was sorted, but all right. So that basically says, OK, so when does it make sense to sort the list and then do the search?.
+
+ID: L7121
+Time: 498
+Transcript: Because if I can sort the list cheaply,.
+
+ID: L7122
+Time: 500
+Transcript: then the search is going to be logarithmic.
+
+ID: L7123
+Time: 502
+Transcript: That's really what I would like. This little expression basically says,.
+
+ID: L7124
+Time: 507
+Transcript: let's let sort be the cost of sorting the list. I want to know when that cost plus something that's order log n, which is what it's going.
+
+ID: L7125
+Time: 514
+Transcript: to cost me to do the search, when is that less than something that's order n? Because then it's going to be better to do the sort first.
+
+ID: L7126
+Time: 522
+Transcript: and do the search.
+
+ID: L7127
+Time: 523
+Transcript: And so I can just rearrange it. It needs to be when does the cost of sorting, when is it less than this expression, which basically.
+
+ID: L7128
+Time: 530
+Transcript: says when is sorting going to be less expensive than the linear cost?.
+
+ID: L7129
+Time: 537
+Transcript: Crud. Actually, good news for you, right? This is a really short lecture because it.
+
+ID: L7130
+Time: 543
+Transcript: says it's never true.
+
+ID: L7131
+Time: 545
+Transcript: Ouch.
+
+ID: L7132
+Time: 546
+Transcript: Don't worry, we've got more to go in the lecture. The reason it can't be true, if you think about it just.
+
+ID: L7133
+Time: 551
+Transcript: informally, is if I've got a collection of n elements and I want to sort it, I've got to look at each one of those elements at least once, right?.
+
+ID: L7134
+Time: 561
+Transcript: I have to look at them to decide where they go.
+
+ID: L7135
+Time: 563
+Transcript: Oh, that's n elements. So the sorting must be at least order n because I.
+
+ID: L7136
+Time: 568
+Transcript: got to look at everything. And in fact, as it says there, I'm.
+
+ID: L7137
+Time: 571
+Transcript: going to have to use at least linear time to do the sort.
+
+ID: L7138
+Time: 576
+Transcript: Sounds like we're stuck, but we're not. And the reason is often when I want to search something, I'm going to do multiple searches,.
+
+ID: L7139
+Time: 586
+Transcript: but I may only want to sort the list once.
+
+ID: L7140
+Time: 588
+Transcript: In fact, I probably only want to sort the list once.
+
+ID: L7141
+Time: 591
+Transcript: So in that case, I'm spreading out the cost.
+
+ID: L7142
+Time: 593
+Transcript: I'm amortizing the expense of the sort. And now what I want to know is if I'm going to do k searches, the cost of those k searches I know.
+
+ID: L7143
+Time: 603
+Transcript: is going to be k log n because it's log to do the search. And I simply need to know is the cost of sorting plus this,.
+
+ID: L7144
+Time: 611
+Transcript: can I have something where it's less than k searches just using linear search?.
+
+ID: L7145
+Time: 616
+Transcript: And the answer is yes. There are going to be, for large case, ways in which we can do the sort where the sort time becomes irrelevant,.
+
+ID: L7146
+Time: 625
+Transcript: that the cost is really dominated by the search. And so what I want to do now is look at, all right, how could we do the sort reasonably efficiently?.
+
+ID: L7147
+Time: 634
+Transcript: It's going to have to be at least linear.
+
+ID: L7148
+Time: 635
+Transcript: We're going to see it's going to be a little more than linear. But if I could do it reasonably, I'm.
+
+ID: L7149
+Time: 639
+Transcript: going to be in good shape here. So what I want to do is show you a number of ways.
+
+ID: L7150
+Time: 644
+Transcript: in which we can do sorting. Take a list of elements and sort them from, in this case,.
+
+ID: L7151
+Time: 649
+Transcript: smaller to higher or in increasing order.
+
+ID: L7152
+Time: 652
+Transcript: So here's my goal.
+
+ID: L7153
+Time: 654
+Transcript: I want to efficiently sort a list.
+
+ID: L7154
+Time: 656
+Transcript: I want to see if we can do this as efficiently as possible. I'm going to start, I'm going to say,.
+
+ID: L7155
+Time: 663
+Transcript: with a humorous version of sort.
+
+ID: L7156
+Time: 665
+Transcript: You've all convinced that my humor is nonexistent.
+
+ID: L7157
+Time: 667
+Transcript: You're right.
+
+ID: L7158
+Time: 668
+Transcript: But it sets the stage for it.
+
+ID: L7159
+Time: 669
+Transcript: This is a sort.
+
+ID: L7160
+Time: 670
+Transcript: You can look it up. It's called monkey sort, bogo sort, stupid sort, slow sort,.
+
+ID: L7161
+Time: 674
+Transcript: permutation sort, shotgun sort.
+
+ID: L7162
+Time: 676
+Transcript: And here's how it works.
+
+ID: L7163
+Time: 677
+Transcript: Anna has nicely given me a set of numbers on cards here.
+
+ID: L7164
+Time: 680
+Transcript: Here's how you do bogo sort.
+
+ID: L7165
+Time: 684
+Transcript: I got to do that better.
+
+ID: L7166
+Time: 685
+Transcript: I got to spread them out randomly like this.
+
+ID: L7167
+Time: 689
+Transcript: Oh, good.
+
+ID: L7168
+Time: 689
+Transcript: I'm going to have to.
+
+ID: L7169
+Time: 690
+Transcript: Sorry, Tom.
+
+ID: L7170
+Time: 690
+Transcript: I'm now walking. And now I pick them up saying, is that less than this,.
+
+ID: L7171
+Time: 694
+Transcript: which is less than, oh, crud.
+
+ID: L7172
+Time: 697
+Transcript: They're not sorted.
+
+ID: L7173
+Time: 698
+Transcript: All right.
+
+ID: L7174
+Time: 700
+Transcript: I pick them all up.
+
+ID: L7175
+Time: 703
+Transcript: And I do it again. A little brain damage, right?.
+
+ID: L7176
+Time: 707
+Transcript: It's intended to get your attention.
+
+ID: L7177
+Time: 709
+Transcript: I did.
+
+ID: L7178
+Time: 709
+Transcript: I heard a couple of chuckles.
+
+ID: L7179
+Time: 710
+Transcript: Those are A students, by the way.
+
+ID: L7180
+Time: 712
+Transcript: I heard a couple of chuckles here.
+
+ID: L7181
+Time: 714
+Transcript: We could actually do this exhaustively. Basically, it's called permutation sort because you could search through all possible permutations.
+
+ID: L7182
+Time: 723
+Transcript: to see if you find something that's sorted. That, by the way, the complexity of that is something like n factorial, which for large n.
+
+ID: L7183
+Time: 732
+Transcript: is n to the nth power.
+
+ID: L7184
+Time: 736
+Transcript: And if n's anything bigger than about 2, don't do it.
+
+ID: L7185
+Time: 739
+Transcript: But it would be a way to think about doing this.
+
+ID: L7186
+Time: 741
+Transcript: All right. Now, having caught in the humorous version of this, how could we do this a little bit better?.
+
+ID: L7187
+Time: 747
+Transcript: No, sorry. I should say, what's the complexity?.
+
+ID: L7188
+Time: 749
+Transcript: There's a nice, crisp definition of BOGO sort.
+
+ID: L7189
+Time: 753
+Transcript: Its best case is order n because I just need to check it sorted.
+
+ID: L7190
+Time: 757
+Transcript: Its average case is n factorial. And its worst case, if I'm just doing it randomly,.
+
+ID: L7191
+Time: 762
+Transcript: is god knows because I could be doing it here forever.
+
+ID: L7192
+Time: 765
+Transcript: So we're going to move on.
+
+ID: L7193
+Time: 768
+Transcript: Here's a second way to do it.
+
+ID: L7194
+Time: 770
+Transcript: Called bubble sort.
+
+ID: L7195
+Time: 771
+Transcript: I'm going to do this with a small version of this.
+
+ID: L7196
+Time: 772
+Transcript: I'm going to put out a set.
+
+ID: L7197
+Time: 774
+Transcript: I'll turn these up so you can see them in a second. The idea of bubble sort is I'm going to start at,.
+
+ID: L7198
+Time: 780
+Transcript: I'm going to call this the front end of the list.
+
+ID: L7199
+Time: 782
+Transcript: And I'm going to walk down comparing elements pairwise.
+
+ID: L7200
+Time: 785
+Transcript: And I'm always going to move the larger one over.
+
+ID: L7201
+Time: 788
+Transcript: So I start here and I say, 1's less than 11.
+
+ID: L7202
+Time: 791
+Transcript: I'm OK.
+
+ID: L7203
+Time: 792
+Transcript: 11's bigger than 5.
+
+ID: L7204
+Time: 794
+Transcript: I'm going to bubble that up.
+
+ID: L7205
+Time: 796
+Transcript: 11's bigger than 6.
+
+ID: L7206
+Time: 797
+Transcript: I'm going to bubble that up.
+
+ID: L7207
+Time: 798
+Transcript: 11's bigger than 2.
+
+ID: L7208
+Time: 800
+Transcript: I've basically bubbled 11 to the end.
+
+ID: L7209
+Time: 802
+Transcript: Now I go back here.
+
+ID: L7210
+Time: 803
+Transcript: I say 1 is less than 5.
+
+ID: L7211
+Time: 804
+Transcript: That's good.
+
+ID: L7212
+Time: 805
+Transcript: 5 is less than 6.
+
+ID: L7213
+Time: 807
+Transcript: That's good.
+
+ID: L7214
+Time: 808
+Transcript: 6 is bigger than 2.
+
+ID: L7215
+Time: 810
+Transcript: Bubble that.
+
+ID: L7216
+Time: 811
+Transcript: 6 is less than 11.
+
+ID: L7217
+Time: 813
+Transcript: You get the idea.
+
+ID: L7218
+Time: 814
+Transcript: Comparison, comparison, and swap, comparison, comparison. And now if I go back to this part and do it,.
+
+ID: L7219
+Time: 822
+Transcript: you'll notice that's in the right order.
+
+ID: L7220
+Time: 824
+Transcript: That's in the right order.
+
+ID: L7221
+Time: 826
+Transcript: That's in the right order.
+
+ID: L7222
+Time: 828
+Transcript: That's in the right order.
+
+ID: L7223
+Time: 829
+Transcript: I'm done.
+
+ID: L7224
+Time: 831
+Transcript: Small round of applause, please.
+
+ID: L7225
+Time: 832
+Transcript: I was able to sort five elements.
+
+ID: L7226
+Time: 834
+Transcript: Thank you.
+
+ID: L7227
+Time: 837
+Transcript: The little video is sort of showing the same thing.
+
+ID: L7228
+Time: 839
+Transcript: You can see the idea here. It's called bubble sort because you're literally bubbling.
+
+ID: L7229
+Time: 843
+Transcript: things up to the end of the list.
+
+ID: L7230
+Time: 845
+Transcript: It's pretty simple to do.
+
+ID: L7231
+Time: 846
+Transcript: You're just swapping pairs. And as you saw, when I get to the end of the list, I go back and do it until I have a pass where.
+
+ID: L7232
+Time: 851
+Transcript: I go all the way through the list and I don't do any swaps. And in that case, I know I'm done because everything's.
+
+ID: L7233
+Time: 857
+Transcript: in order and I can stop. One of the properties of it is that the largest unsorted.
+
+ID: L7234
+Time: 861
+Transcript: element is always at the end after the pass. In other words, after the first one,.
+
+ID: L7235
+Time: 867
+Transcript: I know that the largest element's at the end. After the second one, the largest thing left.
+
+ID: L7236
+Time: 870
+Transcript: is going to be in the next place. And that tells me, among other things, that this is going to take no more than n times.
+
+ID: L7237
+Time: 877
+Transcript: through the list to succeed.
+
+ID: L7238
+Time: 880
+Transcript: Might actually take fewer than that.
+
+ID: L7239
+Time: 882
+Transcript: OK.
+
+ID: L7240
+Time: 884
+Transcript: Again, let's look at some code for it.
+
+ID: L7241
+Time: 885
+Transcript: Let's look at its complexity.
+
+ID: L7242
+Time: 886
+Transcript: And let's actually run this.
+
+ID: L7243
+Time: 888
+Transcript: So here is a little simple version of bubble sort.
+
+ID: L7244
+Time: 892
+Transcript: I'm going to set a flag up here.
+
+ID: L7245
+Time: 893
+Transcript: I'm going to call it swap initially to false. That's going to let me tell when I'm done, when I'm gone through everything in the list.
+
+ID: L7246
+Time: 900
+Transcript: without doing a swap.
+
+ID: L7247
+Time: 901
+Transcript: And then I'm going to loop. As long as swap is false, so the first time through,.
+
+ID: L7248
+Time: 905
+Transcript: it's going to do that loop.
+
+ID: L7249
+Time: 907
+Transcript: I set swap initially to true.
+
+ID: L7250
+Time: 909
+Transcript: And notice what I then do.
+
+ID: L7251
+Time: 911
+Transcript: I let j range from 1 up to the length of the list.
+
+ID: L7252
+Time: 915
+Transcript: And I look at the j-th element and the previous element. If the previous element is bigger,.
+
+ID: L7253
+Time: 922
+Transcript: I'm going to flip them right there.
+
+ID: L7254
+Time: 924
+Transcript: And that's just doing that swap, what I just did down here. And if that's the case, I'm going to set the flag to false,.
+
+ID: L7255
+Time: 930
+Transcript: which says I've done at least one bubble as part of this. Which means when I come out of here and go back around.
+
+ID: L7256
+Time: 936
+Transcript: to the loop, it's going to do it again. And it will do it until all of this succeeds without this ever being true, in which case.
+
+ID: L7257
+Time: 943
+Transcript: that's true, which makes that false, and it will drop out.
+
+ID: L7258
+Time: 950
+Transcript: Let's look at an example of this running. Just to give you a sense of that,.
+
+ID: L7259
+Time: 955
+Transcript: assuming I can find the right place here.
+
+ID: L7260
+Time: 957
+Transcript: So there is, again, a version of bubble sort on the side.
+
+ID: L7261
+Time: 961
+Transcript: And I'm going to bring this down to the bottom.
+
+ID: L7262
+Time: 963
+Transcript: I've got a little test list there. And I've put a print statement in it so you can see each time through the loop what's.
+
+ID: L7263
+Time: 970
+Transcript: the form of the list as it starts.
+
+ID: L7264
+Time: 972
+Transcript: And assuming I've done this right, here you go.
+
+ID: L7265
+Time: 977
+Transcript: There's the list the first time through. Notice after one pass, 25 is at the end of the list,.
+
+ID: L7266
+Time: 984
+Transcript: the biggest element, exactly what I like.
+
+ID: L7267
+Time: 985
+Transcript: But you can also see a few other things have flipped. Right in there, there have been some other swaps.
+
+ID: L7268
+Time: 990
+Transcript: as it bubbled through.
+
+ID: L7269
+Time: 992
+Transcript: And in fact, you can see that idea.
+
+ID: L7270
+Time: 995
+Transcript: You can see 25 moving through. Notice on the next step, a whole bunch of the list.
+
+ID: L7271
+Time: 1002
+Transcript: is actually in the right order.
+
+ID: L7272
+Time: 1004
+Transcript: It's just because I got lucky. All I can guarantee is that the second largest element.
+
+ID: L7273
+Time: 1007
+Transcript: is at the second from the end of the list. But you can see here, even though the list is, I think,.
+
+ID: L7274
+Time: 1013
+Transcript: nine long, it only took us four passes through.
+
+ID: L7275
+Time: 1017
+Transcript: So this is nice.
+
+ID: L7276
+Time: 1017
+Transcript: It says at most, n times through the list. And at the end, we actually get out something.
+
+ID: L7277
+Time: 1023
+Transcript: that's in the right form. OK, so let's go back to this and basically say, what's the complexity?.
+
+ID: L7278
+Time: 1033
+Transcript: Well, that's length n.
+
+ID: L7279
+Time: 1036
+Transcript: Has to be.
+
+ID: L7280
+Time: 1036
+Transcript: I'm going through the entire list.
+
+ID: L7281
+Time: 1038
+Transcript: And inside of there is just constant work.
+
+ID: L7282
+Time: 1044
+Transcript: Four operations.
+
+ID: L7283
+Time: 1045
+Transcript: I'm doing a test.
+
+ID: L7284
+Time: 1046
+Transcript: That's right, five.
+
+ID: L7285
+Time: 1046
+Transcript: I'm doing a test. And then depending whether that test is true or not,.
+
+ID: L7286
+Time: 1049
+Transcript: I'm setting a flag and doing some movement of things around.
+
+ID: L7287
+Time: 1052
+Transcript: But it's just constant.
+
+ID: L7288
+Time: 1052
+Transcript: I don't care about the five. And there, how many times do I go around the loop?.
+
+ID: L7289
+Time: 1059
+Transcript: In the worst case, n. All I can guarantee is after the first pass,.
+
+ID: L7290
+Time: 1064
+Transcript: the biggest thing is here.
+
+ID: L7291
+Time: 1065
+Transcript: After the second pass, the second biggest thing is there.
+
+ID: L7292
+Time: 1068
+Transcript: After the third pass, you get the idea.
+
+ID: L7293
+Time: 1070
+Transcript: So I've got order n things inside the loop.
+
+ID: L7294
+Time: 1074
+Transcript: And I'm doing that loop n times.
+
+ID: L7295
+Time: 1077
+Transcript: And I hope that looks familiar. We've talked about this, right?.
+
+ID: L7296
+Time: 1080
+Transcript: This is nested loops. What's this?.
+
+ID: L7297
+Time: 1082
+Transcript: Quadratic.
+
+ID: L7298
+Time: 1085
+Transcript: So it's order n squared, where n is the length of the list. Now, as you also saw, on average,.
+
+ID: L7299
+Time: 1090
+Transcript: it could be less than that.
+
+ID: L7300
+Time: 1091
+Transcript: But it's going to be order n squared.
+
+ID: L7301
+Time: 1094
+Transcript: OK.
+
+ID: L7302
+Time: 1096
+Transcript: That's one possibility. Here's the second nice, simple sort algorithm.
+
+ID: L7303
+Time: 1102
+Transcript: called selection sort.
+
+ID: L7304
+Time: 1104
+Transcript: You can kind of think of this as going the other way.
+
+ID: L7305
+Time: 1107
+Transcript: Not completely, but going the other way. When I say going the other way, the idea.
+
+ID: L7306
+Time: 1110
+Transcript: is that I'm going to find the smallest element in the list. And I'm going to stick it at the front of the list when I'm done.
+
+ID: L7307
+Time: 1116
+Transcript: and simply swap that place with whatever was there.
+
+ID: L7308
+Time: 1119
+Transcript: Flip them. I might do a few other flips along the way,.
+
+ID: L7309
+Time: 1122
+Transcript: depending how I implement this. Next pass, I'm just going to look.
+
+ID: L7310
+Time: 1127
+Transcript: at everything but the first element.
+
+ID: L7311
+Time: 1128
+Transcript: Because I know that one's done.
+
+ID: L7312
+Time: 1129
+Transcript: I'm going to do the same thing.
+
+ID: L7313
+Time: 1131
+Transcript: Find the smallest element remaining in the list.
+
+ID: L7314
+Time: 1133
+Transcript: Put it in the second spot.
+
+ID: L7315
+Time: 1135
+Transcript: And keep doing that. What I know is if I implement this correctly, after i steps, the first i elements of the list.
+
+ID: L7316
+Time: 1144
+Transcript: will be sorted. And everything in the rest of the list has to be bigger than the largest thing.
+
+ID: L7317
+Time: 1149
+Transcript: in the first part of the list.
+
+ID: L7318
+Time: 1151
+Transcript: OK.
+
+ID: L7319
+Time: 1152
+Transcript: So we could build that. Before we do it, I'm going to show you a little video starring.
+
+ID: L7320
+Time: 1156
+Transcript: Professor Guttag.
+
+ID: L7321
+Time: 1157
+Transcript: This is his cameo performance here. But I want to just show you an example of this using.
+
+ID: L7322
+Time: 1162
+Transcript: not numbers, but people.
+
+ID: L7323
+Time: 1165
+Transcript: All right, so now we're going to do selection sort. The idea here is that each step, we're going to select the shortest person.
+
+ID: L7324
+Time: 1174
+Transcript: and put them next in line of the sorted group.
+
+ID: L7325
+Time: 1178
+Transcript: So we'll bring the leftmost person forward.
+
+ID: L7326
+Time: 1181
+Transcript: And we will compare her to everybody else.
+
+ID: L7327
+Time: 1184
+Transcript: So one at a time, step forward.
+
+ID: L7328
+Time: 1187
+Transcript: You're still the winner.
+
+ID: L7329
+Time: 1188
+Transcript: You go back.
+
+ID: L7330
+Time: 1190
+Transcript: Please step forward. And watch the number of comparisons.
+
+ID: L7331
+Time: 1194
+Transcript: that go on, by the way.
+
+ID: L7332
+Time: 1194
+Transcript: We're going to come back to that.
+
+ID: L7333
+Time: 1199
+Transcript: Still the winner.
+
+ID: L7334
+Time: 1201
+Transcript: Next.
+
+ID: L7335
+Time: 1204
+Transcript: Ah, a new winner.
+
+ID: L7336
+Time: 1206
+Transcript: All right.
+
+ID: L7337
+Time: 1207
+Transcript: So you can take her place. So here we're choosing to actually insert.
+
+ID: L7338
+Time: 1212
+Transcript: into the spot in the line. We could have put her back at the front,.
+
+ID: L7339
+Time: 1214
+Transcript: but this would be the one to work.
+
+ID: L7340
+Time: 1216
+Transcript: Now we'll compare.
+
+ID: L7341
+Time: 1217
+Transcript: Same old winner.
+
+ID: L7342
+Time: 1222
+Transcript: Same winner.
+
+ID: L7343
+Time: 1223
+Transcript: Next.
+
+ID: L7344
+Time: 1228
+Transcript: No change.
+
+ID: L7345
+Time: 1229
+Transcript: This is getting kind of boring.
+
+ID: L7346
+Time: 1233
+Transcript: Don't fall.
+
+ID: L7347
+Time: 1235
+Transcript: Same winner.
+
+ID: L7348
+Time: 1237
+Transcript: Please.
+
+ID: L7349
+Time: 1239
+Transcript: This is a tough one.
+
+ID: L7350
+Time: 1242
+Transcript: Oh, close, but I think you're still shorter.
+
+ID: L7351
+Time: 1245
+Transcript: All right.
+
+ID: L7352
+Time: 1246
+Transcript: Next.
+
+ID: L7353
+Time: 1249
+Transcript: No change, which means you are the first in line.
+
+ID: L7354
+Time: 1253
+Transcript: Congratulations. So smallest element now guaranteed.
+
+ID: L7355
+Time: 1255
+Transcript: to be at the first spot.
+
+ID: L7356
+Time: 1256
+Transcript: All right, now you step forward, and we'll compare you.
+
+ID: L7357
+Time: 1271
+Transcript: And I would invite you to watch the left hand of the list. Notice how it is slowly building up at each stage.
+
+ID: L7358
+Time: 1277
+Transcript: to have that portion sorted. And we deliberately admit students.
+
+ID: L7359
+Time: 1284
+Transcript: to be of different heights so John can do this demo.
+
+ID: L7360
+Time: 1288
+Transcript: You are the winner.
+
+ID: L7361
+Time: 1290
+Transcript: Take your place in line.
+
+ID: L7362
+Time: 1292
+Transcript: Next.
+
+ID: L7363
+Time: 1295
+Transcript: It's you. And once again, we have a lovely group of students.
+
+ID: L7364
+Time: 1305
+Transcript: sorted in height order. And check out, I want you to remember.
+
+ID: L7365
+Time: 1310
+Transcript: number of comparisons.
+
+ID: L7366
+Time: 1311
+Transcript: 55. Not that the 50, but I want you to see a comparison.
+
+ID: L7367
+Time: 1315
+Transcript: as we go on in a second.
+
+ID: L7368
+Time: 1316
+Transcript: So gain selection sort. This is this idea of find the smallest element,.
+
+ID: L7369
+Time: 1320
+Transcript: put it at the front. And I might do a little number of flips,.
+
+ID: L7370
+Time: 1323
+Transcript: as you can see here along the way.
+
+ID: L7371
+Time: 1325
+Transcript: But this is the same sort of animation of that. So let's, first of all, convince ourselves it will do the right thing, and then look at some code,.
+
+ID: L7372
+Time: 1333
+Transcript: and then run the code. So to convince ourselves that this is going to do the right thing, we could talk about something.
+
+ID: L7373
+Time: 1340
+Transcript: that we often refer to as a loop invariant. We're going to write a loop where.
+
+ID: L7374
+Time: 1343
+Transcript: we're going to walk through this. And the invariant here, we want to just demonstrate.
+
+ID: L7375
+Time: 1347
+Transcript: if it's true at the beginning and it's true at each step. Therefore, by induction, as we did earlier, I can conclude it's true always, is.
+
+ID: L7376
+Time: 1354
+Transcript: that if I'm given a prefix or the first part of a list, from 0 up to i, and a suffix or a second part of the list,.
+
+ID: L7377
+Time: 1361
+Transcript: from i plus 1 up to the end of the overall list, given that, then I'm going to assert that the invariant is.
+
+ID: L7378
+Time: 1368
+Transcript: that the prefix is sorted, and no element of the prefix.
+
+ID: L7379
+Time: 1372
+Transcript: is larger than the smallest element of the suffix. Just what I said earlier, it says, at any stage.
+
+ID: L7380
+Time: 1377
+Transcript: here, if this is the amount of sort I've done so far, I can guarantee, I'm going to claim, this will be sorted,.
+
+ID: L7381
+Time: 1382
+Transcript: and everything here is bigger than that thing there. How do I prove it?.
+
+ID: L7382
+Time: 1389
+Transcript: Well, the base case is really easy.
+
+ID: L7383
+Time: 1392
+Transcript: In the base case, the prefix is empty.
+
+ID: L7384
+Time: 1394
+Transcript: I don't have anything, so it's obviously sorted. And everything in the suffix is bigger than anything.
+
+ID: L7385
+Time: 1398
+Transcript: in the prefix, so I'm fine. And then I just want to say, as long as I write my code so that this step is true, that I'm.
+
+ID: L7386
+Time: 1405
+Transcript: going to move the smallest element from the suffix,.
+
+ID: L7387
+Time: 1408
+Transcript: the second part of the list, to the end of the prefix.
+
+ID: L7388
+Time: 1412
+Transcript: Since the prefix was sorted, this is now sorted. And everything in the suffix is still.
+
+ID: L7389
+Time: 1418
+Transcript: going to be bigger than everything in the prefix. And as a consequence, by induction, this is going to give me something that says it's.
+
+ID: L7390
+Time: 1425
+Transcript: always going to be correct.
+
+ID: L7391
+Time: 1429
+Transcript: So here's code that would do that. Here I'm just going to set a little thing called.
+
+ID: L7392
+Time: 1434
+Transcript: the start of suffix, or suffix start.
+
+ID: L7393
+Time: 1436
+Transcript: Initially it's going to point to the beginning of the list.
+
+ID: L7394
+Time: 1440
+Transcript: And then I'm going to run a loop. And as long as I still have things to search in the list,.
+
+ID: L7395
+Time: 1444
+Transcript: so that pointer doesn't point to the end of the list, what am I going to do? I'm going to loop over everything from that point.
+
+ID: L7396
+Time: 1452
+Transcript: to the end of the list, comparing it.
+
+ID: L7397
+Time: 1456
+Transcript: to the thing at that point. If it's less than, I'm going to do a swap,.
+
+ID: L7398
+Time: 1462
+Transcript: because I wanted to move it up. And you can see by the time I get through this loop, I will have found the smallest element.
+
+ID: L7399
+Time: 1469
+Transcript: in the remainder of the list. And I would have put it at that spot, whatever.
+
+ID: L7400
+Time: 1473
+Transcript: suffix start points to.
+
+ID: L7401
+Time: 1476
+Transcript: And when I've done all of that, I just change this by 1. Having found the smallest element,.
+
+ID: L7402
+Time: 1482
+Transcript: I've stuck it at spot 0.
+
+ID: L7403
+Time: 1483
+Transcript: I'll do the same thing. Having found the next smallest element,.
+
+ID: L7404
+Time: 1486
+Transcript: I know it's at point 1.
+
+ID: L7405
+Time: 1487
+Transcript: And I'll just continue around. One of the things you can see here is, as opposed to bubble sort, this one is going.
+
+ID: L7406
+Time: 1496
+Transcript: to take n times around the loop, because I'm only.
+
+ID: L7407
+Time: 1501
+Transcript: moving this pointer by 1. So it starts at 0, and then 1, and then 2, all the way up.
+
+ID: L7408
+Time: 1505
+Transcript: to n minus 1. You can also see in this particular implementation, while I'm certainly ensuring that the smallest element goes.
+
+ID: L7409
+Time: 1515
+Transcript: into that spot, I may do a few other flips along the way. I'm going to find something I think is the smallest element,.
+
+ID: L7410
+Time: 1522
+Transcript: put it there, and put that element here. And then when I find another smaller element,.
+
+ID: L7411
+Time: 1525
+Transcript: I may do that flip. I could have implemented this where I literally.
+
+ID: L7412
+Time: 1529
+Transcript: search for the smallest element and only move that.
+
+ID: L7413
+Time: 1532
+Transcript: Doesn't make any difference in terms of the complexity. What's the complexity here?.
+
+ID: L7414
+Time: 1539
+Transcript: Already said this part. I will loop n times, because I start at 0 and then 1,.
+
+ID: L7415
+Time: 1545
+Transcript: you get the idea. Inside of the loop, I'm going to walk down the remainder of the list, which is initially n, and then n.
+
+ID: L7416
+Time: 1554
+Transcript: minus 1, and then n minus 2 times.
+
+ID: L7417
+Time: 1558
+Transcript: But we've seen that before as well.
+
+ID: L7418
+Time: 1559
+Transcript: While they get shorter, that complexity is still quadratic. Order n times going through this process, within the process,.
+
+ID: L7419
+Time: 1569
+Transcript: order n things that I have to compare. And yes, n gets smaller, but we know that that n term,.
+
+ID: L7420
+Time: 1576
+Transcript: if you like, dominates.
+
+ID: L7421
+Time: 1577
+Transcript: So again, this is quadratic. OK, before you believe that all sorting algorithms are quadratic, I want to show you the last one, the one that.
+
+ID: L7422
+Time: 1586
+Transcript: actually is one of the, I think, the prettiest algorithms around.
+
+ID: L7423
+Time: 1590
+Transcript: and a great example of a more efficient algorithm.
+
+ID: L7424
+Time: 1593
+Transcript: It's called merge sort.
+
+ID: L7425
+Time: 1596
+Transcript: Merge sort takes an approach we've seen before.
+
+ID: L7426
+Time: 1599
+Transcript: Talked about divide and conquer. Break the problem down into smaller versions.
+
+ID: L7427
+Time: 1604
+Transcript: of the same problem. And once you've got those solutions,.
+
+ID: L7428
+Time: 1607
+Transcript: bring the answer back together.
+
+ID: L7429
+Time: 1609
+Transcript: For merge sort, that's pretty easy.
+
+ID: L7430
+Time: 1611
+Transcript: It says if I've got a list of 0 or 1 elements, it's sorted.
+
+ID: L7431
+Time: 1615
+Transcript: Duh. OK?.
+
+ID: L7432
+Time: 1617
+Transcript: If I got a list of more than one element, here's my trick.
+
+ID: L7433
+Time: 1620
+Transcript: I'm going to split it into two lists.
+
+ID: L7434
+Time: 1623
+Transcript: I'm going to sort them. And when I'm done, I'm just going to merge those two.
+
+ID: L7435
+Time: 1627
+Transcript: lists into one list.
+
+ID: L7436
+Time: 1629
+Transcript: And the merge is easy. Because if I've got two lists that are sorted, I just need to look at the first element of each,.
+
+ID: L7437
+Time: 1636
+Transcript: take the one that's smaller, add it to my result, and keep doing that until one of the lists is empty,.
+
+ID: L7438
+Time: 1640
+Transcript: and then just copy the remainder of the other list. You can probably already get a sense of what the cost is going to be here,.
+
+ID: L7439
+Time: 1648
+Transcript: because this is cutting the problem in half.
+
+ID: L7440
+Time: 1651
+Transcript: Now, I've got two pieces, so I need to think about both of them.
+
+ID: L7441
+Time: 1655
+Transcript: I want to give you a couple of visualizations of this.
+
+ID: L7442
+Time: 1657
+Transcript: Here's the first one.
+
+ID: L7443
+Time: 1658
+Transcript: It says, basically, I've got a big unsorted list.
+
+ID: L7444
+Time: 1661
+Transcript: I'm going to split it.
+
+ID: L7445
+Time: 1662
+Transcript: And I'm going to split it. And I'm going to split it until I get down to just lists that are either 0 or 1, which by definition.
+
+ID: L7446
+Time: 1671
+Transcript: are sorted. And once I'm at that level, then I just have to merge them into a sorted list, and then merge them pairwise into a sorted list,.
+
+ID: L7447
+Time: 1681
+Transcript: and you get the idea.
+
+ID: L7448
+Time: 1684
+Transcript: So it's divide and conquer.
+
+ID: L7449
+Time: 1685
+Transcript: The divide is dividing it up into smaller pieces.
+
+ID: L7450
+Time: 1688
+Transcript: The conquer is merging them back together. And we have Professor Guttag back for an encore.
+
+ID: L7451
+Time: 1695
+Transcript: together with his students.
+
+ID: L7452
+Time: 1696
+Transcript: So let's show you an example of merge sort.
+
+ID: L7453
+Time: 1699
+Transcript: So we're about to demonstrate merge sort. And we're going to sort this rather motley collection.
+
+ID: L7454
+Time: 1705
+Transcript: of MIT students by height. So the first thing we need to do is.
+
+ID: L7455
+Time: 1712
+Transcript: we're going to ask everyone to split into a group of two.
+
+ID: L7456
+Time: 1716
+Transcript: So you split a little bit.
+
+ID: L7457
+Time: 1718
+Transcript: You two are together.
+
+ID: L7458
+Time: 1720
+Transcript: You two are together.
+
+ID: L7459
+Time: 1722
+Transcript: You two are together.
+
+ID: L7460
+Time: 1723
+Transcript: You two are together.
+
+ID: L7461
+Time: 1724
+Transcript: And you are all by yourself.
+
+ID: L7462
+Time: 1726
+Transcript: I'm sorry.
+
+ID: L7463
+Time: 1729
+Transcript: All right.
+
+ID: L7464
+Time: 1730
+Transcript: So now, let's take the first group, take a step down. And what we do is we sort this group.
+
+ID: L7465
+Time: 1737
+Transcript: by height with the shortest on the left.
+
+ID: L7466
+Time: 1741
+Transcript: And look at this.
+
+ID: L7467
+Time: 1742
+Transcript: We don't have to do anything.
+
+ID: L7468
+Time: 1743
+Transcript: Thank you.
+
+ID: L7469
+Time: 1744
+Transcript: Feel free to go back up.
+
+ID: L7470
+Time: 1747
+Transcript: We then sort the next pair, please.
+
+ID: L7471
+Time: 1750
+Transcript: And it looks to me like we need to switch.
+
+ID: L7472
+Time: 1753
+Transcript: All right.
+
+ID: L7473
+Time: 1754
+Transcript: Take a step back.
+
+ID: L7474
+Time: 1758
+Transcript: Ladies.
+
+ID: L7475
+Time: 1764
+Transcript: OK.
+
+ID: L7476
+Time: 1766
+Transcript: Ladies, gentlemen.
+
+ID: L7477
+Time: 1770
+Transcript: Also OK.
+
+ID: L7478
+Time: 1774
+Transcript: And again, OK.
+
+ID: L7479
+Time: 1777
+Transcript: Notice each subgroup is now sorted, which is great.
+
+ID: L7480
+Time: 1782
+Transcript: Now what we do is we take these groups and merge the groups.
+
+ID: L7481
+Time: 1787
+Transcript: So let's have these two.
+
+ID: L7482
+Time: 1790
+Transcript: Going to sort these groups, have them step forward. And now what we're doing is we're.
+
+ID: L7483
+Time: 1796
+Transcript: doing a merge of the two sorted groups.
+
+ID: L7484
+Time: 1800
+Transcript: So we start by merging them. We'll take the leftmost person in this group and compare her to the first person in this group.
+
+ID: L7485
+Time: 1809
+Transcript: and decide she's still the shortest.
+
+ID: L7486
+Time: 1811
+Transcript: Take a step back. Now we're going to look at you and say,.
+
+ID: L7487
+Time: 1820
+Transcript: you're actually taller than this fellow.
+
+ID: L7488
+Time: 1823
+Transcript: So you now step up there.
+
+ID: L7489
+Time: 1829
+Transcript: And we're good here.
+
+ID: L7490
+Time: 1831
+Transcript: Both of you take a step back.
+
+ID: L7491
+Time: 1836
+Transcript: Now we'll take these two groups and follow the same procedure.
+
+ID: L7492
+Time: 1840
+Transcript: We'll merge them. Let's see, we'll compare you, the first person in this group,.
+
+ID: L7493
+Time: 1845
+Transcript: to the first person in this group.
+
+ID: L7494
+Time: 1848
+Transcript: Now it's a little tricky.
+
+ID: L7495
+Time: 1849
+Transcript: So let's see the two of you compare.
+
+ID: L7496
+Time: 1851
+Transcript: Let's see, back to back.
+
+ID: L7497
+Time: 1854
+Transcript: We have a winner.
+
+ID: L7498
+Time: 1856
+Transcript: Step back. And now we need to compare the shortest person in this group.
+
+ID: L7499
+Time: 1861
+Transcript: to the shortest person in this group.
+
+ID: L7500
+Time: 1864
+Transcript: We have a winner.
+
+ID: L7501
+Time: 1864
+Transcript: It's you.
+
+ID: L7502
+Time: 1867
+Transcript: I'm sorry.
+
+ID: L7503
+Time: 1869
+Transcript: And now we just, we're OK.
+
+ID: L7504
+Time: 1872
+Transcript: Please step back.
+
+ID: L7505
+Time: 1877
+Transcript: Now we'll have these two groups come forward. We'll compare the shortest person in this group.
+
+ID: L7506
+Time: 1883
+Transcript: to the shortest person in that group.
+
+ID: L7507
+Time: 1885
+Transcript: I actually need you guys to get back to back here.
+
+ID: L7508
+Time: 1890
+Transcript: You are the winner. And it's pretty clear that the shortest person in this group.
+
+ID: L7509
+Time: 1895
+Transcript: is shorter than the shortest person in that group.
+
+ID: L7510
+Time: 1898
+Transcript: So you go there and you step back.
+
+ID: L7511
+Time: 1900
+Transcript: Notice the groups.
+
+ID: L7512
+Time: 1902
+Transcript: And now we repeat the same process. And notice how the whole subgroup now goes up,.
+
+ID: L7513
+Time: 1914
+Transcript: once we know that one group is empty. And you can see that we have a group of students sorted.
+
+ID: L7514
+Time: 1928
+Transcript: in order by height.
+
+ID: L7515
+Time: 1932
+Transcript: Remember the first number, 55, 28. Now this is just numbers, but you can see the expectation is this is going to take less time,.
+
+ID: L7516
+Time: 1940
+Transcript: and it certainly did there.
+
+ID: L7517
+Time: 1942
+Transcript: So again, just the demo another way visually, I'm sorting. Sorry, I'm splitting down until I get small things.
+
+ID: L7518
+Time: 1949
+Transcript: and then just merging them up. I may have to do multiple passes through here, but it's going to be hopefully faster than the other methods.
+
+ID: L7519
+Time: 1956
+Transcript: we looked at. I'm going to show you code in a second,.
+
+ID: L7520
+Time: 1959
+Transcript: and then we're going to run it just to see it.
+
+ID: L7521
+Time: 1961
+Transcript: But let me stress one more time just the idea of merging. You can see the idea I keep splitting down until I got something small enough,.
+
+ID: L7522
+Time: 1968
+Transcript: I want to merge them back. The idea of merging, you've seen it from Professor Guttag,.
+
+ID: L7523
+Time: 1972
+Transcript: but I just want to highlight why this is going to be efficient. If I've got two lists, list one and list two,.
+
+ID: L7524
+Time: 1979
+Transcript: the things left there, process is very simple.
+
+ID: L7525
+Time: 1983
+Transcript: I pull out the smallest element of each, I compare them. And I simply put the smallest one into the result,.
+
+ID: L7526
+Time: 1991
+Transcript: move on in that first list. So the one disappears from that left list, and now again, I pull out just the smallest element.
+
+ID: L7527
+Time: 1997
+Transcript: of each one, do the comparison. Smallest one goes to the end of my result,.
+
+ID: L7528
+Time: 2002
+Transcript: and I drop that element from its list. So I've now taken one from list one, excuse me,.
+
+ID: L7529
+Time: 2007
+Transcript: one from list two.
+
+ID: L7530
+Time: 2008
+Transcript: You get the idea. The reason I want to give you this visualization,.
+
+ID: L7531
+Time: 2013
+Transcript: sorry, let me do the last step. Once I get to a place where one of the lists is empty,.
+
+ID: L7532
+Time: 2017
+Transcript: just copy the rest of the list onto the end. You can see already a hint of the code, and that is that I'm only going to ever look.
+
+ID: L7533
+Time: 2029
+Transcript: at each element of each sublist once as I do the merge.
+
+ID: L7534
+Time: 2034
+Transcript: And that's a nice property. Having had them sorted, I don't need.
+
+ID: L7535
+Time: 2036
+Transcript: to do lots of interior comparisons.
+
+ID: L7536
+Time: 2038
+Transcript: I'm only comparing the ends of the list. I only therefore look at each element,.
+
+ID: L7537
+Time: 2043
+Transcript: or the number of comparisons rather, I should say.
+
+ID: L7538
+Time: 2045
+Transcript: I may look at each element more than once. The number of comparisons is going.
+
+ID: L7539
+Time: 2049
+Transcript: to be at most the number of elements in both lists. And that's going to be a nice cue.
+
+ID: L7540
+Time: 2054
+Transcript: as we think about how to solve it.
+
+ID: L7541
+Time: 2057
+Transcript: So here's the code to merge, and then we'll write merge sort. And I know there's a lot of code here,.
+
+ID: L7542
+Time: 2061
+Transcript: but we can walk through it and get a good sense of it. I'm going to set up a variable called result that's.
+
+ID: L7543
+Time: 2066
+Transcript: going to hold my answer. And I'm going to set up two indices, i and j,.
+
+ID: L7544
+Time: 2071
+Transcript: that are initially 0.
+
+ID: L7545
+Time: 2072
+Transcript: They're pointing to the beginning. And remember, the input here is two lists that we know are sorted, or should be sorted,.
+
+ID: L7546
+Time: 2077
+Transcript: or we screwed up in some way. So initially, i and j are both pointing.
+
+ID: L7547
+Time: 2081
+Transcript: to the beginning of the left and right list.
+
+ID: L7548
+Time: 2084
+Transcript: And look at what we do. We say, as long as there's still something in the left list and still something in the right list,.
+
+ID: L7549
+Time: 2090
+Transcript: i is less than the length of left,.
+
+ID: L7550
+Time: 2091
+Transcript: j is less than the length of right, do the comparison.
+
+ID: L7551
+Time: 2096
+Transcript: If the left one's smaller, add it to the end of result. To the end of result, right, I'm appending it.
+
+ID: L7552
+Time: 2102
+Transcript: because I want it to be in that sorted order, and increase i. If it's not, add the right one to the end of result,.
+
+ID: L7553
+Time: 2111
+Transcript: and increase j. And I'll just keep doing that until I exhaust.
+
+ID: L7554
+Time: 2115
+Transcript: one of the lists. And when I do, I can basically say, if the right list is empty, I know if I get out of here,.
+
+ID: L7555
+Time: 2122
+Transcript: they can't both be true. In other words, if there's still something in the left list,.
+
+ID: L7556
+Time: 2126
+Transcript: just put it on the end. Otherwise, if the only thing's left on the right list,.
+
+ID: L7557
+Time: 2131
+Transcript: just put them on the end. So I'm just walking down the list doing the comparison,.
+
+ID: L7558
+Time: 2136
+Transcript: adding the smallest element to my result.
+
+ID: L7559
+Time: 2138
+Transcript: And when I'm done, I just return result. Complexity we can already begin to see here, right? This says left and right sublists are ordered,.
+
+ID: L7560
+Time: 2147
+Transcript: so I'm just moving the indices depending on which.
+
+ID: L7561
+Time: 2149
+Transcript: one holds the smaller element. And when I get done, I'm just returning.
+
+ID: L7562
+Time: 2153
+Transcript: the rest of the list. So what's the complexity here?.
+
+ID: L7563
+Time: 2159
+Transcript: I'm going to do this a little more informally. You could actually do that kind of relationship.
+
+ID: L7564
+Time: 2163
+Transcript: I did last time. But what am I doing? I'm going through the two lists, but only one time.
+
+ID: L7565
+Time: 2167
+Transcript: through each of those two lists.
+
+ID: L7566
+Time: 2169
+Transcript: I'm only comparing the smallest elements. So as I already said, this says that the number of elements I copy will be everything in the left list.
+
+ID: L7567
+Time: 2177
+Transcript: and everything in the right list. So that order is just the length of left.
+
+ID: L7568
+Time: 2181
+Transcript: plus the length of right. And how many comparisons do I do?.
+
+ID: L7569
+Time: 2186
+Transcript: The most I have to do is however many are in the longer list.
+
+ID: L7570
+Time: 2190
+Transcript: That's the maximum number I need to have.
+
+ID: L7571
+Time: 2193
+Transcript: Oh, that's nice. That says if the lists are of order n, I'm doing order n copies, because order n plus order n.
+
+ID: L7572
+Time: 2199
+Transcript: is just 2n, which is order n.
+
+ID: L7573
+Time: 2201
+Transcript: And I'm doing order n comparisons.
+
+ID: L7574
+Time: 2204
+Transcript: So it's linear in the length of the list.
+
+ID: L7575
+Time: 2208
+Transcript: Sounds good.
+
+ID: L7576
+Time: 2210
+Transcript: That just does the merge. How do I do merge sort?.
+
+ID: L7577
+Time: 2214
+Transcript: Well, we set it.
+
+ID: L7578
+Time: 2215
+Transcript: Break the problem in half. Keep doing it until I get sorted lists,.
+
+ID: L7579
+Time: 2219
+Transcript: and then grow them back up.
+
+ID: L7580
+Time: 2220
+Transcript: So there's merge sort. It says if the list is either empty or of length 1,.
+
+ID: L7581
+Time: 2224
+Transcript: just return a copy of the list.
+
+ID: L7582
+Time: 2227
+Transcript: It's sorted.
+
+ID: L7583
+Time: 2229
+Transcript: Otherwise, find the middle point.
+
+ID: L7584
+Time: 2230
+Transcript: There's that integer division.
+
+ID: L7585
+Time: 2232
+Transcript: And split.
+
+ID: L7586
+Time: 2233
+Transcript: Split the list everything up to the middle point.
+
+ID: L7587
+Time: 2236
+Transcript: And do merge sort on that.
+
+ID: L7588
+Time: 2237
+Transcript: Split everything in the list from the middle point on.
+
+ID: L7589
+Time: 2240
+Transcript: Do merge sort on that.
+
+ID: L7590
+Time: 2242
+Transcript: And when I get back those two sorted lists, just merge them. Again, I hope you can see what the order of growth.
+
+ID: L7591
+Time: 2250
+Transcript: should be here.
+
+ID: L7592
+Time: 2251
+Transcript: Cutting the problem down in half at each step. So the number of times I should have to go through this.
+
+ID: L7593
+Time: 2257
+Transcript: should be log in the size of the original list.
+
+ID: L7594
+Time: 2262
+Transcript: And you can see why we call it divide and conquer. I'm dividing it down into small pieces.
+
+ID: L7595
+Time: 2265
+Transcript: until I have a simple solution.
+
+ID: L7596
+Time: 2267
+Transcript: And then I'm growing that solution back up.
+
+ID: L7597
+Time: 2270
+Transcript: So there's the base case.
+
+ID: L7598
+Time: 2272
+Transcript: There's the divide.
+
+ID: L7599
+Time: 2274
+Transcript: And there's the nice conquer piece of this.
+
+ID: L7600
+Time: 2278
+Transcript: OK.
+
+ID: L7601
+Time: 2279
+Transcript: I'm going to show you an example of that.
+
+ID: L7602
+Time: 2281
+Transcript: But let's actually look at some code.
+
+ID: L7603
+Time: 2282
+Transcript: Sorry about that.
+
+ID: L7604
+Time: 2283
+Transcript: Let's look at some code to do this.
+
+ID: L7605
+Time: 2286
+Transcript: And in fact, I meant to do this earlier and didn't.
+
+ID: L7606
+Time: 2289
+Transcript: I also have a version of selection sort.
+
+ID: L7607
+Time: 2294
+Transcript: I've already done bubble sort.
+
+ID: L7608
+Time: 2295
+Transcript: There's selection sort.
+
+ID: L7609
+Time: 2296
+Transcript: Let's uncomment this. And let's run both of those and just see.
+
+ID: L7610
+Time: 2302
+Transcript: the comparison between them.
+
+ID: L7611
+Time: 2305
+Transcript: Sorry, just to make that a little easier to read.
+
+ID: L7612
+Time: 2308
+Transcript: There we go.
+
+ID: L7613
+Time: 2310
+Transcript: So we saw bubble sort.
+
+ID: L7614
+Time: 2312
+Transcript: It only went through four times, so less than n times.
+
+ID: L7615
+Time: 2314
+Transcript: There's selection sort. And as I said to you, it has to do n passes, because it can only ever guarantee that it gets.
+
+ID: L7616
+Time: 2321
+Transcript: one element at the beginning. So you can in fact see in this case, after the initial input until the end of the first step,.
+
+ID: L7617
+Time: 2330
+Transcript: it looks like it didn't do anything, because it determined eventually that one.
+
+ID: L7618
+Time: 2334
+Transcript: was in the right spot. And similarly, I think there's another one right there.
+
+ID: L7619
+Time: 2338
+Transcript: where it doesn't do any.
+
+ID: L7620
+Time: 2340
+Transcript: It appears not to do anything. All it's guaranteeing is that the next smallest element.
+
+ID: L7621
+Time: 2343
+Transcript: is in the right spot. As we get to the end of it, it in fact.
+
+ID: L7622
+Time: 2347
+Transcript: ends up in the right place. And then let's look at merge sort.
+
+ID: L7623
+Time: 2350
+Transcript: and do one more visualization of this.
+
+ID: L7624
+Time: 2354
+Transcript: So again, let me remove that. And if we run it, again, I've just put some print statements.
+
+ID: L7625
+Time: 2363
+Transcript: in there.
+
+ID: L7626
+Time: 2364
+Transcript: Here you can see a nice behavior. I start off calling merge sort with that,.
+
+ID: L7627
+Time: 2370
+Transcript: which splits down into doing merge sort of this portion. Eventually it's going to come back down there.
+
+ID: L7628
+Time: 2374
+Transcript: and do the second one. It keeps doing it until it gets down to simple lists.
+
+ID: L7629
+Time: 2379
+Transcript: that it knows are sorted.
+
+ID: L7630
+Time: 2381
+Transcript: And then it merges it.
+
+ID: L7631
+Time: 2383
+Transcript: Does the smaller pieces, and then merges it. And having now two merge things, it.
+
+ID: L7632
+Time: 2387
+Transcript: can do the next level of merge. So you can see that it gets this nice reduction of problems.
+
+ID: L7633
+Time: 2393
+Transcript: until it gets down to the smallest size. So let's just look at one more visualization of that.
+
+ID: L7634
+Time: 2399
+Transcript: and then get the complexity.
+
+ID: L7635
+Time: 2401
+Transcript: So if I start out with this list, sorry about that.
+
+ID: L7636
+Time: 2406
+Transcript: What I need to do is split it.
+
+ID: L7637
+Time: 2409
+Transcript: Take the first one, split it. Keep doing that until I get down to a base case.
+
+ID: L7638
+Time: 2413
+Transcript: where I know what those are and I simply merge them.
+
+ID: L7639
+Time: 2417
+Transcript: Pass it back up. Take the second piece, split it until I get down to base cases,.
+
+ID: L7640
+Time: 2422
+Transcript: do the merge, which is nice and linear.
+
+ID: L7641
+Time: 2424
+Transcript: Pass that back up.
+
+ID: L7642
+Time: 2425
+Transcript: Having done those two pieces, I do one more merge.
+
+ID: L7643
+Time: 2429
+Transcript: And I do the same thing. I want you to see this because, again, you.
+
+ID: L7644
+Time: 2435
+Transcript: can notice how many levels in this tree log. Log in the size because at each stage.
+
+ID: L7645
+Time: 2442
+Transcript: here I went from a problem of eight to two problems of four.
+
+ID: L7646
+Time: 2446
+Transcript: Each of those went to two problems of two.
+
+ID: L7647
+Time: 2447
+Transcript: And each of those went to two problems of size one. All right, so the last piece is what's the complexity?.
+
+ID: L7648
+Time: 2458
+Transcript: Here's a simple way to think about it.
+
+ID: L7649
+Time: 2461
+Transcript: At the top level, I start off with n elements.
+
+ID: L7650
+Time: 2464
+Transcript: I've got two sorted lists of size n over 2.
+
+ID: L7651
+Time: 2468
+Transcript: And to merge them together, I need to do order n work. Because as I said, I've got to do at least n comparisons where.
+
+ID: L7652
+Time: 2477
+Transcript: n is the length of the list.
+
+ID: L7653
+Time: 2478
+Transcript: And then I've got to do n plus n copies, which is just order n.
+
+ID: L7654
+Time: 2482
+Transcript: So I'm doing order n work.
+
+ID: L7655
+Time: 2484
+Transcript: At the second level, it gets a little more complicated.
+
+ID: L7656
+Time: 2488
+Transcript: Now I've got problems of size n over 4. But how many of them do I have?.
+
+ID: L7657
+Time: 2494
+Transcript: Four.
+
+ID: L7658
+Time: 2495
+Transcript: Oh, that's nice. Because what do I know about this?.
+
+ID: L7659
+Time: 2498
+Transcript: I know that I have to copy each element at least once.
+
+ID: L7660
+Time: 2501
+Transcript: Sorry, not at least once.
+
+ID: L7661
+Time: 2502
+Transcript: I would copy each element exactly once. And I'll do comparisons that are equal to the length.
+
+ID: L7662
+Time: 2508
+Transcript: of the longer list.
+
+ID: L7663
+Time: 2509
+Transcript: So I've got four sub lists of length n over 4.
+
+ID: L7664
+Time: 2512
+Transcript: That says n elements.
+
+ID: L7665
+Time: 2514
+Transcript: Oh, that's nice.
+
+ID: L7666
+Time: 2515
+Transcript: Order n.
+
+ID: L7667
+Time: 2517
+Transcript: At each step, sub problems get smaller, but I have more of them.
+
+ID: L7668
+Time: 2521
+Transcript: But the total size of the problem is n.
+
+ID: L7669
+Time: 2523
+Transcript: So the cost at each step is order n. How many times do I do it?.
+
+ID: L7670
+Time: 2529
+Transcript: Log n.
+
+ID: L7671
+Time: 2531
+Transcript: So this is log n iterations with order n work at each step.
+
+ID: L7672
+Time: 2536
+Transcript: And this is a wonderful example of a log linear algorithm.
+
+ID: L7673
+Time: 2540
+Transcript: It's n log n, where n is the length of the list. So what you end up with then is a joke version, some reasonable ways of doing sort.
+
+ID: L7674
+Time: 2552
+Transcript: that are quick and easy to implement but are quadratic,.
+
+ID: L7675
+Time: 2555
+Transcript: and then an elegant way of doing the search that's n log n. And I'll remind you, I started by saying,.
+
+ID: L7676
+Time: 2561
+Transcript: as long as I can make the cost of sorting small enough,.
+
+ID: L7677
+Time: 2565
+Transcript: I can amortize that cost. And if you go back and look at last lecture's notes,.
+
+ID: L7678
+Time: 2568
+Transcript: you'll see n log n grows pretty slowly.
+
+ID: L7679
+Time: 2572
+Transcript: And it's actually a nice thing to do. It makes it reasonable to do the sort,.
+
+ID: L7680
+Time: 2576
+Transcript: and then I can do the search in order n time.
+
+ID: L7681
+Time: 2580
+Transcript: And here's the last punch line.
+
+ID: L7682
+Time: 2582
+Transcript: It's the fastest we can do.
+
+ID: L7683
+Time: 2584
+Transcript: I'm going to look at John again.
+
+ID: L7684
+Time: 2585
+Transcript: I don't think anybody has found a faster sort algorithm.
+
+ID: L7685
+Time: 2588
+Transcript: This is the best one can do, unless you do.
+
+ID: L7686
+Time: 2591
+Transcript: The best worst case.
+
+ID: L7687
+Time: 2592
+Transcript: Sorry, the best worst case.
+
+ID: L7688
+Time: 2593
+Transcript: I'm sorry.
+
+ID: L7689
+Time: 2594
+Transcript: John is absolutely right.
+
+ID: L7690
+Time: 2595
+Transcript: There are better average cases.
+
+ID: L7691
+Time: 2596
+Transcript: Again, our concern is worst case. So this is as good as we're going to do in terms.
+
+ID: L7692
+Time: 2600
+Transcript: of a worst case algorithm. So there you now have sorting algorithms and searching.
+
+ID: L7693
+Time: 2604
+Transcript: algorithms. And you've now seen constant, log, linear, log-linear,.
+
+ID: L7694
+Time: 2612
+Transcript: quadratic, and exponential algorithms. I'll remind you, we want things as high up.
+
+ID: L7695
+Time: 2616
+Transcript: in that hierarchy as possible.
+
+ID: L7696
+Time: 2620
+Transcript: All right.
+
+ID: L7697
+Time: 2622
+Transcript: I have six minutes left.
+
+ID: L7698
+Time: 2624
+Transcript: Some of you are going to leave us.
+
+ID: L7699
+Time: 2625
+Transcript: We're going to miss you.
+
+ID: L7700
+Time: 2626
+Transcript: But that's OK.
+
+ID: L7701
+Time: 2627
+Transcript: I'm sure we'll see you later on. For those of you hanging around, this isn't a bad time just to step back and say, so what have we seen?.
+
+ID: L7702
+Time: 2633
+Transcript: And I want to do this just very quickly. I'm sorry, I want to remind you, we started by, in some sense,.
+
+ID: L7703
+Time: 2639
+Transcript: giving you a little bit of a contract of things.
+
+ID: L7704
+Time: 2641
+Transcript: we were going to show you. And I would simply suggest to you, what have we done? We've given you a sense of how to represent knowledge.
+
+ID: L7705
+Time: 2648
+Transcript: with data structures.
+
+ID: L7706
+Time: 2649
+Transcript: Tuples, lists, dictionaries, more complicated structures. We've shown you some good computational metaphors, iteration and loops, recursion as a great way of breaking problems down into simpler.
+
+ID: L7707
+Time: 2661
+Transcript: versions of the same problem.
+
+ID: L7708
+Time: 2663
+Transcript: And they really are metaphors.
+
+ID: L7709
+Time: 2665
+Transcript: They're ways of thinking about problems. We've given you abstraction, the idea of capture computation,.
+
+ID: L7710
+Time: 2671
+Transcript: bury it in a procedure.
+
+ID: L7711
+Time: 2673
+Transcript: You now have a contract.
+
+ID: L7712
+Time: 2674
+Transcript: You don't need to know what happens inside the procedure.
+
+ID: L7713
+Time: 2676
+Transcript: As long as it delivers the answer, it says it would. Or another way of saying it, you can delegate it to somebody.
+
+ID: L7714
+Time: 2682
+Transcript: and trust that you're going to get what you like out of it. We've seen classes and methods as a wonderful way to modularize systems, to capture combinations of data.
+
+ID: L7715
+Time: 2691
+Transcript: and things that operate on them in a nice, elegant way. And we just spent a week and a half talking.
+
+ID: L7716
+Time: 2697
+Transcript: about classes of algorithms and their complexity. If you step up a level, what we hope you've gotten out of this.
+
+ID: L7717
+Time: 2706
+Transcript: are a couple of things. You've begun to learn computational modes.
+
+ID: L7718
+Time: 2710
+Transcript: of thinking. How do I tackle a problem and divide and conquer? How do I think about recursion as a tool in dealing with something?.
+
+ID: L7719
+Time: 2717
+Transcript: You've begun to begun, I will use that word deliberately,.
+
+ID: L7720
+Time: 2720
+Transcript: to master the art of computational problem solving. How can you take a problem and turn it into an algorithm? And especially, you've begun to have the ability.
+
+ID: L7721
+Time: 2728
+Transcript: to make the computer do what you want it to. To say, if I've got a problem from biology or chemistry or math or physics or chemical engineering.
+
+ID: L7722
+Time: 2736
+Transcript: or mechanical engineering, how do I take that problem and say, here's how I would design an algorithm.
+
+ID: L7723
+Time: 2741
+Transcript: to give me a simulation and a way of evaluating what it does? And so what we hope we've done is.
+
+ID: L7724
+Time: 2747
+Transcript: we've started you down the path to being able to think and act.
+
+ID: L7725
+Time: 2750
+Transcript: like a computer scientist.
+
+ID: L7726
+Time: 2752
+Transcript: All right, don't panic. That doesn't mean you stare at people's shoes.
+
+ID: L7727
+Time: 2755
+Transcript: when you talk to them.
+
+ID: L7728
+Time: 2756
+Transcript: Not all computer scientists do that.
+
+ID: L7729
+Time: 2757
+Transcript: Just faculty.
+
+ID: L7730
+Time: 2760
+Transcript: Sorry, John. So what do computer scientists do?.
+
+ID: L7731
+Time: 2764
+Transcript: And this is actually meant to be serious. And I put up two of my famous historical figures.
+
+ID: L7732
+Time: 2768
+Transcript: of computer scientists.
+
+ID: L7733
+Time: 2770
+Transcript: They do think computationally. They think about abstractions, about algorithms,.
+
+ID: L7734
+Time: 2775
+Transcript: about automated execution.
+
+ID: L7735
+Time: 2776
+Transcript: So the three A's of computational thinking. And in the same way that traditionally you had the three R's of reading, writing, and arithmetic,.
+
+ID: L7736
+Time: 2783
+Transcript: computational thinking, we hope, is becoming a fundamental.
+
+ID: L7737
+Time: 2787
+Transcript: that every well-educated person is going to need.
+
+ID: L7738
+Time: 2790
+Transcript: And that says, you think about the right abstraction. When you have a problem in your Europe, what's the right abstraction? How do I pull apart the pieces?.
+
+ID: L7739
+Time: 2800
+Transcript: How do I think about that in terms of decomposing things into a relationship that I can use to solve problems? How do I automate?.
+
+ID: L7740
+Time: 2809
+Transcript: How do I mechanize that abstraction? How do I use what I know happens inside of the machine to write a sequence of steps in a language I'm.
+
+ID: L7741
+Time: 2816
+Transcript: using to capture that process? And then finally, how do I turn that into an algorithm? And that not only means I need a language for describing.
+
+ID: L7742
+Time: 2826
+Transcript: those automated processes. And if you like allowing the abstraction of details,.
+
+ID: L7743
+Time: 2831
+Transcript: but frankly also a way to communicate. If you have to think crisply about how do I describe an algorithm, it's actually giving you.
+
+ID: L7744
+Time: 2839
+Transcript: a way to crystallize or clarify your thinking about a problem.
+
+ID: L7745
+Time: 2843
+Transcript: This is not to say you should talk to your friends in Python.
+
+ID: L7746
+Time: 2846
+Transcript: I don't recommend it. But it does say you should use that thinking.
+
+ID: L7747
+Time: 2849
+Transcript: as a way of capturing your ideas of what you're going to do. And that leads then to this idea of how difficult.
+
+ID: L7748
+Time: 2857
+Transcript: is a problem, how best can I solve it?.
+
+ID: L7749
+Time: 2860
+Transcript: We've shown you these complexity classes. And we've hinted at the idea that, in fact, some problems.
+
+ID: L7750
+Time: 2864
+Transcript: are inherently more difficult than others.
+
+ID: L7751
+Time: 2867
+Transcript: That's something I hope you come back to as you go along.
+
+ID: L7752
+Time: 2870
+Transcript: And especially, we want you to start thinking recursively. We want you to think about how do I take a hard problem,.
+
+ID: L7753
+Time: 2876
+Transcript: break it up into simpler versions of the same problem,.
+
+ID: L7754
+Time: 2879
+Transcript: and then construct the solution.
+
+ID: L7755
+Time: 2882
+Transcript: And that shows up lots of places.
+
+ID: L7756
+Time: 2886
+Transcript: Recursion is in all sorts of wonderful places. So just to give you an example, I could say to you recursively, this lecture.
+
+ID: L7757
+Time: 2892
+Transcript: will end when I'm done talking about this lecture, which will end when I'm done talking about this lecture, which.
+
+ID: L7758
+Time: 2898
+Transcript: will end when I'm done.
+
+ID: L7759
+Time: 2899
+Transcript: All right, you don't like infinite recursion.
+
+ID: L7760
+Time: 2901
+Transcript: Good luck on the exam.
+

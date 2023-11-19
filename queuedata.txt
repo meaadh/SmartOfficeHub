@@ -1,0 +1,14 @@
+ID: 1
+Question: What criteria are used for deciding which elements to exchange during each iteration of Selection Sort?
+
+ID: 2
+Question: What strategy is typically employed for determining the pivot element in Quick Sort?
+
+ID: 3
+Question: In the most unfavorable scenario, what is the time complexity of Bubble Sort?
+
+ID: 4
+Question: Which sorting algorithm incorporates a binary tree structure in its process?
+
+ID: 5
+Question: What is the standard time complexity for sorting an array using Merge Sort?
