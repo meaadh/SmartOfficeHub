@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 if (isset($_POST["submit"])) {
-   $inserts = "INSERT INTO studentquestion (question,Name,CourseName) VALUES ('$question','$name','$coursename')"; 
+   $inserts = "INSERT INTO question (question,Name,CourseName) VALUES ('$question','$name','$course')"; 
    if (mysqli_query($conn, $insert)) {
     $statusMsg = "Final Recommedation added successfully";
   }
@@ -108,8 +108,13 @@ if (isset($_POST["submit"])) {
                 <input type="text" name="question" required placeholder="Enter Question">
                 <input type="submit" name="submit" class="form-btn" value="Upload Question"  />
             </form>
+       
         </div>
-
+        <div class="form-container">
+        <form action="authorPage.php" method="get" target="">
+         <button class="form-btn" type="submit">Click me</button>
+      </form>
+        </div>
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
@@ -160,4 +165,4 @@ if (isset($_POST["submit"])) {
     ftruncate($file, 0);
     fwrite($file, $question ."\n");
     fclose($file);
- ?>
+ ?> 
