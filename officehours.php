@@ -8,16 +8,21 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 if (isset($_POST["submit"])) {
-   $inserts = "INSERT INTO question (question,Name,CourseName) VALUES ('$question','$name','$course')"; 
-   if (mysqli_query($conn, $insert)) {
-    $statusMsg = "Final Recommedation added successfully";
-  }
-  else
-  {
-    $statusMsg = "Final Recommedation failed successfully";
-
-  }
-}
+    extract($_REQUEST);
+    $file=fopen("form-save.txt","a");
+    ftruncate($file, 0);
+    fwrite($file, $question ."\n");
+    fclose($file);
+    $inserts = "INSERT INTO question (question,CourseName) VALUES ('$question','$coursename')"; 
+    if (mysqli_query($conn, $insert)) {
+     $statusMsg = "Final Recommedation added successfully";
+   }
+   else
+   {
+     $statusMsg = "Final Recommedation failed successfully";
+ 
+   }
+ };
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +101,7 @@ if (isset($_POST["submit"])) {
         </div>
         <div class="form-container">
 
-            <form action="" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
                 <h3>Office Hour Form</h3>
                 <select name="CourseName">
                     <option value="CourseName1">EECS 482 Operation System</option>
@@ -160,9 +165,5 @@ if (isset($_POST["submit"])) {
 </body>
 </html>
 <?php
-    extract($_REQUEST);
-    $file=fopen("form-save.txt","a");
-    ftruncate($file, 0);
-    fwrite($file, $question ."\n");
-    fclose($file);
+  
  ?> 

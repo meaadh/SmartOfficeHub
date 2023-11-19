@@ -142,24 +142,6 @@ echo $statusMsg;
             </div>
 
         </div>
-        <div class="form-container">
-
-            <form action="" method="post" enctype="multipart/form-data">
-                <h3>Submission Form</h3>
-                <input type="text" name="title" required placeholder="enter Paper Title">
-                <input type="file" name="fileToUpload">
-                <select name="Conference">
-                    <option value="Conference1">Tech Conference</option>
-                    <option value="Conference2">Food Conference</option>
-                    <option value="Conference3">Google Conference</option>
-                    <option value="Conference4">Life Conference</option>
-                </select>
-                <input type="text" name="username" required placeholder="enter usernames of co-author">
-                <input type="submit" name="submit" value="Upload Paper" class="form-btn">
-            </form>
-
-        </div>
-
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
