@@ -121,8 +121,11 @@ echo $statusMsg;
                 <div class="table">
                         <table class="center">
                             <thead>
-                                <th>Recommedation</th>
-                                <th>Paper</th>
+                                <th>Position</th>
+                                <th>Name</th>
+                                <th>Question</th>
+                                <th>Course</th>
+
 
                             </thead>
                             <tbody>
@@ -132,8 +135,11 @@ echo $statusMsg;
                                 $result = $conn->query($query);
                                 foreach ($result as $file) : ?>
                                     <tr>
-                                        <td><?php echo $file['recommendation']; ?></td>
-                                        <td><?php echo $file['file_name']; ?></td>
+                                        <td><?php echo $file['id']; ?></td>
+                                        <td><?php echo $file['name']; ?></td>
+                                        <td><?php echo $file['question']; ?></td>
+                                        <td><?php echo $file['coursename']; ?></td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -142,24 +148,6 @@ echo $statusMsg;
             </div>
 
         </div>
-        <div class="form-container">
-
-            <form action="" method="post" enctype="multipart/form-data">
-                <h3>Submission Form</h3>
-                <input type="text" name="title" required placeholder="enter Paper Title">
-                <input type="file" name="fileToUpload">
-                <select name="Conference">
-                    <option value="Conference1">Tech Conference</option>
-                    <option value="Conference2">Food Conference</option>
-                    <option value="Conference3">Google Conference</option>
-                    <option value="Conference4">Life Conference</option>
-                </select>
-                <input type="text" name="username" required placeholder="enter usernames of co-author">
-                <input type="submit" name="submit" value="Upload Paper" class="form-btn">
-            </form>
-
-        </div>
-
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
