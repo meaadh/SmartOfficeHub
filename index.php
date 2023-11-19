@@ -102,7 +102,7 @@ if (isset($_POST["submit"])) {
         <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
           <div class="carousel-container">
             <div class="carousel-content container">
-              <h2 class="animate__animated animate__fadeInDown"><span>Smart Office Hub</span></h2>
+              <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HOUR</span></h2>
               <h6 class="animate__animated animate__fadeInUp">Empowering Learning, Connecting Minds: SmartOfficeHub, Where Office Hours Become Intelligent and Collaborative</h6>
               <a href="loginform.php" rel="noopener noreferrer" target="_self" class="btn-get-started animate__animated animate__fadeInUp scrollto"><i class="icofont-login"></i> | Login</a>
             </div>
@@ -145,7 +145,7 @@ if (isset($_POST["submit"])) {
               </div>
               <div class="team-content">
                 <h3 class="name">Jon Chen</h3>
-                <h4 class="title">Administrator</h4>
+                <h4 class="title">CTO</h4>
               </div>
               <ul class="social">
               </ul>
@@ -158,8 +158,8 @@ if (isset($_POST["submit"])) {
                 <img class="img-fluid" src="assets/img/team/team-4.jpg">
               </div>
               <div class="team-content">
-                <h3 class="name">Yogal Chen</h3>
-                <h4 class="title">CFO</h4>
+                <h3 class="name">Tom Zu</h3>
+                <h4 class="title">COO</h4>
               </div>
               <ul class="social">
               </ul>
@@ -172,8 +172,8 @@ if (isset($_POST["submit"])) {
                 <img class="img-fluid" src="assets/img/team/team-3.jpg">
               </div>
               <div class="team-content">
-                <h3 class="name">John Applet</h3>
-                <h4 class="title">COO</h4>
+                <h3 class="name">Liyufei </h3>
+                <h4 class="title">CMO</h4>
               </div>
               <ul class="social">
               </ul>
@@ -186,6 +186,33 @@ if (isset($_POST["submit"])) {
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
+  <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 d-flex align-items-stretch" data-aos="fade-up">
+            <div class="info-box">
+              <a href="" rel="noopener noreferrer" target="_blank"><i class="bx bx-map"></i></a>
+              <h3>Our Address</h3>
+              <p>2281 Bonisteel Ann Arbor,MI 48109</p>
+            </div>
+          </div>
+          <div class="col-sm-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="info-box">
+              <a href="mailto:info@conference.com"><i class="bx bx-envelope"></i></a>
+              <h3>Email Us</h3>
+              <p>info@SmartOfficeHub.com</p>
+            </div>
+          </div>
+          <div class="col-sm-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="info-box ">
+              <a href="tel:248-420-6969"><i class="bx bx-phone-call"></i></a>
+              <h3>Call Us</h3>
+              <p>+1 248-420-6969</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>Smart Office Hub</span></strong>. All Rights Reserved

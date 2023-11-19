@@ -6,18 +6,37 @@ session_start();
 if (!isset($_SESSION['user_name'])) {
     header('location:loginform.php');
 }
+$filename2 = 'video.txt';  // Replace with the path to your file
 
 if (isset($_POST["submit"])) {
-   $inserts = "INSERT INTO question (question,Name,CourseName) VALUES ('$question','$name','$course')"; 
-   if (mysqli_query($conn, $insert)) {
-    $statusMsg = "Final Recommedation added successfully";
-  }
-  else
-  {
-    $statusMsg = "Final Recommedation failed successfully";
-
-  }
+    header('location:queuePage.php');         
 }
+$filename = 'piazza.txt';  // Replace with the path to your file
+
+$delaySeconds = 1;
+
+// Maximum number of attempts before giving up
+$maxAttempts = 10;
+
+$attempts = 0;
+
+while ($attempts < $maxAttempts) {
+    // Check if the file exists
+    if (file_exists($filename2)) {
+        // File exists, read its content
+        $fileContent = file_get_contents($filename2);
+        // Check if the content is present (modify this condition based on your requirements)
+        if (!empty($fileContent)) {
+            break; // Exit the loop if content is found
+        }
+    }
+
+    // Wait for the specified delay before the next attempt
+    sleep($delaySeconds);
+
+    $attempts++;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,8 +92,6 @@ if (isset($_POST["submit"])) {
             </div>
             <nav class="nav-menu float-right d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
                     <a href="logout.php" rel="noopener noreferrer" target="_self" class="btn-get-started"><i class="icofont-logout"></i>
                         | Logout</a>
                 </ul>
@@ -83,50 +100,97 @@ if (isset($_POST["submit"])) {
         </div>
     </header><!-- End Header -->
     <div class="hero-text">
-                <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HUB</span></h2>
-                <h6 class="animate__animated animate__fadeInUp">To streamline the office hour experience for students</h6>
-            </div>
+        <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HOUR</span></h2>
+        <h6 class="animate__animated animate__fadeInUp">To streamline the office hour experience for students</h6>
+    </div>
     <main id="main">
         <div class="user-container">
             <div class="content">
                 <h3>Hi, <span><?php echo $_SESSION['user_name'] ?></span></h3>
                 <h4>We've found the following Piazza post and video for you!</h4>
+                <h3><span>This is your piazza post:</span></h3>
+
             </div>
+
         </div>
-        <!-- <h4>This is your piazza post:</h4> -->
         <div class="user-container">
             <h5 id="piazzaText">Loading content...</h5>
         </div>
-        <script>
-        fetch('piazza.txt')
-            .then(response => response.text())
-            .then(text => {
-            document.getElementById('piazzaText').innerText = text;
-        })
-        .catch(error => console.error('Error fetching piazza.txt:', error));
+        <div id="text-container"></div>
+<!--         <script>
+            // Function to check files content
+            function checkFilesContent() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'ResultPage.php', true);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = xhr.responseText.split('|'); // Split the response into an array
+
+                        // Check if the content of either file has changed
+                        if (response[0] == currentFileContent1 || response[1] == currentFileContent2) {
+                        
+                            clearInterval(checkFilesInterval);
+
+                            // Stop further checks by clearing the interval
+
+                        } else if (response[0] == currentFileContent1) {
+                            location.reload();
+                        }
+                        else if (response[1] == currentFileContent2) {
+                            location.reload();
+                        }
+                    }
+                };
+
+                xhr.send();
+            }
+
+            // Initial file contents
+            var currentFileContent1 = '<?php echo $fileContent1; ?>';
+            var currentFileContent2 = '<?php echo $fileContent2; ?>';
+
+            // Check files content every 5 seconds
+            var checkFilesInterval = setInterval(checkFilesContent, 5000);
+        </script> -->
+       <script>
+            fetch('piazza.txt')
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById('piazzaText').innerText = text;
+                })
+                .catch(error => console.error('Error fetching piazza.txt:', error));
         </script>
         <div class="user-container">
-        <iframe width="640" height="360" src="" frameborder="0" allowfullscreen id="youtubePlayer"></iframe>
+            <div class="content">
+                <h3><span>This is your Video</span></h3>
+
+            </div>
+
+        </div>
+        <div class="user-container">
+            <iframe width="640" height="360" src="" frameborder="0" allowfullscreen id="youtubePlayer"></iframe>
         </div>
         <script>
-        fetch('video.txt')
-            .then(response => response.text())
-            .then(youtubeLink => {
-            const videoId = getYouTubeVideoId(youtubeLink);
-            const youtubePlayer = document.getElementById('youtubePlayer');
-            youtubePlayer.src = `https://www.youtube.com/embed/${videoId}`;
-        })
-        .catch(error => console.error('Error fetching video.txt:', error));
-        function getYouTubeVideoId(url) {
-        const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-        const match = url.match(regex);
-        return match ? match[1] : null;
-        }
+            fetch('video.txt')
+                .then(response => response.text())
+                .then(youtubeLink => {
+                    const videoId = getYouTubeVideoId(youtubeLink);
+                    const youtubePlayer = document.getElementById('youtubePlayer');
+                    youtubePlayer.src = `https://www.youtube.com/embed/${videoId}`;
+                })
+                .catch(error => console.error('Error fetching video.txt:', error));
+
+            function getYouTubeVideoId(url) {
+                const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+                const match = url.match(regex);
+                return match ? match[1] : null;
+            }
         </script>
         <div class="form-container">
-        <form action="authorPage.php" method="get" target="">
-         <button class="form-btn" type="submit">Still Join OH Queue</button>
-      </form>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="submit" name="submit" class="form-btn" value="Queue to Office Hour"  />
+            </form>
         </div>
     </main><!-- End #main -->
 
@@ -140,7 +204,7 @@ if (isset($_POST["submit"])) {
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>PERSPECTIVES PROCEEDINGS MANAGEMENT</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>Smart Office HUB</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
@@ -171,11 +235,5 @@ if (isset($_POST["submit"])) {
 
 
 </body>
+
 </html>
-<?php
-    extract($_REQUEST);
-    $file=fopen("form-save.txt","a");
-    ftruncate($file, 0);
-    fwrite($file, $question ."\n");
-    fclose($file);
- ?> 

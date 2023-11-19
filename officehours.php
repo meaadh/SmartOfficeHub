@@ -11,23 +11,28 @@ if (isset($_POST["submit"])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $question = mysqli_real_escape_string($conn, $_POST['question']);
     $CourseName = mysqli_real_escape_string($conn, $_POST['CourseName']);
-    $insert = "INSERT INTO finalsubmission (username,recommendation) VALUES ('$username', '$question')";
+    $insert = "INSERT INTO finalsubmission (name,question,coursename) VALUES ('$username', '$question', '$CourseName')";
   if (mysqli_query($conn, $insert)) {
-    $statusMsg = "Final Recommedation added successfully";
+    $statusMsg = "Question uploaded successfully";
     extract($_REQUEST);
     $file=fopen("form-save.txt","a");
     ftruncate($file, 0);
     fwrite($file, $question ."\n");
+    fwrite($file, $CourseName ."\n");
     fclose($file);
+    header('location:ResultPage.php');
   } else {
-    $statusMsg = "Final Recommendation upload failed, please try again.";
+    $statusMsg = "Question upload failed, please try again.";
     extract($_REQUEST);
     $file=fopen("form-save.txt","a");
     ftruncate($file, 0);
     fwrite($file, $question ."\n");
+    fwrite($file, $CourseName ."\n");
     fclose($file);
   }
 };
+echo $statusMsg;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,8 +88,6 @@ if (isset($_POST["submit"])) {
             </div>
             <nav class="nav-menu float-right d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
                     <a href="logout.php" rel="noopener noreferrer" target="_self" class="btn-get-started"><i class="icofont-logout"></i>
                         | Logout</a>
                 </ul>
@@ -93,7 +96,7 @@ if (isset($_POST["submit"])) {
         </div>
     </header><!-- End Header -->
     <div class="hero-text">
-                <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HUB</span></h2>
+                <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HOUR</span></h2>
                 <h6 class="animate__animated animate__fadeInUp">To streamline the office hour experience for students</h6>
             </div>
     <main id="main">
@@ -109,21 +112,12 @@ if (isset($_POST["submit"])) {
             <form action="" method="post" enctype="multipart/form-data">
                 <h3>Office Hour Form</h3>
                 <select name="CourseName">
-                    <option value="CourseName1">EECS 482 Operation System</option>
-                    <option value="CourseName2">EECS 280 Introduction to Data Structure</option>
-                    <option value="CourseName3">EECS 281 Data Structure and Algorithms</option>
-                    <option value="CourseName4">EECS 388 Introduction to Computer Security</option>
+                    <option value="EECS 281 Data Structure and Algorithms">EECS 281 Data Structure and Algorithms</option>
                 </select>
                 <input type="text" name="username" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
                 <input type="submit" name="submit" class="form-btn" value="Upload Question"  />
-            </form>
-       
-        </div>
-        <div class="form-container">
-        <form action="answer.php" method="get" target="">
-         <button class="form-btn" type="submit">Click me</button>
-      </form>
+            </form>   
         </div>
     </main><!-- End #main -->
 
@@ -137,7 +131,7 @@ if (isset($_POST["submit"])) {
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>PERSPECTIVES PROCEEDINGS MANAGEMENT</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>SMART OFFICE HUB</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->

@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
    <meta charset="utf-8">
    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-   <title>Conference Paper Review System</title>
+   <title>SMART OFFICE HUB</title>
    <meta content="" name="descriptison">
    <meta content="" name="keywords">
 

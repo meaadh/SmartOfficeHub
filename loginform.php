@@ -129,7 +129,7 @@ if (isset($_POST['submit'])) {
             <div class="info-box">
               <a href="mailto:info@conference.com"><i class="bx bx-envelope"></i></a>
               <h3>Email Us</h3>
-              <p>info@conference.com</p>
+              <p>info@SmartOfficeHub.com</p>
             </div>
           </div>
           <div class="col-sm-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">

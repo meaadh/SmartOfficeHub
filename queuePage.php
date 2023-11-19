@@ -10,36 +10,29 @@ if (!isset($_SESSION['user_name'])) {
 
 $targetDir = "Uploads/";
 
-if (isset($_POST["submit"])) {
-    $name = mysqli_real_escape_string($conn, $_POST['title']);
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    if (!empty($_FILES["fileToUpload"]["name"])) {
-        $fileName = basename($_FILES["fileToUpload"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
-        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+if (isset($_POST["Merge"])) {
+    /* $sql = "SELECT id, GROUP_CONCAT('name' SEPARATOR ', ') AS concatenated_values FROM finalsubmission GROUP BY id";
 
-        // Allow certain file formats 
-        $allowTypes = array('pdf', 'doc', 'docx');
-        if (in_array($fileType, $allowTypes)) {
-            // Upload file to server 
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFilePath)) {
-                // Insert image file name into database 
-                $insert = "INSERT INTO images (file_name, upload_date) VALUES ('$fileName', NOW())";
-                $inserts = "INSERT INTO papersubmission (title, upload_date,username) VALUES ('$name', NOW(),'$username')";
-                if (mysqli_query($conn, $insert) && mysqli_query($conn, $inserts)) {
-                    $statusMsg = "The file " . $fileName . " has been uploaded successfully.";
-                } else {
-                    $statusMsg = "File upload failed, please try again.";
-                }
-            } else {
-                $statusMsg = "Sorry, there was an error uploading your file.";
-            }
-        } else {
-            $statusMsg = 'Sorry, only PDF, DOC, & DOCX files are allowed to upload.';
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        // Fetch the result as an associative array
+        while ($row = $result->fetch_assoc()) {
+            // Access the ID and concatenated values
+            $id = $row['id'];
+            $concatenatedValues = $row['concatenated_values'];
+    
+            // Output or use the results as needed
+            echo "ID: $id, Concatenated Values: $concatenatedValues<br>";
         }
     } else {
-        $statusMsg = 'Please select a file to upload.';
-    }
+        echo "No rows found in the table.";
+    } */
+    header('location:ResultPage.php');         
+
+}
+if (isset($_POST["Stay"])) {
+
 }
 echo $statusMsg;
 ?>
@@ -50,7 +43,7 @@ echo $statusMsg;
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Conference Paper Review System</title>
+    <title>SMART OFFICE HUB</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -97,11 +90,6 @@ echo $statusMsg;
             </div>
             <nav class="nav-menu float-right d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.php">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#event">Events</a></li>
-                    <li><a href="#team">Board Members</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
                     <a href="logout.php" rel="noopener noreferrer" target="_self" class="btn-get-started"><i class="icofont-logout"></i>
                         | Logout</a>
                 </ul>
@@ -110,14 +98,21 @@ echo $statusMsg;
         </div>
     </header><!-- End Header -->
     <div class="hero-text">
-                <h2 class="animate__animated animate__fadeInDown"><span>PERSPECTIVES Proceedings Managment</span></h2>
-                <h6 class="animate__animated animate__fadeInUp">A Conference Paper Review Company</h6>
+                <h2 class="animate__animated animate__fadeInDown"><span>SMART OFFICE HOUR</span></h2>
+                <h6 class="animate__animated animate__fadeInUp">To streamline the office hour experience for students</h6>
             </div>
     <main id="main">
         <div class="user-container">
             <div class="content">
-                <h3>HI, <span>Author</span></h3>
-                <h1>Welcome <span><?php echo $_SESSION['user_name'] ?></span></h1>
+                <h3>HI, <span><?php echo $_SESSION['user_name'] ?></span></h3>
+                <h3>Welcome to Introduction to Computer Security Office Hours</h3>
+                <div class="form-container">
+        <form action="" method="post" enctype="multipart/form-data">
+        <input type="text" name="Stay" class="form-btn" value="Stay Position"  />
+            <input type="submit" name="Merge" class="form-btn" value="Merge Position"  />
+            <input type="submit" name="Stay" class="form-btn" value="Stay Position"  />
+            </form>
+        </div>
                 <div class="table">
                         <table class="center">
                             <thead>
@@ -135,10 +130,11 @@ echo $statusMsg;
                                 $result = $conn->query($query);
                                 foreach ($result as $file) : ?>
                                     <tr>
-                                        <td><?php echo $file['id']; ?></td>
-                                        <td><?php echo $file['name']; ?></td>
-                                        <td><?php echo $file['question']; ?></td>
-                                        <td><?php echo $file['coursename']; ?></td>
+                                        <td><?php  if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')echo $file['id']; ?></td>
+                                        <td><?php  if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')echo $file['name']; ?></td>
+                                        <td><?php  if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')echo $file['question']; ?></td>
+                                        <td><?php if($file['coursename'] == 'EECS 281 Data Structure and Algorithms')
+                                        {echo $file['coursename'];} ?></td>
 
                                     </tr>
                                 <?php endforeach; ?>

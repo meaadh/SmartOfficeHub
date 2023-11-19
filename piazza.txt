@@ -1,8 +1,1 @@
-Yes you can do quicksort on a singly linked list, a vector and a doubly linked list. 
-
-Time complexities: 
-singly linked: O(n^2) worst case O(nlogn) average case. Here is an implementation. 
-
-doubly linked: O(n^2) worst case, O(nlogn) average case (follows from the singly linked list case) 
-
-vector: O(n^2) worst case, O(nlogn) average case (as discussed in lecture). 
+response[0] 
