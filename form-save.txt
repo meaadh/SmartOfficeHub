@@ -1,1 +1,2 @@
-Who is Heap Sort?
+What is a MergeSort?
+EECS 281 Data Structure and Algorithms

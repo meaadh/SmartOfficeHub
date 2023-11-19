@@ -17,6 +17,7 @@ def parser(file_path):
 
     return qa_dict
 
-file_path = 'piazza.txt'
+file_path = 'piazzadata.txt'
 qa_dictionary = parser(file_path)
+print(qa_dictionary)
 

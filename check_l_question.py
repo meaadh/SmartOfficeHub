@@ -5,7 +5,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 class Watcher:
-    DIRECTORY_TO_WATCH = "form-save.txt"
+    DIRECTORY_TO_WATCH = "c:/xampp/htdocs/SmartOfficeHub/form-save.txt"
 
     def __init__(self):
         self.observer = Observer()
