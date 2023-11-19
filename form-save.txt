@@ -1,2 +1,1 @@
-What is a Queue?
-EECS 281 Data Structure and Algorithms
+Who is Heap Sort?

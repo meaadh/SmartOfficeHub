@@ -12,46 +12,57 @@ $filename3 = 'queue.txt';  // Replace with the path to your file
 if (file_exists($filename3)) {
     // File exists, read its content
     $fileContent = file_get_contents($filename3);
-   
 }
 if (isset($_POST["Merge"])) {
-    echo $fileContent;
     $primaryKeyColumn = 'id';
     $sqlLastRow = "SELECT MAX($primaryKeyColumn) AS lastID FROM finalsubmission";
-
+   
+    $sql2 = "SELECT name FROM finalsubmission ORDER BY id DESC LIMIT 1";
+    $result1 = $conn->query($sql2);
     $resultLastRow = $conn->query($sqlLastRow);
-    $rowId = 2; // Replace with the actual ID of the row you want to update
-    $columnValue = "Jose"; // Replace with the actual value you want to insert
-    $columnName = "name"; // Replace with the actual column name
+    if ($result1->num_rows > 0) {
+        // Fetch the data and assign it to a variable
+        $row = $result1->fetch_assoc();
+        $lastRowData = $row['name'];
     
-    // SQL query to update a specific row and column in your_table
-    $sql = "UPDATE finalsubmission SET $columnName = '$columnValue' WHERE id = $rowId";
-    if ($resultLastRow->num_rows > 0) {
-        $rowLast = $resultLastRow->fetch_assoc();
-        $lastID = $rowLast['lastID'];
-      
-        
-
-        // SQL query to delete the last row based on the primary key
-       // $sqlDeleteLastRow = "DELETE FROM finalsubmission WHERE $primaryKeyColumn = $lastID";
-       if(2== $primaryKeyColumn)
-       {
-           $insert =  "UPDATE finalsubmission SET $columnName = '$columnValue' WHERE id = $primaryKeyColumn";
-       }
-
-/*         if ($conn->query($sqlDeleteLastRow) === TRUE) {
-            echo "Last row deleted successfully.";
-            header('location:queuePage.php');
-            if($fileContent== $primaryKeyColumn)
-            {
-                $insert = "INSERT INTO finalsubmission (name) VALUES ('Jose')";
-            }
-
-        } else {
-            echo "Error deleting last row: " . $conn->error;
-        } */
+        // Use $lastRowData as needed
+       
     } else {
-        echo "No rows found in the table.";
+        echo "No results found";
+    }
+    
+    $rowId = 2; // Replace with the actual ID of the row you want to update
+    $columnName = 'name'; // Replace with the actual column name
+
+
+    // SQL query to update a specific row and column in your_table
+    $sql = "SELECT  $columnName FROM finalsubmission WHERE id = $fileContent";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Fetch the data and assign it to a variable
+        $row = $result->fetch_assoc();
+        $columnData = $row['name'];
+        echo "Data from the column: " . $columnData;
+        $dww = "UPDATE finalsubmission SET   $columnName =  '$columnData,$lastRowData' WHERE $primaryKeyColumn= $fileContent";
+        if ($conn->query($dww) === TRUE) {
+        } else {
+        }
+        if ($resultLastRow->num_rows > 0) {
+            $rowLast = $resultLastRow->fetch_assoc();
+            $lastID = $rowLast['lastID'];
+            $sqlDeleteLastRow = "DELETE FROM finalsubmission WHERE $primaryKeyColumn = $lastID";
+
+            if ($conn->query($sqlDeleteLastRow) === TRUE) {
+                echo "Last row deleted successfully.";
+                header('location:queuePage.php');
+                file_put_contents($filename3, '');
+            } else {
+                echo "Error deleting last row: " . $conn->error;
+            }
+        } else {
+            echo "No rows found in the table.";
+        }
     }
 }
 
@@ -101,7 +112,7 @@ echo $statusMsg;
         <div class="container">
 
             <div class="logo float-left">
-                <a href="index.php"><img src="assets/img/logo-pcm.png" alt="" class="img-fluid"></a>
+                <a href="index.php"><img src="assets/img/logo_notext.png" alt="" class="img-fluid"></a>
             </div>
             <div class="mobile">
                 <div class="donate float-right">
@@ -126,7 +137,7 @@ echo $statusMsg;
         <div class="user-container">
             <div class="content">
                 <h3>HI, <span><?php echo $_SESSION['user_name'] ?></span></h3>
-                <h3>Welcome to Introduction to Computer Security Office Hours</h3>
+                <h3>Welcome to Data Structure and Algorithms Office Hours</h3>
                 <?php
                 $fileSize = filesize($filename3);
 
@@ -134,7 +145,7 @@ echo $statusMsg;
                 if ($fileSize > 0) { ?>
                     <div class="form-container">
                         <form action="" method="post" enctype="multipart/form-data">
-                            <input type="text" name="Stay" class="form-btn" value="Stay Position" />
+                            <h4>Would You like to Merge with another Student with similar question?</h4>
                             <input type="submit" name="Merge" class="form-btn" value="Merge Position" />
                             <input type="submit" name="Stay" class="form-btn" value="Stay Position" />
                         </form>
@@ -144,7 +155,6 @@ echo $statusMsg;
                         }
                         if (isset($_POST["Stay"])) {
                             file_put_contents($filename3, '');
-
                         }
                             ?>
 
@@ -192,7 +202,7 @@ echo $statusMsg;
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>PERSPECTIVES PROCEEDINGS MANAGEMENT</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>SMART OFFICE HUB</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->

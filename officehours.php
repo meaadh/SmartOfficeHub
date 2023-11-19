@@ -27,7 +27,6 @@ if (isset($_POST["submit"])) {
     $file=fopen("form-save.txt","a");
     ftruncate($file, 0);
     fwrite($file, $question ."\n");
-    fwrite($file, $CourseName ."\n");
     fclose($file);
   }
 };
