@@ -111,7 +111,7 @@ if (isset($_POST["submit"])) {
        
         </div>
         <div class="form-container">
-        <form action="answer.php" method="get" target="">
+        <form action="authorPage.php" method="get" target="">
          <button class="form-btn" type="submit">Click me</button>
       </form>
         </div>
