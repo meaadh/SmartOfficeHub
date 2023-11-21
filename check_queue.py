@@ -64,7 +64,7 @@ def queue_gpt():
     with open(output_queue, 'w') as file:
         file.write(response.choices[0].message['content'])
         
-api_key = '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'
+api_key = ''
 question = 'form-save.txt'
 queue = 'queuedata.txt'
 output_queue = 'queue.txt'

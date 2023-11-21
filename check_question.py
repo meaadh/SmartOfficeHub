@@ -65,7 +65,7 @@ def chat_with_gpt(question, piazza, api_key, output_file):
         file.write(response.choices[0].message['content'])
 
 # Example usage
-api_key = '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'
+api_key = ''
 question = 'form-save.txt'
 piazza = 'piazzadata.txt'
 output_file = 'response.txt'
