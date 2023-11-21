@@ -1,7 +1,7 @@
 <?php
-define("DB_SERVER","35.3.77.207");
+define("DB_SERVER","192.168.4.59");
 define("DB_USERNAME","mhsad");
 define("DB_PASSWORD","/)lV*Pv]FsX1lRA4");
 define("DB_DATABASE","smartofficehours");
-$conn=mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+$conn=mysqli_connect('localhost','root','',DB_DATABASE);
 ?>
