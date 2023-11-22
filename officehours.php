@@ -118,11 +118,17 @@ echo $statusMsg;
                 </select>
                 <input type="text" name="username" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
-                <input type="submit" name="submit" class="form-btn" value="Upload Question"  />
+                <input type="submit" name="submit" load() class="form-btn" value="Upload Question"  />
             </form>   
         </div>
     </main><!-- End #main -->
-
+    <script>
+        function load() {
+         setTimeout('ResultPage.php', 10000);
+         var result = document.getElementById("result");
+         result.innerHTML = `The page will load after delay of 5 seconds using setTimeout()  method.`;
+      }
+        </script>
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">
