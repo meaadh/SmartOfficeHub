@@ -9,7 +9,27 @@ if (!isset($_SESSION['user_name'])) {
 $filename2 = 'video.txt';  // Replace with the path to your file
 
 if (isset($_POST["submit"])) {
-    header('location:queuePage.php');         
+    $select = " SELECT * FROM finalsubmission";
+
+    //$result = mysqli_query($conn, $select);
+    $result = $conn->query($select);
+
+    if (mysqli_num_rows($result) > 0) {
+
+        $row = mysqli_fetch_array($result);
+
+        if ($row['coursename'] == 'EECS 280 Data Structure') {
+
+            header('location:QueuePage2.php');
+        } elseif ($row['coursename'] == 'EECS 281 Data Structure and Algorithms') {
+
+            header('location:QueuePage.php');
+        } elseif ($row['coursename'] == 'EECS 380 Computer Security') {
+
+            header('location:QueuePage3.php');
+        }
+        
+    }
 }
 $filename = 'piazza.txt';  // Replace with the path to your file
 
@@ -117,7 +137,7 @@ while ($attempts < $maxAttempts) {
             <h5 id="piazzaText">Loading content...</h5>
         </div>
         <div id="text-container"></div>
-<!--         <script>
+        <!--         <script>
             // Function to check files content
             function checkFilesContent() {
                 var xhr = new XMLHttpRequest();
@@ -153,7 +173,7 @@ while ($attempts < $maxAttempts) {
             // Check files content every 5 seconds
             var checkFilesInterval = setInterval(checkFilesContent, 5000);
         </script> -->
-       <script>
+        <script>
             fetch('piazza.txt')
                 .then(response => response.text())
                 .then(text => {
@@ -188,9 +208,10 @@ while ($attempts < $maxAttempts) {
             }
         </script>
         <div class="form-container">
-        <form action="" method="post" enctype="multipart/form-data">
-        <h3>NOT SATISFIED!</h3><h3> Click Below to Join Queue</h3>
-            <input type="submit" name="submit" class="form-btn" value="Queue to Office Hour"  />
+            <form action="" method="post" enctype="multipart/form-data">
+                <h3>NOT SATISFIED!</h3>
+                <h3> Click Below to Join Queue</h3>
+                <input type="submit" name="submit" class="form-btn" value="Queue to Office Hour" />
             </form>
         </div>
     </main><!-- End #main -->

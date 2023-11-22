@@ -112,6 +112,9 @@ echo $statusMsg;
                 <h3>Office Hour Form</h3>
                 <select name="CourseName">
                     <option value="EECS 281 Data Structure and Algorithms">EECS 281 Data Structure and Algorithms</option>
+                    <option value="EECS 280 Data Structure">EECS 280 Data Structure</option>
+                    <option value="EECS 380 Computer Security">EECS 380 Computer Security</option>
+
                 </select>
                 <input type="text" name="username" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
