@@ -112,14 +112,23 @@ echo $statusMsg;
                 <h3>Office Hour Form</h3>
                 <select name="CourseName">
                     <option value="EECS 281 Data Structure and Algorithms">EECS 281 Data Structure and Algorithms</option>
+                    <option value="EECS 280 Data Structure">EECS 280 Data Structure</option>
+                    <option value="EECS 380 Computer Security">EECS 380 Computer Security</option>
+
                 </select>
                 <input type="text" name="username" required placeholder="Enter Name">
                 <input type="text" name="question" required placeholder="Enter Question">
-                <input type="submit" name="submit" class="form-btn" value="Upload Question"  />
+                <input type="submit" name="submit" load() class="form-btn" value="Upload Question"  />
             </form>   
         </div>
     </main><!-- End #main -->
-
+    <script>
+        function load() {
+         setTimeout('ResultPage.php', 10000);
+         var result = document.getElementById("result");
+         result.innerHTML = `The page will load after delay of 5 seconds using setTimeout()  method.`;
+      }
+        </script>
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">

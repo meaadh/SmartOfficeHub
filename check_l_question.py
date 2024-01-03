@@ -65,7 +65,7 @@ def lecture_gpt(question, lecture, api_key, output_lecture):
         file.write(response.choices[0].message['content'])
 
 # Example usage
-api_key = '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'
+api_key = ''
 question = 'form-save.txt'
 lecture = 'lectures.txt'
 output_lecture = 'lresponse.txt'
