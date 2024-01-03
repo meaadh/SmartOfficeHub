@@ -1,2 +1,2 @@
-What is a MergeSort?
+bubble sort?
 EECS 281 Data Structure and Algorithms
